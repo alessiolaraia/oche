@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { previewVoice } from '../../caller';
 import { listVoices, ttsSupported } from '../../caller/tts';
 import { useSettings } from '../../store/settings';
+import type { VoiceSource } from '../../settings/types';
+import { Choice } from './controls';
 
 /** Auswahl aller System-Stimmen (Deutsch und Englisch) + Probe hören. */
 export function VoicePicker() {
@@ -16,7 +18,27 @@ export function VoicePicker() {
     return () => speechSynthesis.removeEventListener('voiceschanged', load);
   }, []);
 
-  if (!ttsSupported()) return <p className="row warn">Dieser Browser hat keine Sprachausgabe.</p>;
+  const source = (
+    <Choice<VoiceSource>
+      label="Stimme"
+      hint={
+        caller.voiceSource === 'pack'
+          ? 'Eigene Oche-Aufnahmen, lauter bei hohen Zahlen. Was nicht aufgenommen ist (z. B. Namen), spricht die Systemstimme.'
+          : 'Die eingebaute Stimme des Geräts.'
+      }
+      value={caller.voiceSource}
+      options={{ pack: 'Oche-Ansager', system: 'Systemstimme' }}
+      onChange={(v) => update('caller', { voiceSource: v })}
+    />
+  );
+
+  if (!ttsSupported())
+    return (
+      <>
+        {source}
+        <p className="row warn">Dieser Browser hat keine Systemstimme – nur das Oche-Paket ist verfügbar.</p>
+      </>
+    );
 
   const de = voices.filter((v) => v.lang.startsWith('de'));
   const en = voices.filter((v) => v.lang.startsWith('en'));
@@ -24,9 +46,10 @@ export function VoicePicker() {
 
   return (
     <>
+      {source}
       <label className="row">
         <span className="label">
-          Stimme Deutsch
+          Systemstimme Deutsch
           <small>Für den Stil „Nüchtern“.</small>
         </span>
         <select
@@ -43,7 +66,7 @@ export function VoicePicker() {
       </label>
       <label className="row">
         <span className="label">
-          Stimme Englisch
+          Systemstimme Englisch
           <small>Für den Stil „Arena“.</small>
         </span>
         <select

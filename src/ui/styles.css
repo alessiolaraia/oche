@@ -515,3 +515,20 @@ input[type='checkbox'] {
   font-size: var(--s-28);
   margin-bottom: 6px;
 }
+
+.pack-tester {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.pack-tester-key {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pack-tester-key input {
+  width: 10em;
+}

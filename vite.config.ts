@@ -41,8 +41,20 @@ export default defineConfig(({ mode }) => ({
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         navigateFallback: 'index.html',
         // Das Modell (45 MB) cacht Vosk selbst entpackt in IndexedDB – nicht doppelt im SW.
-        globIgnores: ['models/**'],
+        globIgnores: ['models/**', 'voices/**'],
         runtimeCaching: [
+          // Klang-Paket: Clips ändern sich nie (neue Version = neuer Schlüsselsatz), Manifest frisch halten
+          {
+            urlPattern: ({ url }) => url.pathname.includes('/voices/') && url.pathname.endsWith('.m4a'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'oche-voices' },
+          },
+          {
+            urlPattern: ({ url }) =>
+              url.pathname.includes('/voices/') && url.pathname.endsWith('manifest.json'),
+            handler: 'NetworkFirst',
+            options: { cacheName: 'oche-voices-manifest', networkTimeoutSeconds: 3 },
+          },
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.words.txt'),
             handler: 'CacheFirst',

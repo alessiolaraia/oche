@@ -15,7 +15,18 @@ Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
 - `src/voice/numbers.de.ts` – **einzige Quelle** für deutsche Zahlwörter: erzeugt Vosk-Grammatik _und_ Parser.
 - `src/voice/` – `SpeechEngine`-Interface; `voskEngine` (primär, offline, Grammatik) und `webSpeechEngine` (Fallback).
   Audio: getUserMedia → Gain → Compressor → Noise Gate → AudioWorklet (16 kHz) → Vosk-Worker.
-- `src/caller/` – TTS, Caller-Stile, synthetische Soundeffekte. Während TTS spricht, bekommt der Recognizer kein Audio (+300 ms).
+- `src/caller/` – TTS, Caller-Stile, synthetische Soundeffekte. Während TTS/Clips laufen, bekommt der Recognizer kein Audio (+300 ms).
+  Ansagen sind Bausteine (`Cue`: Text + optional Clip-Schlüssel). `src/caller/voicepack.ts` ist die **einzige Quelle**
+  für Clip-Schlüssel, Texte und Intensität (`scoreLevel`): je höher die Punktzahl, desto mehr Emotion und Lautheit.
+
+### Klang-Paket (eigene Ansagerstimme)
+
+- `public/voices/oche-de|oche-en/` – AAC-Clips + `manifest.json`, im Git. Erzeugt lokal mit Chatterbox (MIT),
+  eigene synthetische Stimme, keine Imitation realer Caller. Fehlende Clips spricht die Systemstimme.
+- Neu erzeugen: `npx tsx scripts/voicepack/export-spec.ts`, dann
+  `.cache/tts-venv/bin/python scripts/voicepack/generate.py de` (bzw. `en`). Bestehende Clips werden übersprungen –
+  zum Neuerzeugen Datei löschen oder `--only key1,key2`. Jeder Clip wird per Vosk zurückgehört (Bericht:
+  `.cache/voicepack-<lang>-report.json`). Einrichtung der Python-Umgebung siehe `scripts/voicepack/README.md`.
 - `src/platform/` – Feature-Detection für Wake Lock, `navigator.audioSession`, Lifecycle. Nie Browser-Sniffing.
 - `src/store/` – Zustand-Stores; `src/db/` – Dexie (IndexedDB), Export/Import JSON.
 - `src/engine/bot.ts` – Bot simuliert Einzeldarts; `skillFor()` per Simulation kalibriert (±10 % Test).

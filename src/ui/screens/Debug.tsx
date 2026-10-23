@@ -6,6 +6,7 @@ import { useVoice } from '../../store/voice';
 import { startVoice, stopVoice, voskSupported } from '../../voice/control';
 import { webSpeechSupported } from '../../voice/webSpeechEngine';
 import { LevelMeter } from '../components/LevelMeter';
+import { PackTester } from '../components/PackTester';
 import { VoiceLog } from '../components/VoiceLog';
 
 const ENGINE_LABEL = {
@@ -116,6 +117,8 @@ export function Debug() {
           ))}
         </tbody>
       </table>
+      <h2 className="section-title">Klang-Paket</h2>
+      <PackTester />
       <h2 className="section-title">Letzte 20 Rohergebnisse</h2>
       <VoiceLog limit={20} />
       <p className="hint">{navigator.userAgent}</p>

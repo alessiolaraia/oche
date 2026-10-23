@@ -4,7 +4,8 @@ import type { Sfx } from './announce';
 
 let ctx: AudioContext | null = null;
 
-function audio(): AudioContext | null {
+/** Gemeinsamer AudioContext für Effekte und Klang-Paket. */
+export function audio(): AudioContext | null {
   if (typeof AudioContext !== 'function') return null;
   ctx ??= new AudioContext();
   if (ctx.state === 'suspended') void ctx.resume();

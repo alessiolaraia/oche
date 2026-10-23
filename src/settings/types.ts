@@ -4,6 +4,7 @@ export type VoiceMode = 'trigger' | 'direct';
 export type EnginePreference = 'auto' | 'vosk' | 'webspeech';
 export type CallerStyle = 'plain' | 'arena';
 export type Theme = 'dark' | 'light';
+export type VoiceSource = 'pack' | 'system';
 
 export interface Settings {
   game: {
@@ -41,6 +42,8 @@ export interface Settings {
   caller: {
     enabled: boolean;
     style: CallerStyle;
+    /** Oche-Klang-Paket (eigene Aufnahmen) oder Systemstimme; fehlende Clips spricht immer die Systemstimme. */
+    voiceSource: VoiceSource;
     /** Deutsche Stimme (Stil „Nüchtern“). */
     voiceURI: string | null;
     /** Englische Stimme (Stil „Arena“). */
@@ -92,6 +95,7 @@ export const DEFAULT_SETTINGS: Settings = {
   caller: {
     enabled: true,
     style: 'plain',
+    voiceSource: 'pack',
     voiceURI: null,
     voiceURIEn: null,
     rate: 1,
