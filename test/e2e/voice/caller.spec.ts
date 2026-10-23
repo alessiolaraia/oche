@@ -5,7 +5,9 @@ import { fakeMic, quickStartWithVoice, warmUp } from './voiceHelpers';
 test.use(fakeMic('wurf-sechzig'));
 test.skip(({ browserName }) => browserName !== 'chromium', 'Fake-Audio nur in Chromium');
 
-test('mit Ansagen und Effekten: Erkennung läuft weiter, Echo-Schutz blockiert nicht dauerhaft', async ({ page }) => {
+test('mit Ansagen und Effekten: Erkennung läuft weiter, Echo-Schutz blockiert nicht dauerhaft', async ({
+  page,
+}) => {
   test.setTimeout(240_000);
   const errors = collectConsoleErrors(page);
   await warmUp(page);

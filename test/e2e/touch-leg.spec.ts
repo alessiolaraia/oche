@@ -4,7 +4,7 @@ import { collectConsoleErrors, enterScore, freshApp } from './helpers';
 test('komplettes 501-Leg per Touch inkl. Bust, Korrektur per Zurück und Checkout', async ({ page }) => {
   const errors = collectConsoleErrors(page);
   await freshApp(page);
-  await page.goto('/');
+  await page.goto('./');
   await page.getByTestId('quick-start').click();
   await expect(page.getByTestId('remaining')).toHaveText('501');
 
@@ -45,7 +45,7 @@ test('komplettes 501-Leg per Touch inkl. Bust, Korrektur per Zurück und Checkou
   // Reload: Spiel wird aus IndexedDB fortgesetzt
   await page.reload();
   await expect(page.getByText('Legs 1:0')).toBeVisible();
-  await page.goto('/#/');
+  await page.goto('./#/');
   await page.getByRole('button', { name: 'Laufendes Spiel fortsetzen' }).click();
   await expect(page.getByTestId('active-player')).toHaveText('Spieler 2');
 

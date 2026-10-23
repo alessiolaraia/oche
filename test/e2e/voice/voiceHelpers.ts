@@ -22,14 +22,14 @@ export function fakeMic(name: string) {
  */
 export async function warmUp(page: Page, settings: Record<string, unknown> = {}) {
   await freshApp(page, { voice: { engine: 'vosk', ...settings } });
-  await page.goto('/#/debug');
+  await page.goto('./#/debug');
   await page.getByRole('button', { name: 'Mikro starten' }).click();
   await expect(page.getByText('Vosk (offline, Grammatik)')).toBeVisible({ timeout: 150_000 });
   await page.getByRole('button', { name: 'Mikro stoppen' }).click();
 }
 
 export async function quickStartWithVoice(page: Page) {
-  await page.goto('/#/');
+  await page.goto('./#/');
   await page.getByTestId('quick-start').click();
   await expect(page.getByTestId('remaining')).toHaveText('501');
 }

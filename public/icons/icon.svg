@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Oche: Board-Schwarz, Sisal-Ring als Doppelring, ein rotes und ein grünes Segment -->
+  <rect width="512" height="512" fill="#1a1714"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#e3d3b0" stroke-width="44"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#d2372c" stroke-width="44"
+          stroke-dasharray="47.1 895.4" stroke-dashoffset="23.6" transform="rotate(-90 256 256)"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#2fa463" stroke-width="44"
+          stroke-dasharray="47.1 895.4" stroke-dashoffset="-23.5" transform="rotate(-90 256 256)"/>
+  <circle cx="256" cy="256" r="34" fill="#2fa463"/>
+  <circle cx="256" cy="256" r="14" fill="#d2372c"/>
+</svg>

@@ -5,11 +5,12 @@ export default defineConfig({
   timeout: 60_000,
   fullyParallel: true,
   reporter: [['list']],
-  use: { baseURL: 'http://localhost:4173', trace: 'retain-on-failure' },
+  // BASE_PATH=/oche/ testet den GitHub-Pages-Build unter Unterpfad
+  use: { baseURL: `http://localhost:4173${process.env.BASE_PATH ?? '/'}`, trace: 'retain-on-failure' },
   webServer: {
     command: 'npm run build && npx vite preview --port 4173 --strictPort',
     port: 4173,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 180_000,
   },
   projects: [

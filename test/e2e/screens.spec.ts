@@ -7,7 +7,7 @@ test('Screenshots aller Screens', async ({ page }, info) => {
   const shot = (name: string) =>
     page.screenshot({ path: `test-results/screens/${info.project.name}-${name}.png` });
   await freshApp(page);
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByTestId('quick-start')).toBeVisible();
   await shot('setup');
 
@@ -25,11 +25,11 @@ test('Screenshots aller Screens', async ({ page }, info) => {
   await page.getByRole('button', { name: 'Pad zu' }).click();
   await shot('game-checkout');
 
-  await page.goto('/#/settings');
+  await page.goto('./#/settings');
   await shot('settings');
-  await page.goto('/#/stats');
+  await page.goto('./#/stats');
   await shot('stats');
-  await page.goto('/#/onboarding');
+  await page.goto('./#/onboarding');
   await shot('onboarding');
   expect(errors).toEqual([]);
 });
