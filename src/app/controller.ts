@@ -46,12 +46,18 @@ export function submitVisit(
   const next = useMatch.getState().setEvents([...events, ev]);
   const result = next.lastVisit!;
   afterInput(opts.source);
-  useSession.getState().setQuestion(null);
-  emitFeedback({ type: 'visit', result, state: next });
 
+  // Nachfrage vor dem Visit-Ereignis setzen, damit die Ansage weiß, dass erst gefragt wird
   const g = useSettings.getState().game;
-  if (result.checkout && opts.dartsUsed === undefined && g.askCheckoutDarts) ask('checkoutDarts');
-  else if (result.checkout && opts.dartsAtDouble === undefined && g.askDartsAtDouble) ask('dartsAtDouble');
+  const question: Question | null =
+    result.checkout && opts.dartsUsed === undefined && g.askCheckoutDarts
+      ? 'checkoutDarts'
+      : result.checkout && opts.dartsAtDouble === undefined && g.askDartsAtDouble
+        ? 'dartsAtDouble'
+        : null;
+  useSession.getState().setQuestion(question);
+  emitFeedback({ type: 'visit', result, state: next });
+  if (question) emitFeedback({ type: 'question', question });
   return true;
 }
 
@@ -93,11 +99,6 @@ export function submitDarts(darts: Dart[], source: InputSource): boolean {
     dartsAtDouble: state.config.outMode === 'straight' ? undefined : r.dartsAtDouble,
     source,
   });
-}
-
-function ask(q: Question) {
-  useSession.getState().setQuestion(q);
-  emitFeedback({ type: 'question', question: q });
 }
 
 export function undo(source: InputSource): boolean {
@@ -158,9 +159,10 @@ export function answerQuestion(value: number): boolean {
       return false;
     }
     useMatch.getState().setEvents(next);
+    const followUp = useSettings.getState().game.askDartsAtDouble;
+    useSession.getState().setQuestion(followUp ? 'dartsAtDouble' : null);
     emitFeedback({ type: 'answered', question, value });
-    if (useSettings.getState().game.askDartsAtDouble) ask('dartsAtDouble');
-    else useSession.getState().setQuestion(null);
+    if (followUp) emitFeedback({ type: 'question', question: 'dartsAtDouble' });
     return true;
   }
   if (value < 0 || value > 3) {

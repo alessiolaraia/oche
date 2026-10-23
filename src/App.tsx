@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { installFlashFeedback } from './app/feedbackUi';
+import { installCaller } from './caller';
 import { useSettings } from './store/settings';
 import { Flash } from './ui/components/Flash';
 import { Ring } from './ui/components/Ring';
@@ -19,6 +20,7 @@ export function App() {
   const onboarded = useSettings((s) => s.onboarded);
 
   useEffect(() => installFlashFeedback(), []);
+  useEffect(() => installCaller(), []);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document

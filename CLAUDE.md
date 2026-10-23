@@ -28,13 +28,13 @@ Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
   vorhandene Komposita. „bust“ fehlt im Vokabular (nur „überworfen“ in der Grammatik).
 - Vosk speichert das entpackte Modell selbst in IndexedDB (IDBFS) → nach erstem Laden offline. Der Service Worker
   cacht daher nur Worker/WASM/App, nicht das 45-MB-Archiv.
-- Modell und `public/vosk/` sind nicht im Git: `npm install` kopiert Worker/WASM, `npm run model` lädt das Modell.
+- Modell und `public/vosk/` sind nicht im Git: `npm run vosk` kopiert Worker/WASM (npm 11 blockiert postinstall), `npm run model` lädt das Modell.
 
 ## Befehle
 
 | Zweck                          | Befehl                                                        |
 | ------------------------------ | ------------------------------------------------------------- |
-| Einrichten                     | `npm install && npm run model`                                |
+| Einrichten                     | `npm install && npm run vosk && npm run model`                |
 | Dev (Mac)                      | `npm run dev`                                                 |
 | Dev im WLAN fürs Handy (HTTPS) | `npm run dev:phone` → `https://<Mac-IP>:5173`                 |
 | Unit-Tests                     | `npm test`                                                    |

@@ -41,7 +41,10 @@ export interface Settings {
   caller: {
     enabled: boolean;
     style: CallerStyle;
+    /** Deutsche Stimme (Stil „Nüchtern“). */
     voiceURI: string | null;
+    /** Englische Stimme (Stil „Arena“). */
+    voiceURIEn: string | null;
     rate: number;
     pitch: number;
     volume: number;
@@ -90,6 +93,7 @@ export const DEFAULT_SETTINGS: Settings = {
     enabled: true,
     style: 'plain',
     voiceURI: null,
+    voiceURIEn: null,
     rate: 1,
     pitch: 1,
     volume: 1,
