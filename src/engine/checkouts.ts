@@ -246,7 +246,22 @@ function oddDoubleOutRoute(rest: number): Dart[] | null {
 /**
  * Empfohlener Checkout-Weg für `rest` mit höchstens `dartsLeft` Darts, oder null wenn nicht möglich.
  */
+const routeCache = new Map<string, Dart[] | null>();
+
 export function checkoutRoute(rest: number, out: OutMode = 'double', dartsLeft = 3): Dart[] | null {
+  const key = `${out}:${dartsLeft}:${rest}`;
+  if (!routeCache.has(key)) routeCache.set(key, computeRoute(rest, out, dartsLeft));
+  const r = routeCache.get(key)!;
+  return r ? [...r] : null;
+}
+
+/** Höchste Punktzahl, die mit n Darts auscheckbar ist. */
+function maxWith(out: OutMode, n: number): number {
+  return out === 'double' ? ([0, 50, 110, 170][n] ?? 170) : 60 * n;
+}
+
+function computeRoute(rest: number, out: OutMode, dartsLeft: number): Dart[] | null {
+  if (rest > maxWith(out, Math.min(3, dartsLeft))) return null;
   if (rest < 1 || dartsLeft < 1) return null;
   if (out === 'double') {
     if (rest < 2) return null;

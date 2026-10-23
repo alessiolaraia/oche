@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { installFlashFeedback } from './app/feedbackUi';
+import { installTraining } from './app/training';
 import { installCaller } from './caller';
 import { useSettings } from './store/settings';
 import { Flash } from './ui/components/Flash';
@@ -21,6 +22,7 @@ export function App() {
 
   useEffect(() => installFlashFeedback(), []);
   useEffect(() => installCaller(), []);
+  useEffect(() => installTraining(), []);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document

@@ -3,13 +3,16 @@ import { db } from '../db/db';
 import { reduce } from '../engine/x01';
 import type { MatchConfig, MatchEvent, MatchState } from '../engine/types';
 
+export type MatchKind = 'x01' | 'checkout' | '121';
+
 interface MatchStore {
   matchId: string | null;
+  kind: MatchKind;
   startedAt: number;
   config: MatchConfig | null;
   events: MatchEvent[];
   state: MatchState | null;
-  start: (config: MatchConfig) => MatchState;
+  start: (config: MatchConfig, kind?: MatchKind) => MatchState;
   setEvents: (events: MatchEvent[]) => MatchState;
   resume: () => Promise<boolean>;
   close: () => void;
@@ -19,7 +22,9 @@ export function newId(): string {
   return crypto.randomUUID();
 }
 
-async function persist(s: Pick<MatchStore, 'matchId' | 'startedAt' | 'config' | 'events' | 'state'>) {
+async function persist(
+  s: Pick<MatchStore, 'matchId' | 'kind' | 'startedAt' | 'config' | 'events' | 'state'>,
+) {
   if (!s.matchId || !s.config || !s.state) return;
   const finished = s.state.winner !== null;
   await db.matches.put({
@@ -29,21 +34,23 @@ async function persist(s: Pick<MatchStore, 'matchId' | 'startedAt' | 'config' | 
     config: s.config,
     events: s.events,
     winner: s.state.winner,
-    kind: 'x01',
+    kind: s.kind,
   });
-  if (finished) await db.meta.delete('current');
+  // Trainingsrunden werden nicht als „laufendes Spiel“ fortgesetzt
+  if (finished || s.kind !== 'x01') await db.meta.delete('current');
   else await db.meta.put({ key: 'current', matchId: s.matchId });
 }
 
 export const useMatch = create<MatchStore>()((set, get) => ({
   matchId: null,
+  kind: 'x01',
   startedAt: 0,
   config: null,
   events: [],
   state: null,
-  start: (config) => {
+  start: (config, kind = 'x01') => {
     const state = reduce(config, []);
-    const next = { matchId: newId(), startedAt: Date.now(), config, events: [], state };
+    const next = { matchId: newId(), kind, startedAt: Date.now(), config, events: [], state };
     set(next);
     void persist(next);
     return state;
@@ -60,9 +67,10 @@ export const useMatch = create<MatchStore>()((set, get) => ({
     const cur = await db.meta.get('current');
     if (!cur) return false;
     const m = await db.matches.get(cur.matchId);
-    if (!m || m.finishedAt) return false;
+    if (!m || m.finishedAt || m.kind !== 'x01') return false;
     set({
       matchId: m.id,
+      kind: 'x01',
       startedAt: m.startedAt,
       config: m.config,
       events: m.events,
@@ -72,6 +80,6 @@ export const useMatch = create<MatchStore>()((set, get) => ({
   },
   close: () => {
     void db.meta.delete('current');
-    set({ matchId: null, config: null, events: [], state: null });
+    set({ matchId: null, kind: 'x01', config: null, events: [], state: null });
   },
 }));

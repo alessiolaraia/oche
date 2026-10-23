@@ -14,10 +14,19 @@ export default defineConfig({
     timeout: 180_000,
   },
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    // Sprach-E2E (Fake-Mikrofon) nur einmal, in Desktop-Chromium
+    {
+      name: 'desktop',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
+      testIgnore: '**/voice/**',
+    },
     { name: 'phone', use: { ...devices['Pixel 7'] }, testIgnore: '**/voice/**' },
     { name: 'phone-landscape', use: { ...devices['Pixel 7 landscape'] }, testIgnore: '**/voice/**' },
     { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: '**/voice/**' },
+    // Sprach-E2E (Fake-Mikrofon, echtes Vosk) – braucht Echtzeit-CPU, daher eigenes Projekt, seriell
+    {
+      name: 'voice',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
+      testMatch: '**/voice/**/*.spec.ts',
+    },
   ],
 });

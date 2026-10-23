@@ -28,6 +28,8 @@ export interface Phrasebook {
   pause: string;
   resume: string;
   micOff: string;
+  target: (label: string, n: number | null) => string;
+  trainingDone: (success: boolean, darts: number) => string;
 }
 
 const deNum = (n: number) => (n >= 0 && n <= 999 ? numberToWords(n) : String(n));
@@ -70,6 +72,8 @@ export const PLAIN: Phrasebook = {
   pause: 'Pause.',
   resume: 'Weiter.',
   micOff: 'Mikro aus.',
+  target: (label, n) => `Ziel: ${n === null ? label : deNum(n)}.`,
+  trainingDone: (ok, darts) => (ok ? `Geschafft mit ${deNum(darts)} Darts!` : 'Nicht geschafft.'),
 };
 
 export const ARENA: Phrasebook = {
@@ -95,6 +99,8 @@ export const ARENA: Phrasebook = {
   pause: 'Pause.',
   resume: 'Play on.',
   micOff: 'Microphone off.',
+  target: (label, n) => (n === null ? `Target: ${label}.` : `You require ${numberToEnglish(n)}.`),
+  trainingDone: (ok, darts) => (ok ? `Game shot! ${capital(numberToEnglish(darts))} darts.` : 'Missed it.'),
 };
 
 export function phrasebook(style: CallerStyle): Phrasebook {

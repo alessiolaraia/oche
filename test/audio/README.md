@@ -31,6 +31,6 @@ Neu erzeugen (macOS, Stimme „Anna“): `npm run test-audio` – mit anderer St
    ```
 3. **Test anlegen**: `test/e2e/voice/sechzig.spec.ts` kopieren, `fakeMic('meine-aufnahme')` eintragen und
    die erwarteten Reste prüfen.
-4. Laufen lassen: `npx playwright test test/e2e/voice --project=desktop`
+4. Laufen lassen: `npx playwright test test/e2e/voice --project=voice`
 
 Voraussetzung: das Modell liegt in `public/models/` (`npm run model`).

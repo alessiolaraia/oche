@@ -18,6 +18,8 @@ Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
 - `src/caller/` – TTS, Caller-Stile, synthetische Soundeffekte. Während TTS spricht, bekommt der Recognizer kein Audio (+300 ms).
 - `src/platform/` – Feature-Detection für Wake Lock, `navigator.audioSession`, Lifecycle. Nie Browser-Sniffing.
 - `src/store/` – Zustand-Stores; `src/db/` – Dexie (IndexedDB), Export/Import JSON.
+- `src/engine/bot.ts` – Bot simuliert Einzeldarts; `skillFor()` per Simulation kalibriert (±10 % Test).
+- `src/app/training.ts` – Checkout-Training/121 als Einzel-X01-Runden (`kind`), Around the Clock über Controller-Hooks.
 - `src/ui/` – React-Screens; Hash-Routing (`#/debug`), damit GitHub Pages ohne Rewrites läuft.
 
 ### Vosk-Modell
@@ -38,7 +40,8 @@ Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
 | Dev (Mac)                      | `npm run dev`                                                 |
 | Dev im WLAN fürs Handy (HTTPS) | `npm run dev:phone` → `https://<Mac-IP>:5173`                 |
 | Unit-Tests                     | `npm test`                                                    |
-| E2E                            | `npm run e2e` (baut + preview auf :4173)                      |
+| E2E                            | `npm run e2e` (UI auf 4 Viewports, dann Sprache seriell)      |
+| Nur Sprach-E2E (Fake-Mikro)    | `npm run e2e:voice` (braucht `npm run model`)                 |
 | Typen / Lint / Format          | `npm run typecheck` · `npm run lint` · `npm run format`       |
 | Test-WAVs erzeugen             | `npm run test-audio`                                          |
 | Build                          | `npm run build` (für Pages: `BASE_PATH=/oche/ npm run build`) |

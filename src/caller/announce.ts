@@ -111,5 +111,12 @@ export function announce(
         null,
         true,
       );
+    case 'trainingTarget':
+      return out(
+        [pb.target(e.label, e.mode === 'atc' ? (e.target <= 20 ? e.target : null) : e.target)],
+        null,
+      );
+    case 'trainingResult':
+      return out([pb.trainingDone(e.success, e.darts)], e.success ? 'leg' : 'bust', true);
   }
 }

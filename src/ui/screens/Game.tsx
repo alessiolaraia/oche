@@ -9,12 +9,15 @@ import {
   submitVisit,
   undo,
 } from '../../app/controller';
+import { stopTraining } from '../../app/training';
+import { botVisit, skillFor } from '../../engine/bot';
 import { checkoutRoute, formatRoute } from '../../engine/checkouts';
 import { matchStats } from '../../engine/stats';
 import type { MatchState } from '../../engine/types';
 import { useMatch } from '../../store/match';
 import { useSession } from '../../store/session';
 import { useSettings } from '../../store/settings';
+import { useTraining } from '../../store/training';
 import { BigNumber } from '../components/BigNumber';
 import { BoardPad } from '../components/BoardPad';
 import { MicButton } from '../components/MicButton';
@@ -50,6 +53,20 @@ export function Game() {
   const micStatus = useVoice((s) => s.status);
   const micError = useVoice((s) => s.error);
   const modelProgress = useVoice((s) => s.modelProgress);
+  const kind = useMatch((s) => s.kind);
+  const training = useTraining();
+
+  // Bot-Gegner wirft nach kurzer Pause selbst
+  const botAvg = state && state.winner === null ? config?.players[state.current]?.bot?.average : undefined;
+  const botBlocked = question !== null || (config?.startOrder === 'bullOut' && events.length === 0);
+  useEffect(() => {
+    if (botAvg === undefined || botBlocked || !state) return;
+    const t = setTimeout(() => {
+      const p = state.players[state.current]!;
+      submitDarts(botVisit(p.remaining, state.config.outMode, skillFor(botAvg), Math.random), 'touch');
+    }, 2200);
+    return () => clearTimeout(t);
+  }, [botAvg, botBlocked, state]);
 
   // Bildschirm anlassen, solange ein Spiel läuft
   useEffect(() => {
@@ -76,7 +93,8 @@ export function Game() {
   const last = state.lastVisit;
   const others = state.players.map((p, i) => ({ p, i })).filter(({ i }) => i !== cur);
 
-  if (state.winner !== null) return <MatchOver state={state} />;
+  if (state.winner !== null && kind === 'x01') return <MatchOver state={state} />;
+  const trainingDone = training.results.filter((r) => r.success).length;
 
   return (
     <div className={`game${pad !== 'none' ? ' game-with-pad' : ''}`}>
@@ -99,6 +117,12 @@ export function Game() {
         >
           Sprachsteuerung starten
         </button>
+      )}
+      {kind !== 'x01' && (
+        <p className="game-training" data-testid="training-status">
+          {kind === '121' ? '121-Challenge' : 'Checkout-Training'}: Ziel {training.target}, geschafft{' '}
+          {trainingDone} von {training.results.length}
+        </p>
       )}
       {(micError || modelProgress) && (
         <p className={`game-voice-note${micError ? ' warn' : ''}`} role="status">
@@ -194,11 +218,16 @@ export function Game() {
           <button
             className="btn btn-danger"
             onClick={() => {
+              if (kind !== 'x01') {
+                stopTraining();
+                navigate('training');
+                return;
+              }
               useMatch.getState().close();
               navigate('setup');
             }}
           >
-            Spiel beenden
+            {kind === 'x01' ? 'Spiel beenden' : 'Training beenden'}
           </button>
           <button className="btn btn-quiet" onClick={() => setMenu(false)}>
             Schließen

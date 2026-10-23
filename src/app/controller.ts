@@ -1,5 +1,5 @@
 // Einziger Einstiegspunkt für Eingaben – Touch und Sprache laufen beide hier durch.
-import { dartValue, isFinishable, isFinishingDart } from '../engine/checkouts';
+import { evaluateDarts } from '../engine/darts';
 import type { Dart, MatchConfig, VisitEvent } from '../engine/types';
 import { annotateLast, checkCorrection, checkVisit, correctLast, reduce, undoLast } from '../engine/x01';
 import { newId, useMatch } from '../store/match';
@@ -8,6 +8,17 @@ import { useSettings } from '../store/settings';
 import { emitFeedback, type Question } from './feedback';
 
 export type InputSource = 'voice' | 'touch';
+
+/** Trainingsmodi ohne X01 (Around the Clock) übernehmen Eingaben selbst. */
+interface TrainingHooks {
+  visit: (score: number) => boolean;
+  undo: () => boolean;
+}
+let trainingHooks: TrainingHooks | null = null;
+
+export function setTrainingHooks(h: TrainingHooks | null): void {
+  trainingHooks = h;
+}
 
 function afterInput(source: InputSource) {
   if (source === 'voice') useSession.getState().markVoiceInput();
@@ -23,6 +34,10 @@ export function submitVisit(
   score: number,
   opts: { bust?: boolean; darts?: Dart[]; dartsUsed?: number; dartsAtDouble?: number; source: InputSource },
 ): boolean {
+  if (trainingHooks) {
+    afterInput(opts.source);
+    return trainingHooks.visit(opts.bust ? 0 : score);
+  }
   const { state, events } = useMatch.getState();
   if (!state) {
     emitFeedback({ type: 'rejected', reason: 'gameOver' });
@@ -49,8 +64,10 @@ export function submitVisit(
 
   // Nachfrage vor dem Visit-Ereignis setzen, damit die Ansage weiß, dass erst gefragt wird
   const g = useSettings.getState().game;
-  const question: Question | null =
-    result.checkout && opts.dartsUsed === undefined && g.askCheckoutDarts
+  const isMatch = useMatch.getState().kind === 'x01';
+  const question: Question | null = !isMatch
+    ? null
+    : result.checkout && opts.dartsUsed === undefined && g.askCheckoutDarts
       ? 'checkoutDarts'
       : result.checkout && opts.dartsAtDouble === undefined && g.askDartsAtDouble
         ? 'dartsAtDouble'
@@ -59,32 +76,6 @@ export function submitVisit(
   emitFeedback({ type: 'visit', result, state: next });
   if (question) emitFeedback({ type: 'question', question });
   return true;
-}
-
-/**
- * Einzeldarts auswerten: Summe bilden, Checkout nur auf einem gültigen Finish-Dart,
- * sonst Bust; Darts aufs Doppel werden mitgezählt.
- */
-export function evaluateDarts(
-  darts: Dart[],
-  remaining: number,
-  out: MatchConfig['outMode'],
-): { score: number; bust: boolean; dartsUsed?: number; dartsAtDouble: number } {
-  let rest = remaining;
-  let atDouble = 0;
-  for (let i = 0; i < darts.length; i++) {
-    const d = darts[i]!;
-    if (out !== 'straight' && isFinishable(rest, out, 1)) atDouble++;
-    rest -= dartValue(d);
-    if (rest === 0) {
-      return isFinishingDart(d, out)
-        ? { score: remaining, bust: false, dartsUsed: i + 1, dartsAtDouble: atDouble }
-        : { score: 0, bust: true, dartsAtDouble: atDouble };
-    }
-    if (rest < 0 || (rest === 1 && out !== 'straight'))
-      return { score: 0, bust: true, dartsAtDouble: atDouble };
-  }
-  return { score: remaining - rest, bust: false, dartsAtDouble: atDouble };
 }
 
 export function submitDarts(darts: Dart[], source: InputSource): boolean {
@@ -102,6 +93,11 @@ export function submitDarts(darts: Dart[], source: InputSource): boolean {
 }
 
 export function undo(source: InputSource): boolean {
+  if (trainingHooks) {
+    const ok = trainingHooks.undo();
+    if (!ok) emitFeedback({ type: 'rejected', reason: 'nothingToUndo' });
+    return ok;
+  }
   const { events } = useMatch.getState();
   const next = undoLast(events);
   if (next.length === events.length) {

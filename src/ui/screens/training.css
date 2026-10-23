@@ -1,0 +1,62 @@
+.training-modes h2 {
+  font-size: var(--s-28);
+  margin-bottom: 4px;
+}
+
+.training-modes .row {
+  padding: 14px 0;
+  align-items: center;
+}
+
+.atc {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 10px;
+  padding: 10px var(--gutter);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.atc-target {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+}
+
+.atc-bull,
+.atc-done {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(4rem, 26vmin, 16rem);
+  line-height: 0.9;
+  margin: 0;
+  text-align: center;
+}
+
+.atc-done {
+  font-size: clamp(2.5rem, 12vmin, 7rem);
+  color: var(--ring-green);
+}
+
+.atc-hint {
+  margin: 0;
+}
+
+.atc-hits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.atc-hits .pad-key {
+  min-height: 72px;
+  font-size: var(--s-37);
+}
+
+.game-training {
+  grid-area: note;
+  margin: 0;
+  color: var(--sisal-dim);
+  font-weight: 600;
+}

@@ -12,6 +12,17 @@ export interface StoredMatch {
   kind: string;
 }
 
+export interface TrainingResult {
+  id: string;
+  mode: 'atc' | 'checkout' | '121';
+  at: number;
+  /** Ziel (Checkout/121) bzw. 0 bei Around the Clock. */
+  target: number;
+  success: boolean;
+  /** Benötigte Darts. */
+  darts: number;
+}
+
 export interface CurrentMatch {
   key: 'current';
   matchId: string;
@@ -20,6 +31,7 @@ export interface CurrentMatch {
 class OcheDb extends Dexie {
   matches!: EntityTable<StoredMatch, 'id'>;
   meta!: EntityTable<CurrentMatch, 'key'>;
+  trainings!: EntityTable<TrainingResult, 'id'>;
 
   constructor() {
     super('oche');
@@ -27,6 +39,7 @@ class OcheDb extends Dexie {
       matches: 'id, startedAt, finishedAt, kind',
       meta: 'key',
     });
+    this.version(2).stores({ trainings: 'id, mode, at' });
   }
 }
 
