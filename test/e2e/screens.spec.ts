@@ -4,7 +4,8 @@ import { collectConsoleErrors, enterScore, freshApp } from './helpers';
 // Screenshots aller Screens je Viewport (Projekt) – zur Sichtprüfung unter test-results/screens/
 test('Screenshots aller Screens', async ({ page }, info) => {
   const errors = collectConsoleErrors(page);
-  const shot = (name: string) => page.screenshot({ path: `test-results/screens/${info.project.name}-${name}.png` });
+  const shot = (name: string) =>
+    page.screenshot({ path: `test-results/screens/${info.project.name}-${name}.png` });
   await freshApp(page);
   await page.goto('/');
   await expect(page.getByTestId('quick-start')).toBeVisible();

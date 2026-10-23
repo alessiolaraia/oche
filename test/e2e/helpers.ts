@@ -7,7 +7,10 @@ export async function freshApp(page: Page, settings: Record<string, unknown> = {
     sessionStorage.setItem('oche-test-init', '1');
     localStorage.setItem(
       'oche-settings',
-      JSON.stringify({ state: { onboarded: true, caller: { enabled: false, sfx: false }, ...extra }, version: 1 }),
+      JSON.stringify({
+        state: { onboarded: true, caller: { enabled: false, sfx: false }, ...extra },
+        version: 1,
+      }),
     );
   }, settings);
 }
