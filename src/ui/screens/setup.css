@@ -1,0 +1,134 @@
+.setup-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: var(--s-21);
+}
+
+.setup-brand {
+  font-size: var(--s-50);
+  font-weight: 900;
+}
+
+.setup-nav {
+  display: flex;
+  gap: 18px;
+  font-weight: 600;
+}
+
+.setup-nav a {
+  text-decoration: none;
+  color: var(--sisal-dim);
+}
+
+.setup-resume {
+  width: 100%;
+  margin-bottom: 12px;
+  border-color: var(--ring-green);
+}
+
+/* Schnellstart: eine Tafel wie ein Score-Board, 501 groß */
+.setup-quick {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 2px solid var(--sisal);
+  background: var(--sisal);
+  color: var(--board);
+  text-align: left;
+}
+
+.setup-quick-score {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(4.5rem, 22vw, 8rem);
+  line-height: 0.8;
+}
+
+.setup-quick-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(var(--s-28), 6vw, var(--s-37));
+  line-height: 1.05;
+}
+
+.setup-quick-text small {
+  display: block;
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: var(--s-16);
+  margin-top: 6px;
+}
+
+.setup-players {
+  list-style: none;
+  padding: 0;
+}
+
+.setup-players input[type='text'] {
+  flex: 1;
+  min-width: 0;
+}
+
+.setup-bot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sisal-dim);
+  flex: 0 0 auto !important;
+}
+
+.setup-bot-avg {
+  flex: 0 0 auto !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.setup-bot-avg input {
+  width: 4.5em;
+}
+
+.setup-player-actions {
+  display: inline-flex;
+}
+
+.setup-player-actions .btn {
+  min-width: 44px;
+  padding: 0;
+}
+
+.setup-more {
+  display: block;
+  margin: var(--s-16) 0;
+  padding-left: 0;
+}
+
+.setup-wrap {
+  flex-wrap: wrap;
+}
+
+.setup-custom-score {
+  width: 5em;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+.setup-start {
+  width: 100%;
+  min-height: 56px;
+  margin-top: var(--s-16);
+  font-size: var(--s-21);
+}
+
+@media (max-width: 420px) {
+  .setup .row {
+    flex-wrap: wrap;
+  }
+}

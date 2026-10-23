@@ -1,0 +1,23 @@
+.big-number {
+  container-type: size;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+.big-number-digits {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.78;
+  color: var(--sisal);
+  font-size: min(112cqh, calc(100cqw / (var(--digits) * 0.54)));
+  display: flex;
+  font-variant-numeric: tabular-nums;
+}
+
+.big-number-cell {
+  width: 0.52em;
+  text-align: center;
+}

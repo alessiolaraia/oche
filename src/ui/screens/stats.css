@@ -1,0 +1,94 @@
+.stats-players {
+  flex-wrap: wrap;
+  margin-bottom: var(--s-21);
+}
+
+.stats-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--board-line);
+}
+
+.stats-kpi {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.stats-kpi dt {
+  color: var(--sisal-dim);
+  font-size: var(--s-14);
+}
+
+.stats-kpi dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--s-37);
+  line-height: 1.05;
+}
+
+.stats-kpi small {
+  display: block;
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--s-14);
+  color: var(--sisal-dim);
+}
+
+.stats-io {
+  display: flex;
+  gap: 12px;
+}
+
+.chart {
+  margin: 0;
+}
+
+.chart svg {
+  width: 100%;
+  height: auto;
+  touch-action: pan-y;
+}
+
+.chart-grid {
+  stroke: var(--board-line);
+  stroke-width: 1;
+}
+
+.chart-axis {
+  fill: var(--sisal-dim);
+  font-size: 13px;
+  font-family: var(--font-text);
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--sisal);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.chart-dot {
+  fill: var(--sisal);
+  stroke: var(--board);
+  stroke-width: 2;
+}
+
+.chart-cross {
+  stroke: var(--wire);
+  stroke-dasharray: 3 3;
+}
+
+.chart-tip {
+  color: var(--sisal-dim);
+  font-size: var(--s-14);
+  min-height: 1.5em;
+}
+
+.chart-table summary {
+  cursor: pointer;
+  color: var(--sisal-dim);
+  font-size: var(--s-14);
+}

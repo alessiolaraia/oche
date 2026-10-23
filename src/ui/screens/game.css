@@ -1,0 +1,246 @@
+.game {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto auto;
+  grid-template-areas: 'head' 'number' 'info' 'others' 'pad' 'bar';
+  padding: 10px var(--gutter) 10px;
+  gap: 6px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.game-head {
+  grid-area: head;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.game-player {
+  font-size: clamp(var(--s-28), 6vmin, 4rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(var(--s-21), 4vmin, var(--s-37));
+  color: var(--sisal-dim);
+  white-space: nowrap;
+}
+
+.game-number {
+  grid-area: number;
+  min-height: 0;
+}
+
+.game-info {
+  grid-area: info;
+}
+
+.game-info p {
+  margin: 0;
+}
+
+.game-route {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(var(--s-28), 7vmin, 4.5rem);
+  text-align: center;
+  line-height: 1.1;
+}
+
+.game-last {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--sisal-dim);
+  font-size: var(--s-16);
+}
+
+.game-avg {
+  white-space: nowrap;
+}
+
+.game-others {
+  grid-area: others;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--board-line);
+}
+
+.game-others li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'name rest' 'meta rest';
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.game-other-name {
+  grid-area: name;
+  font-weight: 600;
+}
+
+.game-other-meta {
+  grid-area: meta;
+  color: var(--sisal-dim);
+  font-size: var(--s-14);
+}
+
+.game-other-rest {
+  grid-area: rest;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(var(--s-37), 8vmin, 5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.game-pad {
+  grid-area: pad;
+}
+
+.game-bar {
+  grid-area: bar;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.game-bar .btn {
+  flex: 1 1 auto;
+}
+
+.game-with-pad .game-others li {
+  padding: 2px 0;
+}
+
+.game-with-pad .game-other-rest {
+  font-size: var(--s-28);
+}
+
+.game-with-pad .game-route {
+  font-size: var(--s-28);
+}
+
+/* Querformat: Zahl links, Spalte rechts */
+@media (orientation: landscape) and (min-aspect-ratio: 5/4) {
+  .game {
+    grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'head head'
+      'number others'
+      'number info'
+      'number pad'
+      'bar bar';
+    column-gap: 24px;
+  }
+  .game-others {
+    align-self: start;
+  }
+  .game-route {
+    text-align: left;
+  }
+  .game-pad {
+    align-self: end;
+  }
+  .game-with-pad .game-info {
+    display: none;
+  }
+  .game-pad .pad-key {
+    min-height: 40px;
+  }
+}
+
+/* sehr niedrig (Handy quer): kompaktere Leiste */
+@media (max-height: 480px) {
+  .game {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    gap: 2px;
+  }
+  .game-bar .btn {
+    min-height: 40px;
+    padding: 0.3em 0.8em;
+  }
+  .game-pad .pad-quick {
+    display: none;
+  }
+}
+
+.sheet {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--ring-width) + 12px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(32rem, calc(100% - 2 * var(--gutter) - 2 * var(--ring-width)));
+  z-index: 30;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  background: var(--board-raised);
+  border: 1px solid var(--board-line);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 0.45);
+}
+
+.sheet h2 {
+  font-size: var(--s-28);
+  margin-bottom: 4px;
+}
+
+.sheet-row {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 8px;
+}
+
+.match-over-title {
+  font-size: clamp(var(--s-50), 12vmin, 7rem);
+  margin-top: var(--s-28);
+}
+
+.match-over-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--s-28);
+  color: var(--sisal-dim);
+  margin: 0 0 var(--s-28);
+}
+
+.match-over-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--s-28);
+}
+
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-table th,
+.stat-table td {
+  text-align: right;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.stat-table th:first-child {
+  text-align: left;
+}
+
+.stat-table thead th {
+  color: var(--sisal-dim);
+  font-weight: 600;
+  font-size: var(--s-14);
+}
