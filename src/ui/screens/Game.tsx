@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   answerQuestion,
   dismissQuestion,
@@ -19,6 +19,9 @@ import { BigNumber } from '../components/BigNumber';
 import { BoardPad } from '../components/BoardPad';
 import { MicButton } from '../components/MicButton';
 import { NumberPad } from '../components/NumberPad';
+import { keepScreenOn } from '../../platform/wakeLock';
+import { useVoice } from '../../store/voice';
+import { startVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './game.css';
 
@@ -42,6 +45,17 @@ export function Game() {
   const boardPadDefault = useSettings((s) => s.display.boardPad);
   const [pad, setPad] = useState<'none' | 'numbers' | 'board'>('none');
   const [menu, setMenu] = useState(false);
+  const keepAwake = useSettings((s) => s.display.keepAwake);
+  const voiceEnabled = useSettings((s) => s.voice.enabled);
+  const micStatus = useVoice((s) => s.status);
+  const micError = useVoice((s) => s.error);
+  const modelProgress = useVoice((s) => s.modelProgress);
+
+  // Bildschirm anlassen, solange ein Spiel läuft
+  useEffect(() => {
+    keepScreenOn(keepAwake && state !== null && state.winner === null);
+    return () => keepScreenOn(false);
+  }, [keepAwake, state]);
 
   if (!state || !config) {
     return (
@@ -76,6 +90,21 @@ export function Game() {
       <section className="game-number" aria-label={`${meCfg.name}: Rest ${me.remaining}`}>
         <BigNumber value={me.remaining} label={`Rest ${me.remaining}`} />
       </section>
+
+      {voiceEnabled && micStatus === 'off' && pad === 'none' && (
+        <button
+          className="btn btn-primary game-start-mic"
+          onClick={() => void startVoice()}
+          data-testid="start-voice"
+        >
+          Sprachsteuerung starten
+        </button>
+      )}
+      {(micError || modelProgress) && (
+        <p className={`game-voice-note${micError ? ' warn' : ''}`} role="status">
+          {micError ?? modelProgress}
+        </p>
+      )}
 
       <section className="game-info">
         <p className="game-route" data-testid="checkout-route">

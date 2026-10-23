@@ -14,8 +14,9 @@ export default defineConfig({
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'phone', use: { ...devices['Pixel 7'] } },
-    { name: 'phone-landscape', use: { ...devices['Pixel 7 landscape'] } },
-    { name: 'iphone', use: { ...devices['iPhone 15'] } },
+    // Sprach-E2E (Fake-Mikrofon) nur einmal, in Desktop-Chromium
+    { name: 'phone', use: { ...devices['Pixel 7'] }, testIgnore: '**/voice/**' },
+    { name: 'phone-landscape', use: { ...devices['Pixel 7 landscape'] }, testIgnore: '**/voice/**' },
+    { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: '**/voice/**' },
   ],
 });

@@ -2,8 +2,8 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto minmax(0, 1fr) auto auto auto auto;
-  grid-template-areas: 'head' 'number' 'info' 'others' 'pad' 'bar';
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto auto auto auto;
+  grid-template-areas: 'head' 'number' 'mic' 'note' 'info' 'others' 'pad' 'bar';
   padding: 10px var(--gutter) 10px;
   gap: 6px;
   max-width: 1400px;
@@ -134,9 +134,11 @@
 @media (orientation: landscape) and (min-aspect-ratio: 5/4) {
   .game {
     grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr);
-    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
     grid-template-areas:
       'head head'
+      'number mic'
+      'number note'
       'number others'
       'number info'
       'number pad'
@@ -243,4 +245,17 @@
   color: var(--sisal-dim);
   font-weight: 600;
   font-size: var(--s-14);
+}
+
+.game-start-mic {
+  grid-area: mic;
+  min-height: 72px;
+  font-size: var(--s-21);
+}
+
+.game-voice-note {
+  grid-area: note;
+  margin: 0;
+  font-size: var(--s-14);
+  color: var(--sisal-dim);
 }

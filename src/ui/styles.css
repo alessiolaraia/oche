@@ -387,3 +387,131 @@ input[type='checkbox'] {
     flex: 1;
   }
 }
+
+.voice-log-partial {
+  color: var(--sisal-dim);
+  margin: 8px 0 4px;
+}
+
+.voice-log-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.voice-log-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--board-line);
+}
+
+.voice-log-list li[data-accepted='true'] .voice-log-text {
+  color: var(--ring-green);
+}
+
+.voice-log-list li[data-accepted='false'] .voice-log-text {
+  color: var(--sisal-dim);
+}
+
+.voice-log-meta {
+  color: var(--sisal-dim);
+  font-size: var(--s-14);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mic-test .label,
+.row .label:has(.calibration) {
+  display: grid;
+  gap: 8px;
+}
+
+.mic-testmode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calibration {
+  display: grid;
+  gap: 10px;
+}
+
+.calibration-step {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--s-28);
+  margin: 0;
+}
+
+.calibration-speak {
+  color: var(--ring-green);
+}
+
+.mic-trigger {
+  flex-wrap: wrap;
+}
+
+.debug-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.debug-table {
+  margin-top: 12px;
+}
+
+.debug-table td {
+  text-align: left;
+}
+
+.onboarding-steps {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--s-28);
+  color: var(--sisal-dim);
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.onboarding-steps li[aria-current='step'] {
+  color: var(--sisal);
+  border-bottom: 3px solid var(--sisal);
+}
+
+.onboarding-steps li[data-done='true'] {
+  color: var(--ring-green);
+}
+
+.onboarding-step {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.onboarding-step p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+.onboarding-big {
+  min-height: 72px;
+  font-size: var(--s-21);
+  padding: 0 2em;
+}
+
+.onboarding-ios {
+  border-left: 3px solid var(--sisal);
+  padding-left: 14px;
+}
+
+.onboarding-ios h2 {
+  font-size: var(--s-28);
+  margin-bottom: 6px;
+}

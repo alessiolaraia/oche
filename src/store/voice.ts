@@ -26,6 +26,8 @@ interface VoiceStore {
   error: string | null;
   warnings: string[];
   modelProgress: string | null;
+  /** Testmodus: Erkanntes nur anzeigen, nicht ausführen. */
+  testMode: boolean;
   set: (patch: Partial<Omit<VoiceStore, 'set' | 'pushResult'>>) => void;
   pushResult: (r: RawResult) => void;
 }
@@ -42,6 +44,7 @@ export const useVoice = create<VoiceStore>()((set) => ({
   error: null,
   warnings: [],
   modelProgress: null,
+  testMode: false,
   set: (patch) => set(patch),
   pushResult: (r) => set((s) => ({ results: [r, ...s.results].slice(0, 20) })),
 }));

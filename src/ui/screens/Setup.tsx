@@ -3,6 +3,7 @@ import { startMatch } from '../../app/controller';
 import type { InMode, MatchConfig, OutMode, Player } from '../../engine/types';
 import { newId, useMatch } from '../../store/match';
 import { useSettings } from '../../store/settings';
+import { startVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './setup.css';
 
@@ -25,6 +26,8 @@ export function Setup() {
   const go = (config: MatchConfig) => {
     settings.update('players', { recent: config.players.filter((p) => !p.bot).map((p) => p.name) });
     startMatch(config);
+    // Tippen auf Start ist die Nutzergeste, die Mikro und Audio freischaltet
+    if (settings.voice.enabled) void startVoice();
     navigate('game');
   };
 
