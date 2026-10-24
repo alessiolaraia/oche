@@ -85,7 +85,12 @@ describe('Ansagen', () => {
     const off = { ...plain, enabled: false, sfx: false };
     expect(announce(visitEvent([v(180)]), off, ctx)).toBeNull();
     const sfxOnly = { ...plain, enabled: false };
-    expect(announce(visitEvent([v(60)]), sfxOnly, ctx)).toEqual({ cues: [], text: '', sfx: 'accept', interrupt: true });
+    expect(announce(visitEvent([v(60)]), sfxOnly, ctx)).toEqual({
+      cues: [],
+      text: '',
+      sfx: 'accept',
+      interrupt: true,
+    });
   });
 
   it('nicht verstanden → nur Ton', () => {

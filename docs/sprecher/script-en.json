@@ -1,0 +1,3933 @@
+[
+ {
+  "no": 1,
+  "text": "How many darts?",
+  "keys": [
+   "ask_darts"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 2,
+  "text": "Darts at the double?",
+  "keys": [
+   "ask_double"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 3,
+  "text": "Not possible.",
+  "keys": [
+   "impossible"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 4,
+  "text": "Score removed.",
+  "keys": [
+   "undo"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 5,
+  "text": "Corrected.",
+  "keys": [
+   "corrected"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 6,
+  "text": "Pause.",
+  "keys": [
+   "pause"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 7,
+  "text": "Play on.",
+  "keys": [
+   "resume"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 8,
+  "text": "Microphone off.",
+  "keys": [
+   "mic_off"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 9,
+  "text": "Your throw.",
+  "keys": [
+   "your_turn"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 10,
+  "text": "Missed it.",
+  "keys": [
+   "training_fail"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Short phrases"
+ },
+ {
+  "no": 11,
+  "text": "You require two.",
+  "keys": [
+   "require_2"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 12,
+  "text": "You require three.",
+  "keys": [
+   "require_3"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 13,
+  "text": "You require four.",
+  "keys": [
+   "require_4"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 14,
+  "text": "You require five.",
+  "keys": [
+   "require_5"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 15,
+  "text": "You require six.",
+  "keys": [
+   "require_6"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 16,
+  "text": "You require seven.",
+  "keys": [
+   "require_7"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 17,
+  "text": "You require eight.",
+  "keys": [
+   "require_8"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 18,
+  "text": "You require nine.",
+  "keys": [
+   "require_9"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 19,
+  "text": "You require ten.",
+  "keys": [
+   "require_10"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 20,
+  "text": "You require eleven.",
+  "keys": [
+   "require_11"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 21,
+  "text": "You require twelve.",
+  "keys": [
+   "require_12"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 22,
+  "text": "You require thirteen.",
+  "keys": [
+   "require_13"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 23,
+  "text": "You require fourteen.",
+  "keys": [
+   "require_14"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 24,
+  "text": "You require fifteen.",
+  "keys": [
+   "require_15"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 25,
+  "text": "You require sixteen.",
+  "keys": [
+   "require_16"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 26,
+  "text": "You require seventeen.",
+  "keys": [
+   "require_17"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 27,
+  "text": "You require eighteen.",
+  "keys": [
+   "require_18"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 28,
+  "text": "You require nineteen.",
+  "keys": [
+   "require_19"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 29,
+  "text": "You require twenty.",
+  "keys": [
+   "require_20"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 30,
+  "text": "You require twenty-one.",
+  "keys": [
+   "require_21"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 31,
+  "text": "You require twenty-two.",
+  "keys": [
+   "require_22"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 32,
+  "text": "You require twenty-three.",
+  "keys": [
+   "require_23"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 33,
+  "text": "You require twenty-four.",
+  "keys": [
+   "require_24"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 34,
+  "text": "You require twenty-five.",
+  "keys": [
+   "require_25"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 35,
+  "text": "You require twenty-six.",
+  "keys": [
+   "require_26"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 36,
+  "text": "You require twenty-seven.",
+  "keys": [
+   "require_27"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 37,
+  "text": "You require twenty-eight.",
+  "keys": [
+   "require_28"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 38,
+  "text": "You require twenty-nine.",
+  "keys": [
+   "require_29"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 39,
+  "text": "You require thirty.",
+  "keys": [
+   "require_30"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 40,
+  "text": "You require thirty-one.",
+  "keys": [
+   "require_31"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 41,
+  "text": "You require thirty-two.",
+  "keys": [
+   "require_32"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 42,
+  "text": "You require thirty-three.",
+  "keys": [
+   "require_33"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 43,
+  "text": "You require thirty-four.",
+  "keys": [
+   "require_34"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 44,
+  "text": "You require thirty-five.",
+  "keys": [
+   "require_35"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 45,
+  "text": "You require thirty-six.",
+  "keys": [
+   "require_36"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 46,
+  "text": "You require thirty-seven.",
+  "keys": [
+   "require_37"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 47,
+  "text": "You require thirty-eight.",
+  "keys": [
+   "require_38"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 48,
+  "text": "You require thirty-nine.",
+  "keys": [
+   "require_39"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 49,
+  "text": "You require forty.",
+  "keys": [
+   "require_40"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 50,
+  "text": "You require forty-one.",
+  "keys": [
+   "require_41"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 51,
+  "text": "You require forty-two.",
+  "keys": [
+   "require_42"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 52,
+  "text": "You require forty-three.",
+  "keys": [
+   "require_43"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 53,
+  "text": "You require forty-four.",
+  "keys": [
+   "require_44"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 54,
+  "text": "You require forty-five.",
+  "keys": [
+   "require_45"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 55,
+  "text": "You require forty-six.",
+  "keys": [
+   "require_46"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 56,
+  "text": "You require forty-seven.",
+  "keys": [
+   "require_47"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 57,
+  "text": "You require forty-eight.",
+  "keys": [
+   "require_48"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 58,
+  "text": "You require forty-nine.",
+  "keys": [
+   "require_49"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 59,
+  "text": "You require fifty.",
+  "keys": [
+   "require_50"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 60,
+  "text": "You require fifty-one.",
+  "keys": [
+   "require_51"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 61,
+  "text": "You require fifty-two.",
+  "keys": [
+   "require_52"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 62,
+  "text": "You require fifty-three.",
+  "keys": [
+   "require_53"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 63,
+  "text": "You require fifty-four.",
+  "keys": [
+   "require_54"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 64,
+  "text": "You require fifty-five.",
+  "keys": [
+   "require_55"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 65,
+  "text": "You require fifty-six.",
+  "keys": [
+   "require_56"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 66,
+  "text": "You require fifty-seven.",
+  "keys": [
+   "require_57"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 67,
+  "text": "You require fifty-eight.",
+  "keys": [
+   "require_58"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 68,
+  "text": "You require fifty-nine.",
+  "keys": [
+   "require_59"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 69,
+  "text": "You require sixty.",
+  "keys": [
+   "require_60"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 70,
+  "text": "You require sixty-one.",
+  "keys": [
+   "require_61"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 71,
+  "text": "You require sixty-two.",
+  "keys": [
+   "require_62"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 72,
+  "text": "You require sixty-three.",
+  "keys": [
+   "require_63"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 73,
+  "text": "You require sixty-four.",
+  "keys": [
+   "require_64"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 74,
+  "text": "You require sixty-five.",
+  "keys": [
+   "require_65"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 75,
+  "text": "You require sixty-six.",
+  "keys": [
+   "require_66"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 76,
+  "text": "You require sixty-seven.",
+  "keys": [
+   "require_67"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 77,
+  "text": "You require sixty-eight.",
+  "keys": [
+   "require_68"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 78,
+  "text": "You require sixty-nine.",
+  "keys": [
+   "require_69"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 79,
+  "text": "You require seventy.",
+  "keys": [
+   "require_70"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 80,
+  "text": "You require seventy-one.",
+  "keys": [
+   "require_71"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 81,
+  "text": "You require seventy-two.",
+  "keys": [
+   "require_72"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 82,
+  "text": "You require seventy-three.",
+  "keys": [
+   "require_73"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 83,
+  "text": "You require seventy-four.",
+  "keys": [
+   "require_74"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 84,
+  "text": "You require seventy-five.",
+  "keys": [
+   "require_75"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 85,
+  "text": "You require seventy-six.",
+  "keys": [
+   "require_76"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 86,
+  "text": "You require seventy-seven.",
+  "keys": [
+   "require_77"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 87,
+  "text": "You require seventy-eight.",
+  "keys": [
+   "require_78"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 88,
+  "text": "You require seventy-nine.",
+  "keys": [
+   "require_79"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 89,
+  "text": "You require eighty.",
+  "keys": [
+   "require_80"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 90,
+  "text": "You require eighty-one.",
+  "keys": [
+   "require_81"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 91,
+  "text": "You require eighty-two.",
+  "keys": [
+   "require_82"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 92,
+  "text": "You require eighty-three.",
+  "keys": [
+   "require_83"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 93,
+  "text": "You require eighty-four.",
+  "keys": [
+   "require_84"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 94,
+  "text": "You require eighty-five.",
+  "keys": [
+   "require_85"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 95,
+  "text": "You require eighty-six.",
+  "keys": [
+   "require_86"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 96,
+  "text": "You require eighty-seven.",
+  "keys": [
+   "require_87"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 97,
+  "text": "You require eighty-eight.",
+  "keys": [
+   "require_88"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 98,
+  "text": "You require eighty-nine.",
+  "keys": [
+   "require_89"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 99,
+  "text": "You require ninety.",
+  "keys": [
+   "require_90"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 100,
+  "text": "You require ninety-one.",
+  "keys": [
+   "require_91"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 101,
+  "text": "You require ninety-two.",
+  "keys": [
+   "require_92"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 102,
+  "text": "You require ninety-three.",
+  "keys": [
+   "require_93"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 103,
+  "text": "You require ninety-four.",
+  "keys": [
+   "require_94"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 104,
+  "text": "You require ninety-five.",
+  "keys": [
+   "require_95"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 105,
+  "text": "You require ninety-six.",
+  "keys": [
+   "require_96"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 106,
+  "text": "You require ninety-seven.",
+  "keys": [
+   "require_97"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 107,
+  "text": "You require ninety-eight.",
+  "keys": [
+   "require_98"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 108,
+  "text": "You require ninety-nine.",
+  "keys": [
+   "require_99"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 109,
+  "text": "You require one hundred.",
+  "keys": [
+   "require_100"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 110,
+  "text": "You require one hundred and one.",
+  "keys": [
+   "require_101"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 111,
+  "text": "You require one hundred and two.",
+  "keys": [
+   "require_102"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 112,
+  "text": "You require one hundred and three.",
+  "keys": [
+   "require_103"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 113,
+  "text": "You require one hundred and four.",
+  "keys": [
+   "require_104"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 114,
+  "text": "You require one hundred and five.",
+  "keys": [
+   "require_105"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 115,
+  "text": "You require one hundred and six.",
+  "keys": [
+   "require_106"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 116,
+  "text": "You require one hundred and seven.",
+  "keys": [
+   "require_107"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 117,
+  "text": "You require one hundred and eight.",
+  "keys": [
+   "require_108"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 118,
+  "text": "You require one hundred and nine.",
+  "keys": [
+   "require_109"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 119,
+  "text": "You require one hundred and ten.",
+  "keys": [
+   "require_110"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 120,
+  "text": "You require one hundred and eleven.",
+  "keys": [
+   "require_111"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 121,
+  "text": "You require one hundred and twelve.",
+  "keys": [
+   "require_112"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 122,
+  "text": "You require one hundred and thirteen.",
+  "keys": [
+   "require_113"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 123,
+  "text": "You require one hundred and fourteen.",
+  "keys": [
+   "require_114"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 124,
+  "text": "You require one hundred and fifteen.",
+  "keys": [
+   "require_115"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 125,
+  "text": "You require one hundred and sixteen.",
+  "keys": [
+   "require_116"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 126,
+  "text": "You require one hundred and seventeen.",
+  "keys": [
+   "require_117"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 127,
+  "text": "You require one hundred and eighteen.",
+  "keys": [
+   "require_118"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 128,
+  "text": "You require one hundred and nineteen.",
+  "keys": [
+   "require_119"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 129,
+  "text": "You require one hundred and twenty.",
+  "keys": [
+   "require_120"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 130,
+  "text": "You require one hundred and twenty-one.",
+  "keys": [
+   "require_121"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 131,
+  "text": "You require one hundred and twenty-two.",
+  "keys": [
+   "require_122"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 132,
+  "text": "You require one hundred and twenty-three.",
+  "keys": [
+   "require_123"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 133,
+  "text": "You require one hundred and twenty-four.",
+  "keys": [
+   "require_124"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 134,
+  "text": "You require one hundred and twenty-five.",
+  "keys": [
+   "require_125"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 135,
+  "text": "You require one hundred and twenty-six.",
+  "keys": [
+   "require_126"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 136,
+  "text": "You require one hundred and twenty-seven.",
+  "keys": [
+   "require_127"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 137,
+  "text": "You require one hundred and twenty-eight.",
+  "keys": [
+   "require_128"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 138,
+  "text": "You require one hundred and twenty-nine.",
+  "keys": [
+   "require_129"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 139,
+  "text": "You require one hundred and thirty.",
+  "keys": [
+   "require_130"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 140,
+  "text": "You require one hundred and thirty-one.",
+  "keys": [
+   "require_131"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 141,
+  "text": "You require one hundred and thirty-two.",
+  "keys": [
+   "require_132"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 142,
+  "text": "You require one hundred and thirty-three.",
+  "keys": [
+   "require_133"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 143,
+  "text": "You require one hundred and thirty-four.",
+  "keys": [
+   "require_134"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 144,
+  "text": "You require one hundred and thirty-five.",
+  "keys": [
+   "require_135"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 145,
+  "text": "You require one hundred and thirty-six.",
+  "keys": [
+   "require_136"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 146,
+  "text": "You require one hundred and thirty-seven.",
+  "keys": [
+   "require_137"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 147,
+  "text": "You require one hundred and thirty-eight.",
+  "keys": [
+   "require_138"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 148,
+  "text": "You require one hundred and thirty-nine.",
+  "keys": [
+   "require_139"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 149,
+  "text": "You require one hundred and forty.",
+  "keys": [
+   "require_140"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 150,
+  "text": "You require one hundred and forty-one.",
+  "keys": [
+   "require_141"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 151,
+  "text": "You require one hundred and forty-two.",
+  "keys": [
+   "require_142"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 152,
+  "text": "You require one hundred and forty-three.",
+  "keys": [
+   "require_143"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 153,
+  "text": "You require one hundred and forty-four.",
+  "keys": [
+   "require_144"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 154,
+  "text": "You require one hundred and forty-five.",
+  "keys": [
+   "require_145"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 155,
+  "text": "You require one hundred and forty-six.",
+  "keys": [
+   "require_146"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 156,
+  "text": "You require one hundred and forty-seven.",
+  "keys": [
+   "require_147"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 157,
+  "text": "You require one hundred and forty-eight.",
+  "keys": [
+   "require_148"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 158,
+  "text": "You require one hundred and forty-nine.",
+  "keys": [
+   "require_149"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 159,
+  "text": "You require one hundred and fifty.",
+  "keys": [
+   "require_150"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 160,
+  "text": "You require one hundred and fifty-one.",
+  "keys": [
+   "require_151"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 161,
+  "text": "You require one hundred and fifty-two.",
+  "keys": [
+   "require_152"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 162,
+  "text": "You require one hundred and fifty-three.",
+  "keys": [
+   "require_153"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 163,
+  "text": "You require one hundred and fifty-four.",
+  "keys": [
+   "require_154"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 164,
+  "text": "You require one hundred and fifty-five.",
+  "keys": [
+   "require_155"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 165,
+  "text": "You require one hundred and fifty-six.",
+  "keys": [
+   "require_156"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 166,
+  "text": "You require one hundred and fifty-seven.",
+  "keys": [
+   "require_157"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 167,
+  "text": "You require one hundred and fifty-eight.",
+  "keys": [
+   "require_158"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 168,
+  "text": "You require one hundred and fifty-nine.",
+  "keys": [
+   "require_159"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 169,
+  "text": "You require one hundred and sixty.",
+  "keys": [
+   "require_160"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 170,
+  "text": "You require one hundred and sixty-one.",
+  "keys": [
+   "require_161"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 171,
+  "text": "You require one hundred and sixty-two.",
+  "keys": [
+   "require_162"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 172,
+  "text": "You require one hundred and sixty-four.",
+  "keys": [
+   "require_164"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 173,
+  "text": "You require one hundred and sixty-five.",
+  "keys": [
+   "require_165"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 174,
+  "text": "You require one hundred and sixty-seven.",
+  "keys": [
+   "require_167"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 175,
+  "text": "You require one hundred and sixty-eight.",
+  "keys": [
+   "require_168"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 176,
+  "text": "You require one hundred and seventy.",
+  "keys": [
+   "require_170"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 177,
+  "text": "You require one hundred and seventy-one.",
+  "keys": [
+   "require_171"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 178,
+  "text": "You require one hundred and seventy-four.",
+  "keys": [
+   "require_174"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 179,
+  "text": "You require one hundred and seventy-seven.",
+  "keys": [
+   "require_177"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 180,
+  "text": "You require one hundred and eighty.",
+  "keys": [
+   "require_180"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Checkout requirements"
+ },
+ {
+  "no": 181,
+  "text": "Target, one.",
+  "keys": [
+   "target_1"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 182,
+  "text": "Target, two.",
+  "keys": [
+   "target_2"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 183,
+  "text": "Target, three.",
+  "keys": [
+   "target_3"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 184,
+  "text": "Target, four.",
+  "keys": [
+   "target_4"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 185,
+  "text": "Target, five.",
+  "keys": [
+   "target_5"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 186,
+  "text": "Target, six.",
+  "keys": [
+   "target_6"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 187,
+  "text": "Target, seven.",
+  "keys": [
+   "target_7"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 188,
+  "text": "Target, eight.",
+  "keys": [
+   "target_8"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 189,
+  "text": "Target, nine.",
+  "keys": [
+   "target_9"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 190,
+  "text": "Target, ten.",
+  "keys": [
+   "target_10"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 191,
+  "text": "Target, eleven.",
+  "keys": [
+   "target_11"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 192,
+  "text": "Target, twelve.",
+  "keys": [
+   "target_12"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 193,
+  "text": "Target, thirteen.",
+  "keys": [
+   "target_13"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 194,
+  "text": "Target, fourteen.",
+  "keys": [
+   "target_14"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 195,
+  "text": "Target, fifteen.",
+  "keys": [
+   "target_15"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 196,
+  "text": "Target, sixteen.",
+  "keys": [
+   "target_16"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 197,
+  "text": "Target, seventeen.",
+  "keys": [
+   "target_17"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 198,
+  "text": "Target, eighteen.",
+  "keys": [
+   "target_18"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 199,
+  "text": "Target, nineteen.",
+  "keys": [
+   "target_19"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 200,
+  "text": "Target, twenty.",
+  "keys": [
+   "target_20"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 201,
+  "text": "Target, the bull.",
+  "keys": [
+   "target_bull"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Practice targets"
+ },
+ {
+  "no": 202,
+  "text": "No score!",
+  "keys": [
+   "score_0",
+   "bust"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 203,
+  "text": "One.",
+  "keys": [
+   "score_1"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 204,
+  "text": "Two.",
+  "keys": [
+   "score_2"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 205,
+  "text": "Three.",
+  "keys": [
+   "score_3"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 206,
+  "text": "Four.",
+  "keys": [
+   "score_4"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 207,
+  "text": "Five.",
+  "keys": [
+   "score_5"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 208,
+  "text": "Six.",
+  "keys": [
+   "score_6"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 209,
+  "text": "Seven.",
+  "keys": [
+   "score_7"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 210,
+  "text": "Eight.",
+  "keys": [
+   "score_8"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 211,
+  "text": "Nine.",
+  "keys": [
+   "score_9"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 212,
+  "text": "Ten.",
+  "keys": [
+   "score_10"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 213,
+  "text": "Eleven.",
+  "keys": [
+   "score_11"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 214,
+  "text": "Twelve.",
+  "keys": [
+   "score_12"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 215,
+  "text": "Thirteen.",
+  "keys": [
+   "score_13"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 216,
+  "text": "Fourteen.",
+  "keys": [
+   "score_14"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 217,
+  "text": "Fifteen.",
+  "keys": [
+   "score_15"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 218,
+  "text": "Sixteen.",
+  "keys": [
+   "score_16"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 219,
+  "text": "Seventeen.",
+  "keys": [
+   "score_17"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 220,
+  "text": "Eighteen.",
+  "keys": [
+   "score_18"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 221,
+  "text": "Nineteen.",
+  "keys": [
+   "score_19"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 222,
+  "text": "Twenty.",
+  "keys": [
+   "score_20"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 223,
+  "text": "Twenty-one.",
+  "keys": [
+   "score_21"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 224,
+  "text": "Twenty-two.",
+  "keys": [
+   "score_22"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 225,
+  "text": "Twenty-three.",
+  "keys": [
+   "score_23"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 226,
+  "text": "Twenty-four.",
+  "keys": [
+   "score_24"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 227,
+  "text": "Twenty-five.",
+  "keys": [
+   "score_25"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 228,
+  "text": "Twenty-six.",
+  "keys": [
+   "score_26"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 229,
+  "text": "Twenty-seven.",
+  "keys": [
+   "score_27"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 230,
+  "text": "Twenty-eight.",
+  "keys": [
+   "score_28"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 231,
+  "text": "Twenty-nine.",
+  "keys": [
+   "score_29"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 232,
+  "text": "Thirty.",
+  "keys": [
+   "score_30"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 233,
+  "text": "Thirty-one.",
+  "keys": [
+   "score_31"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 234,
+  "text": "Thirty-two.",
+  "keys": [
+   "score_32"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 235,
+  "text": "Thirty-three.",
+  "keys": [
+   "score_33"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 236,
+  "text": "Thirty-four.",
+  "keys": [
+   "score_34"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 237,
+  "text": "Thirty-five.",
+  "keys": [
+   "score_35"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 238,
+  "text": "Thirty-six.",
+  "keys": [
+   "score_36"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 239,
+  "text": "Thirty-seven.",
+  "keys": [
+   "score_37"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 240,
+  "text": "Thirty-eight.",
+  "keys": [
+   "score_38"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 241,
+  "text": "Thirty-nine.",
+  "keys": [
+   "score_39"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 242,
+  "text": "Forty.",
+  "keys": [
+   "score_40"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 243,
+  "text": "Forty-one.",
+  "keys": [
+   "score_41"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 244,
+  "text": "Forty-two.",
+  "keys": [
+   "score_42"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 245,
+  "text": "Forty-three.",
+  "keys": [
+   "score_43"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 246,
+  "text": "Forty-four.",
+  "keys": [
+   "score_44"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 247,
+  "text": "Forty-five.",
+  "keys": [
+   "score_45"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 248,
+  "text": "Forty-six.",
+  "keys": [
+   "score_46"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 249,
+  "text": "Forty-seven.",
+  "keys": [
+   "score_47"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 250,
+  "text": "Forty-eight.",
+  "keys": [
+   "score_48"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 251,
+  "text": "Forty-nine.",
+  "keys": [
+   "score_49"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 252,
+  "text": "Fifty.",
+  "keys": [
+   "score_50"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 253,
+  "text": "Fifty-one.",
+  "keys": [
+   "score_51"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 254,
+  "text": "Fifty-two.",
+  "keys": [
+   "score_52"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 255,
+  "text": "Fifty-three.",
+  "keys": [
+   "score_53"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 256,
+  "text": "Fifty-four.",
+  "keys": [
+   "score_54"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 257,
+  "text": "Fifty-five.",
+  "keys": [
+   "score_55"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 258,
+  "text": "Fifty-six.",
+  "keys": [
+   "score_56"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 259,
+  "text": "Fifty-seven.",
+  "keys": [
+   "score_57"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 260,
+  "text": "Fifty-eight.",
+  "keys": [
+   "score_58"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 261,
+  "text": "Fifty-nine.",
+  "keys": [
+   "score_59"
+  ],
+  "level": "calm",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 262,
+  "text": "Sixty.",
+  "keys": [
+   "score_60"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 263,
+  "text": "Sixty-one.",
+  "keys": [
+   "score_61"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 264,
+  "text": "Sixty-two.",
+  "keys": [
+   "score_62"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 265,
+  "text": "Sixty-three.",
+  "keys": [
+   "score_63"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 266,
+  "text": "Sixty-four.",
+  "keys": [
+   "score_64"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 267,
+  "text": "Sixty-five.",
+  "keys": [
+   "score_65"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 268,
+  "text": "Sixty-six.",
+  "keys": [
+   "score_66"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 269,
+  "text": "Sixty-seven.",
+  "keys": [
+   "score_67"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 270,
+  "text": "Sixty-eight.",
+  "keys": [
+   "score_68"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 271,
+  "text": "Sixty-nine.",
+  "keys": [
+   "score_69"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 272,
+  "text": "Seventy.",
+  "keys": [
+   "score_70"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 273,
+  "text": "Seventy-one.",
+  "keys": [
+   "score_71"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 274,
+  "text": "Seventy-two.",
+  "keys": [
+   "score_72"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 275,
+  "text": "Seventy-three.",
+  "keys": [
+   "score_73"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 276,
+  "text": "Seventy-four.",
+  "keys": [
+   "score_74"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 277,
+  "text": "Seventy-five.",
+  "keys": [
+   "score_75"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 278,
+  "text": "Seventy-six.",
+  "keys": [
+   "score_76"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 279,
+  "text": "Seventy-seven.",
+  "keys": [
+   "score_77"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 280,
+  "text": "Seventy-eight.",
+  "keys": [
+   "score_78"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 281,
+  "text": "Seventy-nine.",
+  "keys": [
+   "score_79"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 282,
+  "text": "Eighty.",
+  "keys": [
+   "score_80"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 283,
+  "text": "Eighty-one.",
+  "keys": [
+   "score_81"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 284,
+  "text": "Eighty-two.",
+  "keys": [
+   "score_82"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 285,
+  "text": "Eighty-three.",
+  "keys": [
+   "score_83"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 286,
+  "text": "Eighty-four.",
+  "keys": [
+   "score_84"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 287,
+  "text": "Eighty-five.",
+  "keys": [
+   "score_85"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 288,
+  "text": "Eighty-six.",
+  "keys": [
+   "score_86"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 289,
+  "text": "Eighty-seven.",
+  "keys": [
+   "score_87"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 290,
+  "text": "Eighty-eight.",
+  "keys": [
+   "score_88"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 291,
+  "text": "Eighty-nine.",
+  "keys": [
+   "score_89"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 292,
+  "text": "Ninety.",
+  "keys": [
+   "score_90"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 293,
+  "text": "Ninety-one.",
+  "keys": [
+   "score_91"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 294,
+  "text": "Ninety-two.",
+  "keys": [
+   "score_92"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 295,
+  "text": "Ninety-three.",
+  "keys": [
+   "score_93"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 296,
+  "text": "Ninety-four.",
+  "keys": [
+   "score_94"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 297,
+  "text": "Ninety-five.",
+  "keys": [
+   "score_95"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 298,
+  "text": "Ninety-six.",
+  "keys": [
+   "score_96"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 299,
+  "text": "Ninety-seven.",
+  "keys": [
+   "score_97"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 300,
+  "text": "Ninety-eight.",
+  "keys": [
+   "score_98"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 301,
+  "text": "Ninety-nine.",
+  "keys": [
+   "score_99"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Scores 0–99"
+ },
+ {
+  "no": 302,
+  "text": "One hundred!",
+  "keys": [
+   "score_100"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 303,
+  "text": "One hundred and one!",
+  "keys": [
+   "score_101"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 304,
+  "text": "One hundred and two!",
+  "keys": [
+   "score_102"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 305,
+  "text": "One hundred and three!",
+  "keys": [
+   "score_103"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 306,
+  "text": "One hundred and four!",
+  "keys": [
+   "score_104"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 307,
+  "text": "One hundred and five!",
+  "keys": [
+   "score_105"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 308,
+  "text": "One hundred and six!",
+  "keys": [
+   "score_106"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 309,
+  "text": "One hundred and seven!",
+  "keys": [
+   "score_107"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 310,
+  "text": "One hundred and eight!",
+  "keys": [
+   "score_108"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 311,
+  "text": "One hundred and nine!",
+  "keys": [
+   "score_109"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 312,
+  "text": "One hundred and ten!",
+  "keys": [
+   "score_110"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 313,
+  "text": "One hundred and eleven!",
+  "keys": [
+   "score_111"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 314,
+  "text": "One hundred and twelve!",
+  "keys": [
+   "score_112"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 315,
+  "text": "One hundred and thirteen!",
+  "keys": [
+   "score_113"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 316,
+  "text": "One hundred and fourteen!",
+  "keys": [
+   "score_114"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 317,
+  "text": "One hundred and fifteen!",
+  "keys": [
+   "score_115"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 318,
+  "text": "One hundred and sixteen!",
+  "keys": [
+   "score_116"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 319,
+  "text": "One hundred and seventeen!",
+  "keys": [
+   "score_117"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 320,
+  "text": "One hundred and eighteen!",
+  "keys": [
+   "score_118"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 321,
+  "text": "One hundred and nineteen!",
+  "keys": [
+   "score_119"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 322,
+  "text": "One hundred and twenty!",
+  "keys": [
+   "score_120"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 323,
+  "text": "One hundred and twenty-one!",
+  "keys": [
+   "score_121"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 324,
+  "text": "One hundred and twenty-two!",
+  "keys": [
+   "score_122"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 325,
+  "text": "One hundred and twenty-three!",
+  "keys": [
+   "score_123"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 326,
+  "text": "One hundred and twenty-four!",
+  "keys": [
+   "score_124"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 327,
+  "text": "One hundred and twenty-five!",
+  "keys": [
+   "score_125"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 328,
+  "text": "One hundred and twenty-six!",
+  "keys": [
+   "score_126"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 329,
+  "text": "One hundred and twenty-seven!",
+  "keys": [
+   "score_127"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 330,
+  "text": "One hundred and twenty-eight!",
+  "keys": [
+   "score_128"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 331,
+  "text": "One hundred and twenty-nine!",
+  "keys": [
+   "score_129"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 332,
+  "text": "One hundred and thirty!",
+  "keys": [
+   "score_130"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 333,
+  "text": "One hundred and thirty-one!",
+  "keys": [
+   "score_131"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 334,
+  "text": "One hundred and thirty-two!",
+  "keys": [
+   "score_132"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 335,
+  "text": "One hundred and thirty-three!",
+  "keys": [
+   "score_133"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 336,
+  "text": "One hundred and thirty-four!",
+  "keys": [
+   "score_134"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 337,
+  "text": "One hundred and thirty-five!",
+  "keys": [
+   "score_135"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 338,
+  "text": "One hundred and thirty-six!",
+  "keys": [
+   "score_136"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 339,
+  "text": "One hundred and thirty-seven!",
+  "keys": [
+   "score_137"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 340,
+  "text": "One hundred and thirty-eight!",
+  "keys": [
+   "score_138"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 341,
+  "text": "One hundred and thirty-nine!",
+  "keys": [
+   "score_139"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 342,
+  "text": "One hundred and forty!",
+  "keys": [
+   "score_140"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 343,
+  "text": "One hundred and forty-one!",
+  "keys": [
+   "score_141"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 344,
+  "text": "One hundred and forty-two!",
+  "keys": [
+   "score_142"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 345,
+  "text": "One hundred and forty-three!",
+  "keys": [
+   "score_143"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 346,
+  "text": "One hundred and forty-four!",
+  "keys": [
+   "score_144"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 347,
+  "text": "One hundred and forty-five!",
+  "keys": [
+   "score_145"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 348,
+  "text": "One hundred and forty-six!",
+  "keys": [
+   "score_146"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 349,
+  "text": "One hundred and forty-seven!",
+  "keys": [
+   "score_147"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 350,
+  "text": "One hundred and forty-eight!",
+  "keys": [
+   "score_148"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 351,
+  "text": "One hundred and forty-nine!",
+  "keys": [
+   "score_149"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 352,
+  "text": "One hundred and fifty!",
+  "keys": [
+   "score_150"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 353,
+  "text": "One hundred and fifty-one!",
+  "keys": [
+   "score_151"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 354,
+  "text": "One hundred and fifty-two!",
+  "keys": [
+   "score_152"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 355,
+  "text": "One hundred and fifty-three!",
+  "keys": [
+   "score_153"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 356,
+  "text": "One hundred and fifty-four!",
+  "keys": [
+   "score_154"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 357,
+  "text": "One hundred and fifty-five!",
+  "keys": [
+   "score_155"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 358,
+  "text": "One hundred and fifty-six!",
+  "keys": [
+   "score_156"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 359,
+  "text": "One hundred and fifty-seven!",
+  "keys": [
+   "score_157"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 360,
+  "text": "One hundred and fifty-eight!",
+  "keys": [
+   "score_158"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 361,
+  "text": "One hundred and fifty-nine!",
+  "keys": [
+   "score_159"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 362,
+  "text": "One hundred and sixty!",
+  "keys": [
+   "score_160"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 363,
+  "text": "One hundred and sixty-one!",
+  "keys": [
+   "score_161"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 364,
+  "text": "One hundred and sixty-two!",
+  "keys": [
+   "score_162"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 365,
+  "text": "One hundred and sixty-four!",
+  "keys": [
+   "score_164"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 366,
+  "text": "One hundred and sixty-five!",
+  "keys": [
+   "score_165"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 367,
+  "text": "One hundred and sixty-seven!",
+  "keys": [
+   "score_167"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 368,
+  "text": "One hundred and sixty-eight!",
+  "keys": [
+   "score_168"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 369,
+  "text": "One hundred and seventy!",
+  "keys": [
+   "score_170"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 370,
+  "text": "One hundred and seventy-one!",
+  "keys": [
+   "score_171"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 371,
+  "text": "One hundred and seventy-four!",
+  "keys": [
+   "score_174"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 372,
+  "text": "One hundred and seventy-seven!",
+  "keys": [
+   "score_177"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Scores 100–177"
+ },
+ {
+  "no": 373,
+  "text": "One hundred and eighty!",
+  "keys": [
+   "score_180"
+  ],
+  "level": "max",
+  "takes": 3,
+  "section": "Big calls"
+ },
+ {
+  "no": 374,
+  "text": "Game shot, and the first leg!",
+  "keys": [
+   "leg_1"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 375,
+  "text": "Game shot, and the second leg!",
+  "keys": [
+   "leg_2"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 376,
+  "text": "Game shot, and the third leg!",
+  "keys": [
+   "leg_3"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 377,
+  "text": "Game shot, and the fourth leg!",
+  "keys": [
+   "leg_4"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 378,
+  "text": "Game shot, and the fifth leg!",
+  "keys": [
+   "leg_5"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 379,
+  "text": "Game shot, and the sixth leg!",
+  "keys": [
+   "leg_6"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 380,
+  "text": "Game shot, and the seventh leg!",
+  "keys": [
+   "leg_7"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 381,
+  "text": "Game shot, and the eighth leg!",
+  "keys": [
+   "leg_8"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 382,
+  "text": "Game shot, and the ninth leg!",
+  "keys": [
+   "leg_9"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 383,
+  "text": "Game shot, and the tenth leg!",
+  "keys": [
+   "leg_10"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 384,
+  "text": "Game shot, and the eleventh leg!",
+  "keys": [
+   "leg_11"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 385,
+  "text": "Game shot, and the twelfth leg!",
+  "keys": [
+   "leg_12"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 386,
+  "text": "Game shot, and the thirteenth leg!",
+  "keys": [
+   "leg_13"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 387,
+  "text": "Game on!",
+  "keys": [
+   "game_on"
+  ],
+  "level": "ton",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 388,
+  "text": "Game shot, and the leg!",
+  "keys": [
+   "leg"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 389,
+  "text": "Game shot, and the set!",
+  "keys": [
+   "set"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 390,
+  "text": "Game shot, and the match!",
+  "keys": [
+   "match"
+  ],
+  "level": "max",
+  "takes": 3,
+  "section": "Big calls"
+ },
+ {
+  "no": 391,
+  "text": "What a finish!",
+  "keys": [
+   "high_finish"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 392,
+  "text": "New leg.",
+  "keys": [
+   "new_leg"
+  ],
+  "level": "normal",
+  "takes": 1,
+  "section": "Big calls"
+ },
+ {
+  "no": 393,
+  "text": "Game shot!",
+  "keys": [
+   "training_ok"
+  ],
+  "level": "big",
+  "takes": 1,
+  "section": "Big calls"
+ }
+]

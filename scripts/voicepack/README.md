@@ -27,3 +27,23 @@ npx tsx scripts/voicepack/export-spec.ts                  # Clip-Liste aus src/c
 - Ausgabe: `public/voices/oche-<lang>/<key>.m4a` (AAC 48 kbit/s) und `manifest.json`.
 - Etwa 12 s pro Clip auf einem M4 (GPU über MPS); beide Pakete zusammen rund 3 Stunden.
 - Einzelne Clips neu: `generate.py de --only score_180,bust`.
+
+## Sprecher-Aufnahme schneiden (echte Stimme)
+
+Für einen echten Sprecher: Skript `docs/sprecher/Oche-Recording-Script.pdf`, Anfrage `docs/sprecher/fiverr-anfrage.md`.
+Skript neu erzeugen (nach Änderungen an `src/caller/voicepack.ts`): `npx tsx scripts/voicepack/make-script.ts`.
+
+Gelieferte WAV-Dateien z. B. nach `.cache/sprecher/` legen, dann:
+
+```bash
+.cache/tts-venv/bin/python scripts/voicepack/cut.py .cache/sprecher/*.wav --speaker "Name des Sprechers"
+open .cache/cut-review/index.html     # jede Zeile anhören, rot = fehlt, gelb = unsicher erkannt
+```
+
+- Pausen ≥ 0,7 s trennen die Äußerungen; jede wird mit Vosk erkannt und per Sequenz-Ausrichtung der
+  Skriptzeile zugeordnet. Versprecher: der letzte Take gewinnt. Gerede wird übersprungen, fehlende Zeilen gemeldet.
+- „× 3 takes“-Zeilen (180, Match) werden als Varianten gespeichert (`key`, `key~2`, `key~3`); die App wechselt zufällig.
+- Ergebnis: `public/voices/oche-en/*.m4a`, `manifest.json`, Eintrag in `public/voices/index.json`.
+- Fehlt eine Zeile, spricht dort die Systemstimme – oder Sprecher um Nachlieferung bitten und erneut schneiden.
+- Getestet mit einer simulierten Lieferung (2 Dateien, Versprecher, vergessene Zeile, Gerede): 398 Äußerungen,
+  alles korrekt zugeordnet, fehlende Zeile gemeldet.

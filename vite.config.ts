@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => ({
           },
           {
             urlPattern: ({ url }) =>
-              url.pathname.includes('/voices/') && url.pathname.endsWith('manifest.json'),
+              url.pathname.includes('/voices/') && /(manifest|index)\.json$/.test(url.pathname),
             handler: 'NetworkFirst',
             options: { cacheName: 'oche-voices-manifest', networkTimeoutSeconds: 3 },
           },

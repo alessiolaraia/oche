@@ -19,19 +19,14 @@ Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
   Ansagen sind Bausteine (`Cue`: Text + optional Clip-Schlüssel). `src/caller/voicepack.ts` ist die **einzige Quelle**
   für Clip-Schlüssel, Texte und Intensität (`scoreLevel`): je höher die Punktzahl, desto mehr Emotion und Lautheit.
 
-### Klang-Paket (eigene Ansagerstimme)
+### Klang-Paket (Ansagerstimme)
 
-- `public/voices/oche-de|oche-en/` – AAC-Clips + `manifest.json`, im Git. Erzeugt lokal mit Chatterbox (MIT),
-  eigene synthetische Stimme, keine Imitation realer Caller. Fehlende Clips spricht die Systemstimme.
-- Neu erzeugen: `npx tsx scripts/voicepack/export-spec.ts`, dann
-  `.cache/tts-venv/bin/python scripts/voicepack/generate.py de` (bzw. `en`). Bestehende Clips werden übersprungen –
-  zum Neuerzeugen Datei löschen oder `--only key1,key2`. Jeder Clip wird per Vosk zurückgehört (Bericht:
-  `.cache/voicepack-<lang>-report.json`). Einrichtung der Python-Umgebung siehe `scripts/voicepack/README.md`.
-- `src/platform/` – Feature-Detection für Wake Lock, `navigator.audioSession`, Lifecycle. Nie Browser-Sniffing.
-- `src/store/` – Zustand-Stores; `src/db/` – Dexie (IndexedDB), Export/Import JSON.
-- `src/engine/bot.ts` – Bot simuliert Einzeldarts; `skillFor()` per Simulation kalibriert (±10 % Test).
-- `src/app/training.ts` – Checkout-Training/121 als Einzel-X01-Runden (`kind`), Around the Clock über Controller-Hooks.
-- `src/ui/` – React-Screens; Hash-Routing (`#/debug`), damit GitHub Pages ohne Rewrites läuft.
+- `public/voices/index.json` listet installierte Pakete; je Paket `public/voices/oche-<lang>/` mit AAC-Clips +
+  `manifest.json` (optional `alts` für mehrere Takes). Ohne Paket spricht die Systemstimme – ohne 404-Anfragen.
+- Ziel: **echter Sprecher** (Englisch, Caller-Stil). Skript/Anfrage in `docs/sprecher/`, Schneiden mit
+  `scripts/voicepack/cut.py` (siehe `scripts/voicepack/README.md`). Keine Imitation realer Caller.
+- `scripts/voicepack/generate.py` (Chatterbox, KI) bleibt als Alternative, wurde vom User aber verworfen.
+- Clip-Schlüssel ändern → `make-script.ts` neu laufen lassen, sonst passt das Skript nicht mehr zum Schneiden.
 
 ### Vosk-Modell
 

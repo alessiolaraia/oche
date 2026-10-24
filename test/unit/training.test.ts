@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { seededRng } from '../../src/engine/bot';
 import { BOGEY_NUMBERS } from '../../src/engine/checkouts';
-import { ATC_BULL, ATC_DONE, atcApply, atcLabel, atcStart, next121, randomCheckoutTarget } from '../../src/engine/training';
+import {
+  ATC_BULL,
+  ATC_DONE,
+  atcApply,
+  atcLabel,
+  atcStart,
+  next121,
+  randomCheckoutTarget,
+} from '../../src/engine/training';
 
 describe('Training', () => {
   it('Checkout-Ziele liegen in 2–170 und sind nie Bogeys', () => {

@@ -21,7 +21,8 @@ test('Around the Clock per Touch bis zum Ende', async ({ page }) => {
   await freshApp(page, { voice: { enabled: false } });
   await page.goto('./#/training');
   await page.getByTestId('training-atc').click();
-  for (let i = 0; i < 7; i++) await page.getByRole('group', { name: 'Treffer' }).getByRole('button', { name: '3' }).click();
+  for (let i = 0; i < 7; i++)
+    await page.getByRole('group', { name: 'Treffer' }).getByRole('button', { name: '3' }).click();
   await expect(page.getByText('Geschafft mit 21 Darts')).toBeVisible();
   await page.getByRole('button', { name: 'Beenden' }).click();
   await expect(page.getByText(/Bestes Ergebnis: 21 Darts/)).toBeVisible();

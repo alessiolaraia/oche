@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { previewVoice } from '../../caller';
+import { loadManifest, type PackManifest } from '../../caller/packPlayer';
 import { listVoices, ttsSupported } from '../../caller/tts';
 import { useSettings } from '../../store/settings';
 import type { VoiceSource } from '../../settings/types';
@@ -10,6 +11,16 @@ export function VoicePicker() {
   const caller = useSettings((s) => s.caller);
   const update = useSettings((s) => s.update);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>(() => listVoices());
+  const [pack, setPack] = useState<PackManifest | null | undefined>(undefined);
+  const packLang = caller.style === 'arena' ? 'en' : 'de';
+
+  useEffect(() => {
+    let alive = true;
+    void loadManifest(packLang).then((m) => alive && setPack(m));
+    return () => {
+      alive = false;
+    };
+  }, [packLang]);
 
   useEffect(() => {
     if (!ttsSupported()) return;
@@ -22,9 +33,11 @@ export function VoicePicker() {
     <Choice<VoiceSource>
       label="Stimme"
       hint={
-        caller.voiceSource === 'pack'
-          ? 'Eigene Oche-Aufnahmen, lauter bei hohen Zahlen. Was nicht aufgenommen ist (z. B. Namen), spricht die Systemstimme.'
-          : 'Die eingebaute Stimme des Geräts.'
+        caller.voiceSource === 'system'
+          ? 'Die eingebaute Stimme des Geräts.'
+          : pack === null
+            ? `Für diesen Stil ist noch kein Ansager-Paket installiert – bis dahin spricht die Systemstimme.`
+            : `${pack?.name ?? 'Ansager-Paket'}: echte Aufnahmen, lauter bei hohen Zahlen. Namen spricht die Systemstimme.`
       }
       value={caller.voiceSource}
       options={{ pack: 'Oche-Ansager', system: 'Systemstimme' }}

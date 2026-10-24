@@ -3,7 +3,7 @@ import { useMatch } from '../store/match';
 import { useSession } from '../store/session';
 import { useSettings } from '../store/settings';
 import { announce, type Announcement } from './announce';
-import { loadManifest, playClip, prefetchPack, preload, stopClips } from './packPlayer';
+import { loadManifest, playClip, prefetchPack, preload, stopClips, variant } from './packPlayer';
 import { phrasebook, type Cue } from './phrases';
 import { playSfx, unlockSfx } from './sfx';
 import { cancelSpeech, speak, unlockSpeech } from './tts';
@@ -36,7 +36,10 @@ function perform(a: Announcement): void {
   chain = chain.then(async () => {
     if (gen !== generation) return;
     const m = c.voiceSource === 'pack' && a.cues.length ? await loadManifest(lang) : null;
-    const cues: Cue[] = m ? a.cues.filter((q) => !q.name) : a.cues;
+    // Paket-Modus: Namen weglassen, bei mehreren Takes einen auswählen
+    const cues: Cue[] = m
+      ? a.cues.filter((q) => !q.name).map((q) => (q.key ? { ...q, key: variant(m, q.key) } : q))
+      : a.cues;
     // Clips laden, während der Effekt läuft
     const loading = m
       ? preload(

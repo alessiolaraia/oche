@@ -33,36 +33,65 @@ describe('Klang-Paket', () => {
   it.each([
     ['plain', 'de'],
     ['arena', 'en'],
-  ] as const)('%s: jeder Clip-Schlüssel, den der Caller in einem Match nutzt, existiert im Paket', (style, lang) => {
-    const keys = new Set(packClips(lang).map((c) => c.key));
-    const caller = { ...DEFAULT_SETTINGS.caller, style, announceCheckoutRoute: false };
-    const used = new Set<string>();
-    let n = 0;
-    const events: MatchEvent[] = [];
-    const take = (e: FeedbackEvent, askingAny = false) =>
-      announce(e, caller, { state: reduce(cfg, events), askingAny })?.cues.forEach((c) => c.key && used.add(c.key));
-    // alle möglichen Aufnahmen aus allen Resten 2–501 (Stichprobe) + Bust/Checkout
-    for (const score of [0, 26, 41, 45, 60, 81, 85, 100, 140, 171, 180]) {
-      events.length = 0;
-      events.push({ type: 'visit', id: String(++n), score, ts: n });
+  ] as const)(
+    '%s: jeder Clip-Schlüssel, den der Caller in einem Match nutzt, existiert im Paket',
+    (style, lang) => {
+      const keys = new Set(packClips(lang).map((c) => c.key));
+      const caller = { ...DEFAULT_SETTINGS.caller, style, announceCheckoutRoute: false };
+      const used = new Set<string>();
+      let n = 0;
+      const events: MatchEvent[] = [];
+      const take = (e: FeedbackEvent, askingAny = false) =>
+        announce(e, caller, { state: reduce(cfg, events), askingAny })?.cues.forEach(
+          (c) => c.key && used.add(c.key),
+        );
+      // alle möglichen Aufnahmen aus allen Resten 2–501 (Stichprobe) + Bust/Checkout
+      for (const score of [0, 26, 41, 45, 60, 81, 85, 100, 140, 171, 180]) {
+        events.length = 0;
+        events.push({ type: 'visit', id: String(++n), score, ts: n });
+        const st = reduce(cfg, events);
+        take({ type: 'visit', result: st.lastVisit!, state: st });
+      }
+      const leg: MatchEvent[] = [180, 0, 180, 0, 141].map((s) => ({
+        type: 'visit',
+        id: String(++n),
+        score: s,
+        ts: n,
+      }));
+      events.splice(0, events.length, ...leg);
       const st = reduce(cfg, events);
-      take({ type: 'visit', result: st.lastVisit!, state: st });
-    }
-    const leg: MatchEvent[] = [180, 0, 180, 0, 141].map((s) => ({ type: 'visit', id: String(++n), score: s, ts: n }));
-    events.splice(0, events.length, ...leg);
-    const st = reduce(cfg, events);
-    take({ type: 'visit', result: st.lastVisit!, state: st }, true);
-    take({ type: 'question', question: 'checkoutDarts' });
-    take({ type: 'answered', question: 'checkoutDarts', value: 3 });
-    take({ type: 'undo', state: st });
-    take({ type: 'rejected', reason: 'impossible' });
-    take({ type: 'matchStarted', state: st });
-    take({ type: 'legRestarted', state: st });
-    take({ type: 'control', action: 'pause' });
-    take({ type: 'trainingTarget', mode: 'atc', target: 7, label: '7' });
-    take({ type: 'trainingTarget', mode: 'checkout', target: 121, label: '121' });
-    take({ type: 'trainingResult', success: true, darts: 9 });
-    expect(used.size).toBeGreaterThan(10);
-    expect([...used].filter((k) => !keys.has(k))).toEqual([]);
+      take({ type: 'visit', result: st.lastVisit!, state: st }, true);
+      take({ type: 'question', question: 'checkoutDarts' });
+      take({ type: 'answered', question: 'checkoutDarts', value: 3 });
+      take({ type: 'undo', state: st });
+      take({ type: 'rejected', reason: 'impossible' });
+      take({ type: 'matchStarted', state: st });
+      take({ type: 'legRestarted', state: st });
+      take({ type: 'control', action: 'pause' });
+      take({ type: 'trainingTarget', mode: 'atc', target: 7, label: '7' });
+      take({ type: 'trainingTarget', mode: 'checkout', target: 121, label: '121' });
+      take({ type: 'trainingResult', success: true, darts: 9 });
+      expect(used.size).toBeGreaterThan(10);
+      expect([...used].filter((k) => !keys.has(k))).toEqual([]);
+    },
+  );
+});
+
+describe('Takes', () => {
+  it('wählt bei mehreren Takes zufällig, fällt bei fehlender Datei auf den ersten zurück', async () => {
+    const { variant } = await import('../../src/caller/packPlayer');
+    const m = {
+      id: 'x',
+      lang: 'en' as const,
+      name: '',
+      license: '',
+      format: 'm4a',
+      clips: { score_180: 1, 'score_180~2': 1 },
+      alts: { score_180: 3 },
+    };
+    expect(variant(m, 'score_180', () => 0)).toBe('score_180');
+    expect(variant(m, 'score_180', () => 0.4)).toBe('score_180~2');
+    expect(variant(m, 'score_180', () => 0.9)).toBe('score_180'); // ~3 fehlt
+    expect(variant(m, 'score_60', () => 0.9)).toBe('score_60');
   });
 });

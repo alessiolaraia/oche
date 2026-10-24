@@ -20,13 +20,9 @@ _load = torch.load
 torch.load = lambda *a, **k: _load(*a, **{**k, "map_location": k.get("map_location") or "cpu"})
 from chatterbox.mtl_tts import ChatterboxMultilingualTTS  # noqa: E402
 
-LEVELS = {  # Emotionsstärke, cfg, Ziel-Lautheit (LUFS)
-    "calm": (0.35, 0.5, -20.0),
-    "normal": (0.5, 0.5, -19.0),
-    "ton": (0.8, 0.4, -17.0),
-    "big": (1.1, 0.35, -15.0),
-    "max": (1.5, 0.3, -13.0),
-}
+sys.path.insert(0, os.path.dirname(__file__))
+from style import STYLE, build_refs, hall, stretch_tail, styled_text  # noqa: E402
+
 VOSK_MODEL = {"de": ".cache/vosk-model-small-de-0.15", "en": ".cache/vosk-model-small-en-us-0.15"}
 ACCEPT = 0.82
 TRIES = 5
@@ -51,15 +47,15 @@ def recognize(model: Model, wav: np.ndarray, sr: int):
 
 
 def match(words, expected: str):
-    """Kürzester Wort-Präfix, der zur Erwartung passt → (Ähnlichkeit, Start, Ende)."""
+    """Kürzester Wort-Präfix, der zur Erwartung passt → (Ähnlichkeit, Start, Ende, Start letztes Wort)."""
     exp = norm(expected)
-    best = (0.0, 0.0, 0.0)
+    best = (0.0, 0.0, 0.0, 0.0)
     acc = ""
-    for i, (w, _s, e) in enumerate(words):
+    for i, (w, s, e) in enumerate(words):
         acc += norm(w)
         r = SequenceMatcher(None, acc, exp).ratio()
         if r > best[0] + 1e-6:
-            best = (r, words[0][1], e)
+            best = (r, words[0][1], e, s)
         if len(acc) > len(exp) * 1.6:
             break
     return best
@@ -78,6 +74,7 @@ def energy_trim(wav: np.ndarray, sr: int, start=None, end=None):
     if end is not None:
         b = min(b, int((end + 0.18) * sr))
     a = max(0, a - int(0.03 * sr))
+    energy_trim.start = a / sr  # Schnittbeginn in Sekunden (für Zeitangaben danach)
     out = wav[a:b].copy()
     fade = min(len(out), int(0.03 * sr))
     if fade > 0:
@@ -108,15 +105,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("lang", choices=["de", "en"])
     ap.add_argument("--only", default="")
+    ap.add_argument("--out", default="")
     args = ap.parse_args()
     lang = args.lang
     clips = json.load(open(f".cache/voicepack-{lang}.json"))
     if args.only:
         keys = set(args.only.split(","))
         clips = [c for c in clips if c["key"] in keys]
-    out_dir = f"public/voices/oche-{lang}"
+    out_dir = args.out or f"public/voices/oche-{lang}"
     os.makedirs(out_dir, exist_ok=True)
-    report_path = f".cache/voicepack-{lang}-report.json"
+    report_path = f"{out_dir}/../{os.path.basename(out_dir)}-report.json" if args.out else f".cache/voicepack-{lang}-report.json"
     report = json.load(open(report_path)) if os.path.exists(report_path) else {}
 
     SetLogLevel(-1)
@@ -128,31 +126,44 @@ def main():
     tts.t3.inference = lambda *a, **k: inference(*a, **{**k, "max_new_tokens": limit["n"]})
     sr = tts.sr
 
+    # Referenzstimmen einmal vorberechnen (Chatterbox würde sie sonst bei jedem Clip neu analysieren)
+    refs = build_refs()
+    conds = {}
+    for level, (ref, ex, *_rest) in STYLE.items():
+        tts.prepare_conditionals(refs[ref], exaggeration=ex)
+        conds[level] = tts.conds
+
     todo = [c for c in clips if args.only or not os.path.exists(f"{out_dir}/{c['key']}.m4a")]
     t0 = time.time()
     for i, c in enumerate(todo):
-        ex, cfg, lufs = LEVELS[c["level"]]
-        limit["n"] = max_tokens(c["text"])
+        _ref, ex, cfg, stretch, semis, wet, lufs = STYLE[c["level"]]
+        say = styled_text(c["text"], c["level"], lang)
+        limit["n"] = max_tokens(say)
+        tts.conds = conds[c["level"]]
         best = None
         for attempt in range(TRIES):
             torch.manual_seed(1000 + attempt * 7919 + hash(c["key"]) % 1000)
             try:
-                wav = tts.generate(c["text"], language_id=lang, exaggeration=ex, cfg_weight=cfg, temperature=0.7)
+                wav = tts.generate(say, language_id=lang, exaggeration=ex, cfg_weight=cfg, temperature=0.7)
             except (IndexError, RuntimeError) as err:  # Randfälle in Chatterbox → nächster Versuch
                 print(f"[{lang}] {c['key']} Versuch {attempt + 1} fehlgeschlagen: {err}", flush=True)
                 continue
             wav = wav.squeeze(0).cpu().numpy().astype(np.float32)
-            score, s, e = match(recognize(vosk, wav, sr), c["text"])
+            score, s, e, last = match(recognize(vosk, wav, sr), c["text"])
             if best is None or score > best[0]:
-                best = (score, wav, s, e)
+                best = (score, wav, s, e, last)
             if score >= ACCEPT:
                 break
         if best is None:
             print(f"[{lang}] {c['key']} übersprungen (alle Versuche fehlgeschlagen)", flush=True)
             continue
-        score, wav, s, e = best
+        score, wav, s, e, last = best
         verified = score >= ACCEPT
         cut = energy_trim(wav, sr, s if verified else None, e if verified else None)
+        if verified:
+            # Schlusswort dehnen und anheben – Startzeit relativ zum Schnitt
+            cut = stretch_tail(cut, sr, last - energy_trim.start, stretch, semis)
+        cut = hall(cut, sr, wet)
         cut = loudness(cut, sr, lufs)
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
             import soundfile as sf
@@ -165,6 +176,7 @@ def main():
             os.unlink(tmp.name)
         report[c["key"]] = {
             "text": c["text"],
+            "said": say,
             "level": c["level"],
             "match": round(score, 3),
             "verified": verified,
@@ -179,6 +191,9 @@ def main():
             flush=True,
         )
 
+    if args.out:
+        print(f"[{lang}] Proben in {out_dir}")
+        return
     manifest = {
         "id": f"oche-{lang}",
         "lang": lang,
@@ -188,6 +203,11 @@ def main():
         "clips": {k: v["seconds"] for k, v in sorted(report.items()) if os.path.exists(f"{out_dir}/{k}.m4a")},
     }
     json.dump(manifest, open(f"{out_dir}/manifest.json", "w"), ensure_ascii=False, indent=1)
+    idx_path = os.path.join(os.path.dirname(os.path.abspath(out_dir)), "index.json")
+    idx = json.load(open(idx_path)) if os.path.exists(idx_path) else {"packs": []}
+    if manifest["id"] not in idx["packs"]:
+        idx["packs"].append(manifest["id"])
+    json.dump(idx, open(idx_path, "w"), indent=1)
     bad = [k for k, v in report.items() if not v["verified"]]
     print(f"[{lang}] fertig, nicht verifiziert: {len(bad)} {bad[:30]}")
 

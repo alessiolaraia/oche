@@ -11,22 +11,47 @@ export interface PackManifest {
   format: string;
   /** Schlüssel → Dauer in Sekunden */
   clips: Record<string, number>;
+  /** Mehrere Takes: Schlüssel → Anzahl (Dateien `key`, `key~2`, …). */
+  alts?: Record<string, number>;
+}
+
+/** Wählt bei mehreren Takes zufällig einen – damit 180 nicht jedes Mal gleich klingt. */
+export function variant(m: PackManifest, key: string, rnd: () => number = Math.random): string {
+  const n = m.alts?.[key] ?? 1;
+  if (n <= 1) return key;
+  const i = Math.floor(rnd() * n);
+  const k = i === 0 ? key : `${key}~${i + 1}`;
+  return k in m.clips ? k : key;
 }
 
 const baseUrl = (lang: PackLang) => `${import.meta.env.BASE_URL}voices/oche-${lang}/`;
 const manifests = new Map<PackLang, Promise<PackManifest | null>>();
+let index: Promise<string[]> | null = null;
+
+/** public/voices/index.json listet die installierten Pakete – so gibt es ohne Paket keine 404-Anfragen. */
+function installedPacks(): Promise<string[]> {
+  index ??= fetch(`${import.meta.env.BASE_URL}voices/index.json`)
+    .then((r) => (r.ok ? (r.json() as Promise<{ packs: string[] }>) : { packs: [] }))
+    .then((j) => j.packs)
+    .catch(() => {
+      index = null;
+      return [];
+    });
+  return index;
+}
 const buffers = new Map<string, Promise<AudioBuffer | null>>();
 let current: AudioBufferSourceNode | null = null;
 
 export function loadManifest(lang: PackLang): Promise<PackManifest | null> {
   let p = manifests.get(lang);
   if (!p) {
-    p = fetch(`${baseUrl(lang)}manifest.json`)
-      .then((r) => (r.ok ? (r.json() as Promise<PackManifest>) : null))
-      .catch(() => null)
-      .then((m) => {
-        if (!m) manifests.delete(lang); // später erneut versuchen
-        return m;
+    // Kein Paket installiert (404) → für diese Sitzung merken; Netzfehler → später erneut versuchen
+    p = installedPacks()
+      .then((packs) => (packs.includes(`oche-${lang}`) ? fetch(`${baseUrl(lang)}manifest.json`) : null))
+      .then((r) => (r?.ok ? (r.json() as Promise<PackManifest>) : null))
+      .catch(() => {
+        manifests.delete(lang);
+        return null;
       });
     manifests.set(lang, p);
   }
