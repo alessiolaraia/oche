@@ -1,0 +1,3364 @@
+[
+  {
+    "file": "commands/wurf_0__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 2.95,
+    "speechEnd": 1.648,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_1__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.2,
+    "speechEnd": 1.904,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_5__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.03,
+    "speechEnd": 1.729,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_7__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.03,
+    "speechEnd": 1.73,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_9__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.08,
+    "speechEnd": 1.776,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_11__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.12,
+    "speechEnd": 1.822,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_21__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.485,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_26__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_41__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.497,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_45__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 3.76,
+    "speechEnd": 2.462,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_57__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 3.94,
+    "speechEnd": 2.636,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_81__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_85__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.473,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_95__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.473,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_99__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_100__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.2,
+    "speechEnd": 1.905,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_101__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.264,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_121__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.13,
+    "speechEnd": 2.833,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_125__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.21,
+    "speechEnd": 2.915,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_140__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 3.73,
+    "speechEnd": 2.427,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_141__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.14,
+    "speechEnd": 2.845,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_160__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_171__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.14,
+    "speechEnd": 2.845,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_177__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.21,
+    "speechEnd": 2.915,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_180__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.7,
+    "speechEnd": 2.404,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_2__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.811,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_3__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 2.92,
+    "speechEnd": 1.625,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_12__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.31,
+    "speechEnd": 2.008,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_13__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_14__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.26,
+    "speechEnd": 1.963,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_15__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_16__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.39,
+    "speechEnd": 2.09,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_17__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.067,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_18__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.38,
+    "speechEnd": 2.079,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_19__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_20__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.102,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_30__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.3,
+    "speechEnd": 1.997,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_40__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.24,
+    "speechEnd": 1.939,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_50__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.33,
+    "speechEnd": 2.032,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_60__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.38,
+    "speechEnd": 2.079,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_70__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.36,
+    "speechEnd": 2.055,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_80__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.067,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_90__anna_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.33,
+    "speechEnd": 2.032,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/ueberworfen__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.1,
+    "speechEnd": 1.8,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/zurueck__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 2.81,
+    "speechEnd": 1.514,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/korrektur_45__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.15,
+    "speechEnd": 2.846,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/rest__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 2.7,
+    "speechEnd": 1.395,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/neues_leg__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.13,
+    "speechEnd": 1.826,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_nichts__anna_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.18,
+    "speechEnd": 1.88,
+    "tags": ["anna", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_0__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 2.95,
+    "speechEnd": 1.648,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_1__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.2,
+    "speechEnd": 1.904,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_5__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.03,
+    "speechEnd": 1.729,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_7__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.03,
+    "speechEnd": 1.73,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_9__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.08,
+    "speechEnd": 1.776,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_11__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.12,
+    "speechEnd": 1.822,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_21__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.485,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_26__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_41__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.497,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_45__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 3.76,
+    "speechEnd": 2.462,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_57__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 3.94,
+    "speechEnd": 2.636,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_81__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_85__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.473,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_95__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.473,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_99__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 3.81,
+    "speechEnd": 2.508,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_100__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.2,
+    "speechEnd": 1.905,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_101__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.264,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_121__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.13,
+    "speechEnd": 2.833,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_125__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.21,
+    "speechEnd": 2.915,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_140__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 3.73,
+    "speechEnd": 2.427,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_141__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.14,
+    "speechEnd": 2.845,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_160__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_171__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.14,
+    "speechEnd": 2.845,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_177__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.21,
+    "speechEnd": 2.915,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_180__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.7,
+    "speechEnd": 2.404,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_2__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.811,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_3__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 2.92,
+    "speechEnd": 1.625,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_12__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.31,
+    "speechEnd": 2.008,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_13__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_14__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.26,
+    "speechEnd": 1.963,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_15__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_16__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.39,
+    "speechEnd": 2.09,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_17__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.067,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_18__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.38,
+    "speechEnd": 2.079,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_19__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.044,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_20__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.102,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_30__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.3,
+    "speechEnd": 1.997,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_40__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.24,
+    "speechEnd": 1.939,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_50__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.33,
+    "speechEnd": 2.032,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_60__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.38,
+    "speechEnd": 2.079,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_70__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.36,
+    "speechEnd": 2.055,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_80__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.067,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "confusables/wurf_90__anna_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.33,
+    "speechEnd": 2.032,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/ueberworfen__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.1,
+    "speechEnd": 1.8,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/zurueck__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 2.81,
+    "speechEnd": 1.514,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/korrektur_45__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.15,
+    "speechEnd": 2.846,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/rest__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 2.7,
+    "speechEnd": 1.395,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/neues_leg__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.13,
+    "speechEnd": 1.826,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_nichts__anna_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.18,
+    "speechEnd": 1.88,
+    "tags": ["anna", "laut"]
+  },
+  {
+    "file": "commands/wurf_0__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.039,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_1__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_5__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_7__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_9__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.199,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_11__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.151,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_21__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 4.09,
+    "speechEnd": 2.791,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_26__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_41__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_45__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 4.27,
+    "speechEnd": 2.967,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_57__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 4.43,
+    "speechEnd": 3.127,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_81__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.93,
+    "speechEnd": 2.631,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_85__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_95__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_99__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 4.19,
+    "speechEnd": 2.887,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_100__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.263,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_101__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_121__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.51,
+    "speechEnd": 3.207,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_125__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.68,
+    "speechEnd": 3.383,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_140__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 4.12,
+    "speechEnd": 2.823,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_141__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.54,
+    "speechEnd": 3.239,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_160__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 4.07,
+    "speechEnd": 2.775,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_171__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.47,
+    "speechEnd": 3.175,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_177__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.71,
+    "speechEnd": 3.415,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_180__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.98,
+    "speechEnd": 2.679,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_2__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.103,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_3__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.071,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_12__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_13__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_14__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.75,
+    "speechEnd": 2.455,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_15__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_16__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_17__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.471,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_18__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.69,
+    "speechEnd": 2.391,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_19__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.503,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_20__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_30__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.63,
+    "speechEnd": 2.327,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_40__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_50__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.487,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_60__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_70__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_80__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.59,
+    "speechEnd": 2.295,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_90__flo_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/ueberworfen__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.15,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/zurueck__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 3.22,
+    "speechEnd": 1.921,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/korrektur_45__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.61,
+    "speechEnd": 3.313,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/rest__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.813,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/neues_leg__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.198,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_nichts__flo_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.58,
+    "speechEnd": 2.279,
+    "tags": ["flo", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_0__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.039,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_1__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_5__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_7__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_9__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.199,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_11__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.151,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_21__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 4.09,
+    "speechEnd": 2.791,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_26__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_41__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_45__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 4.27,
+    "speechEnd": 2.967,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_57__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 4.43,
+    "speechEnd": 3.127,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_81__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.93,
+    "speechEnd": 2.631,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_85__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_95__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_99__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 4.19,
+    "speechEnd": 2.887,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_100__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.263,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_101__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_121__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.51,
+    "speechEnd": 3.207,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_125__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.68,
+    "speechEnd": 3.383,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_140__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 4.12,
+    "speechEnd": 2.823,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_141__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.54,
+    "speechEnd": 3.239,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_160__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 4.07,
+    "speechEnd": 2.775,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_171__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.47,
+    "speechEnd": 3.175,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_177__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.71,
+    "speechEnd": 3.415,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_180__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.98,
+    "speechEnd": 2.679,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_2__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.103,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_3__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.071,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_12__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_13__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_14__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.75,
+    "speechEnd": 2.455,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_15__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_16__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_17__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.471,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_18__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.69,
+    "speechEnd": 2.391,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_19__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.503,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_20__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_30__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.63,
+    "speechEnd": 2.327,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_40__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_50__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.487,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_60__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_70__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_80__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.59,
+    "speechEnd": 2.295,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "confusables/wurf_90__flo_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/ueberworfen__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.15,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/zurueck__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 3.22,
+    "speechEnd": 1.921,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/korrektur_45__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.61,
+    "speechEnd": 3.313,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/rest__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.813,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/neues_leg__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.198,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_nichts__flo_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.58,
+    "speechEnd": 2.279,
+    "tags": ["flo", "laut"]
+  },
+  {
+    "file": "commands/wurf_0__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.039,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_1__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_5__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_7__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_9__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.199,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_11__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.151,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_21__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 4.09,
+    "speechEnd": 2.791,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_26__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_41__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_45__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 4.27,
+    "speechEnd": 2.967,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_57__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 4.43,
+    "speechEnd": 3.127,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_81__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.93,
+    "speechEnd": 2.631,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_85__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_95__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_99__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 4.19,
+    "speechEnd": 2.887,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_100__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.263,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_101__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_121__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.51,
+    "speechEnd": 3.207,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_125__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.68,
+    "speechEnd": 3.383,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_140__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 4.12,
+    "speechEnd": 2.823,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_141__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.54,
+    "speechEnd": 3.239,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_160__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 4.07,
+    "speechEnd": 2.775,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_171__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.47,
+    "speechEnd": 3.175,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_177__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.71,
+    "speechEnd": 3.415,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_180__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.98,
+    "speechEnd": 2.679,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_2__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.103,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_3__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.071,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_12__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_13__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_14__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.75,
+    "speechEnd": 2.455,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_15__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_16__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_17__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.471,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_18__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.69,
+    "speechEnd": 2.391,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_19__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.503,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_20__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_30__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.63,
+    "speechEnd": 2.327,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_40__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_50__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.487,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_60__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_70__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_80__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.59,
+    "speechEnd": 2.295,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "confusables/wurf_90__sandy_ruhig.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/ueberworfen__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.15,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/zurueck__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 3.22,
+    "speechEnd": 1.921,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/korrektur_45__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.61,
+    "speechEnd": 3.313,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/rest__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.807,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/neues_leg__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.198,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_nichts__sandy_ruhig.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.58,
+    "speechEnd": 2.279,
+    "tags": ["sandy", "ruhig"]
+  },
+  {
+    "file": "commands/wurf_0__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.34,
+    "speechEnd": 2.039,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_1__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 1
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_5__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 5
+    },
+    "seconds": 3.48,
+    "speechEnd": 2.183,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_7__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 7
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_9__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 9
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.199,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_11__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 11
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.151,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_21__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 21
+    },
+    "seconds": 4.09,
+    "speechEnd": 2.791,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_26__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 26
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_41__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 41
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_45__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 45
+    },
+    "seconds": 4.27,
+    "speechEnd": 2.967,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_57__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 57
+    },
+    "seconds": 4.43,
+    "speechEnd": 3.127,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_81__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 81
+    },
+    "seconds": 3.93,
+    "speechEnd": 2.631,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_85__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 85
+    },
+    "seconds": 4.11,
+    "speechEnd": 2.807,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_95__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 95
+    },
+    "seconds": 4.23,
+    "speechEnd": 2.935,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_99__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 99
+    },
+    "seconds": 4.19,
+    "speechEnd": 2.887,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_100__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 100
+    },
+    "seconds": 3.56,
+    "speechEnd": 2.263,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_101__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 101
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_121__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 121
+    },
+    "seconds": 4.51,
+    "speechEnd": 3.207,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_125__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 125
+    },
+    "seconds": 4.68,
+    "speechEnd": 3.383,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_140__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 140
+    },
+    "seconds": 4.12,
+    "speechEnd": 2.823,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_141__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 141
+    },
+    "seconds": 4.54,
+    "speechEnd": 3.239,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_160__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 160
+    },
+    "seconds": 4.07,
+    "speechEnd": 2.775,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_171__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 171
+    },
+    "seconds": 4.47,
+    "speechEnd": 3.175,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_177__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 177
+    },
+    "seconds": 4.71,
+    "speechEnd": 3.415,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_180__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 180
+    },
+    "seconds": 3.98,
+    "speechEnd": 2.679,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_2__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 2
+    },
+    "seconds": 3.4,
+    "speechEnd": 2.103,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_3__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 3
+    },
+    "seconds": 3.37,
+    "speechEnd": 2.071,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_12__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 12
+    },
+    "seconds": 3.53,
+    "speechEnd": 2.231,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_13__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 13
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_14__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 14
+    },
+    "seconds": 3.75,
+    "speechEnd": 2.455,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_15__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 15
+    },
+    "seconds": 3.85,
+    "speechEnd": 2.551,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_16__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 16
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_17__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 17
+    },
+    "seconds": 3.77,
+    "speechEnd": 2.471,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_18__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 18
+    },
+    "seconds": 3.69,
+    "speechEnd": 2.391,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_19__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 19
+    },
+    "seconds": 3.8,
+    "speechEnd": 2.503,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_20__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 20
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_30__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 30
+    },
+    "seconds": 3.63,
+    "speechEnd": 2.327,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_40__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 40
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_50__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 50
+    },
+    "seconds": 3.79,
+    "speechEnd": 2.487,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_60__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 60
+    },
+    "seconds": 3.67,
+    "speechEnd": 2.375,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_70__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 70
+    },
+    "seconds": 3.71,
+    "speechEnd": 2.407,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_80__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 80
+    },
+    "seconds": 3.59,
+    "speechEnd": 2.295,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "confusables/wurf_90__sandy_laut.ogg",
+    "set": "confusables",
+    "expected": {
+      "type": "score",
+      "value": 90
+    },
+    "seconds": 3.74,
+    "speechEnd": 2.439,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/ueberworfen__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "bust"
+    },
+    "seconds": 3.45,
+    "speechEnd": 2.15,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/zurueck__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "undo"
+    },
+    "seconds": 3.22,
+    "speechEnd": 1.921,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/korrektur_45__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "correct",
+      "value": 45
+    },
+    "seconds": 4.61,
+    "speechEnd": 3.313,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/rest__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "remaining"
+    },
+    "seconds": 3.11,
+    "speechEnd": 1.807,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/neues_leg__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "newLeg"
+    },
+    "seconds": 3.5,
+    "speechEnd": 2.198,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "commands/wurf_nichts__sandy_laut.ogg",
+    "set": "commands",
+    "expected": {
+      "type": "score",
+      "value": 0
+    },
+    "seconds": 3.58,
+    "speechEnd": 2.279,
+    "tags": ["sandy", "laut"]
+  },
+  {
+    "file": "negatives/gespraech_00.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.69,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_01.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.94,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_02.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.91,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_03.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 3.44,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_04.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.03,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_05.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.79,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_06.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 3.83,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_07.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 5.39,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_08.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.55,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_09.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.31,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_10.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.68,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/gespraech_11.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.67,
+    "speechEnd": null,
+    "tags": ["gespraech"]
+  },
+  {
+    "file": "negatives/app_ansage_00.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.37,
+    "speechEnd": null,
+    "tags": ["app"]
+  },
+  {
+    "file": "negatives/app_ansage_01.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 2.37,
+    "speechEnd": null,
+    "tags": ["app"]
+  },
+  {
+    "file": "negatives/app_ansage_02.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 3.07,
+    "speechEnd": null,
+    "tags": ["app"]
+  },
+  {
+    "file": "negatives/app_ansage_03.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 4.2,
+    "speechEnd": null,
+    "tags": ["app"]
+  },
+  {
+    "file": "negatives/app_ansage_04.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 3.28,
+    "speechEnd": null,
+    "tags": ["app"]
+  },
+  {
+    "file": "negatives/fernsehen_musik.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 120.0,
+    "speechEnd": null,
+    "tags": ["tv"]
+  },
+  {
+    "file": "negatives/einschlaege.ogg",
+    "set": "negatives",
+    "expected": null,
+    "seconds": 20.0,
+    "speechEnd": null,
+    "tags": ["einschlag"]
+  }
+]

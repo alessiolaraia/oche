@@ -56,6 +56,8 @@ async function startPipeline(): Promise<AudioPipeline> {
     gateDb: v.gateDb,
     noiseSuppression: v.noiseSuppression,
     autoGainControl: v.autoGainControl,
+    dsp2: v.flags.dsp2,
+    voiceIsolation: true,
   });
   p.setMuted(isEchoMuted());
   p.onLevel = (l) => {

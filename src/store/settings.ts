@@ -17,7 +17,11 @@ export function withDefaults(saved: Partial<Settings> | undefined): Settings {
   return {
     game: { ...DEFAULT_SETTINGS.game, ...s.game },
     players: { ...DEFAULT_SETTINGS.players, ...s.players },
-    voice: { ...DEFAULT_SETTINGS.voice, ...s.voice },
+    voice: {
+      ...DEFAULT_SETTINGS.voice,
+      ...s.voice,
+      flags: { ...DEFAULT_SETTINGS.voice.flags, ...s.voice?.flags },
+    },
     caller: { ...DEFAULT_SETTINGS.caller, ...s.caller },
     display: { ...DEFAULT_SETTINGS.display, ...s.display },
     onboarded: s.onboarded ?? DEFAULT_SETTINGS.onboarded,

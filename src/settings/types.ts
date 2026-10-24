@@ -96,7 +96,7 @@ export const DEFAULT_SETTINGS: Settings = {
     minConfidence: 0.55,
     triggerMinConfidence: 0.6,
     aliases: {},
-    flags: { dsp2: false, vad: 'off' },
+    flags: { dsp2: true, vad: 'off' },
     distanceM: 2.5,
     environment: 'medium',
     gainDb: 20,
