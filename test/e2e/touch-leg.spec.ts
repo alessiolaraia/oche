@@ -38,13 +38,15 @@ test('komplettes 501-Leg per Touch inkl. Bust, Korrektur per Zurück und Checkou
   await expect(page.getByRole('dialog', { name: 'Nachfrage' })).toBeVisible();
   await page.getByRole('dialog', { name: 'Nachfrage' }).getByRole('button', { name: '3' }).click();
 
-  await expect(page.getByText('Legs 1:0')).toBeVisible();
+  // Pad schließen: dann ist der Fokus mit Leg-Stand und Rest wieder sichtbar (Handy hoch blendet ihn aus)
+  await page.getByRole('button', { name: 'Pad zu' }).click();
+  await expect(page.getByText('Legs 1 : 0')).toBeVisible();
   await expect(page.getByTestId('remaining')).toHaveText('501');
   await expect(page.getByTestId('active-player')).toHaveText('Spieler 2');
 
   // Reload: Spiel wird aus IndexedDB fortgesetzt
   await page.reload();
-  await expect(page.getByText('Legs 1:0')).toBeVisible();
+  await expect(page.getByText('Legs 1 : 0')).toBeVisible();
   await page.goto('./#/');
   await page.getByRole('button', { name: 'Laufendes Spiel fortsetzen' }).click();
   await expect(page.getByTestId('active-player')).toHaveText('Spieler 2');

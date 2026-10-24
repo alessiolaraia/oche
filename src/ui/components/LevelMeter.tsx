@@ -20,7 +20,7 @@ export function LevelMeter({ gateDb }: { gateDb: number }) {
       <div className="level-bar" data-open={gateOpen} style={{ width: pct(inputDb) }} />
       <div className="level-gate" style={{ left: pct(gateDb) }} title="Noise Gate" />
       <span className="level-text">
-        {inputDb <= -99 ? '–' : `${Math.round(inputDb)} dB`} {gateOpen ? 'offen' : 'zu'}
+        {inputDb <= -99 ? 'Noch kein Signal' : `${Math.round(inputDb)} dB${gateOpen ? ', Stimme erkannt' : ''}`}
       </span>
     </div>
   );

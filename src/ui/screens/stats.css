@@ -1,40 +1,42 @@
 .stats-players {
-  flex-wrap: wrap;
-  margin-bottom: var(--s-21);
+  margin-bottom: 16px;
 }
 
 .stats-kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
-  gap: 0;
-  margin: 0;
-  border-top: 1px solid var(--board-line);
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0 12px;
+  margin: 0 0 8px;
+  padding: 8px 16px;
 }
 
 .stats-kpi {
   padding: 12px 0;
-  border-bottom: 1px solid var(--board-line);
 }
 
 .stats-kpi dt {
-  color: var(--sisal-dim);
-  font-size: var(--s-14);
+  color: var(--sg-ink-3);
+  font-size: var(--sg-fs-sm);
 }
 
 .stats-kpi dd {
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: var(--s-37);
-  line-height: 1.05;
+  font-size: var(--sg-fs-title);
+  font-weight: 600;
+  letter-spacing: var(--sg-track-tight);
+  font-variant-numeric: tabular-nums;
 }
 
 .stats-kpi small {
   display: block;
-  font-family: var(--font-text);
+  font-size: var(--sg-fs-sm);
   font-weight: 400;
-  font-size: var(--s-14);
-  color: var(--sisal-dim);
+  color: var(--sg-ink-3);
+  letter-spacing: 0;
+}
+
+.stats-table-card {
+  overflow-x: auto;
 }
 
 .stats-io {
@@ -53,42 +55,42 @@
 }
 
 .chart-grid {
-  stroke: var(--board-line);
+  stroke: var(--sg-hairline);
   stroke-width: 1;
 }
 
 .chart-axis {
-  fill: var(--sisal-dim);
+  fill: var(--sg-ink-3);
   font-size: 13px;
-  font-family: var(--font-text);
+  font-family: var(--sg-font);
 }
 
 .chart-line {
   fill: none;
-  stroke: var(--sisal);
+  stroke: var(--sg-ink);
   stroke-width: 2;
   stroke-linejoin: round;
 }
 
 .chart-dot {
-  fill: var(--sisal);
-  stroke: var(--board);
+  fill: var(--sg-ink);
+  stroke: #fbfaf8;
   stroke-width: 2;
 }
 
 .chart-cross {
-  stroke: var(--wire);
+  stroke: var(--sg-ink-3);
   stroke-dasharray: 3 3;
 }
 
 .chart-tip {
-  color: var(--sisal-dim);
-  font-size: var(--s-14);
+  color: var(--sg-ink-3);
+  font-size: var(--sg-fs-sm);
   min-height: 1.5em;
 }
 
 .chart-table summary {
   cursor: pointer;
-  color: var(--sisal-dim);
-  font-size: var(--s-14);
+  color: var(--sg-ink-3);
+  font-size: var(--sg-fs-sm);
 }

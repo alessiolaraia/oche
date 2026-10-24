@@ -1,9 +1,9 @@
 import type { Format, InMode, OutMode, StartOrder } from '../engine/types';
+import type { Environment } from '../voice/audio/calibrationMath';
 
 export type VoiceMode = 'trigger' | 'direct';
 export type EnginePreference = 'auto' | 'vosk' | 'webspeech';
 export type CallerStyle = 'plain' | 'arena';
-export type Theme = 'dark' | 'light';
 export type VoiceSource = 'pack' | 'system';
 
 export interface Settings {
@@ -30,6 +30,10 @@ export interface Settings {
     trigger: string;
     /** 0–1: Ergebnisse mit geringerer mittlerer Wort-Konfidenz werden verworfen. */
     minConfidence: number;
+    /** Abstand Gerät ↔ Abwurf in Metern (Kalibrierung). */
+    distanceM: number;
+    /** Wie laut es im Raum ist (Kalibrierung). */
+    environment: Environment;
     gainDb: number;
     /** Noise Gate in dBFS (z. B. -50). */
     gateDb: number;
@@ -59,7 +63,6 @@ export interface Settings {
     sfx: boolean;
   };
   display: {
-    theme: Theme;
     showCheckoutRoute: boolean;
     keepAwake: boolean;
     boardPad: boolean;
@@ -85,8 +88,10 @@ export const DEFAULT_SETTINGS: Settings = {
     mode: 'trigger',
     trigger: 'wurf',
     minConfidence: 0.55,
-    gainDb: 12,
-    gateDb: -55,
+    distanceM: 2.5,
+    environment: 'medium',
+    gainDb: 20,
+    gateDb: -30,
     noiseSuppression: true,
     autoGainControl: false,
     confirmWindowMs: 3000,
@@ -108,6 +113,6 @@ export const DEFAULT_SETTINGS: Settings = {
     specialCalls: true,
     sfx: true,
   },
-  display: { theme: 'dark', showCheckoutRoute: true, keepAwake: true, boardPad: false },
+  display: { showCheckoutRoute: true, keepAwake: true, boardPad: false },
   onboarded: false,
 };

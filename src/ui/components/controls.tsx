@@ -21,7 +21,7 @@ export function Toggle({
         {label}
         {hint && <small>{hint}</small>}
       </span>
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+      <input type="checkbox" role="switch" checked={checked} onChange={(e) => onChange(e.target.checked)} />
     </label>
   );
 }
@@ -32,26 +32,42 @@ export function Choice<T extends string>({
   value,
   options,
   onChange,
+  full = false,
 }: {
   label: string;
   hint?: ReactNode;
   value: T;
   options: Record<T, string>;
   onChange: (v: T) => void;
+  /** Segment-Schalter über die ganze Breite unter dem Label. */
+  full?: boolean;
 }) {
+  const seg = (
+    <div className={`segmented${full ? ' segmented-full' : ''}`} role="group" aria-label={label}>
+      {(Object.keys(options) as T[]).map((o) => (
+        <button key={o} type="button" aria-pressed={value === o} onClick={() => onChange(o)}>
+          {options[o]}
+        </button>
+      ))}
+    </div>
+  );
+  if (full)
+    return (
+      <div className="stack choice-full">
+        <span className="label">
+          {label}
+          {hint && <small>{hint}</small>}
+        </span>
+        {seg}
+      </div>
+    );
   return (
     <div className="row">
       <span className="label">
         {label}
         {hint && <small>{hint}</small>}
       </span>
-      <div className="segmented">
-        {(Object.keys(options) as T[]).map((o) => (
-          <button key={o} aria-pressed={value === o} onClick={() => onChange(o)}>
-            {options[o]}
-          </button>
-        ))}
-      </div>
+      {seg}
     </div>
   );
 }
@@ -76,10 +92,13 @@ export function Range({
   onChange: (v: number) => void;
 }) {
   return (
-    <label className="row">
-      <span className="label">
-        {label} <strong>{format(value)}</strong>
-        {hint && <small>{hint}</small>}
+    <label className="stack range-row">
+      <span className="range-head">
+        <span className="label">
+          {label}
+          {hint && <small>{hint}</small>}
+        </span>
+        <strong className="range-value">{format(value)}</strong>
       </span>
       <input
         type="range"
@@ -87,6 +106,7 @@ export function Range({
         max={max}
         step={step}
         value={value}
+        aria-label={label}
         onChange={(e) => onChange(Number(e.target.value))}
       />
     </label>

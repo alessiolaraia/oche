@@ -1,201 +1,336 @@
+/* Spielansicht: Fokus = Rest des Spielers am Zug (mit der einen Aura), daneben/darunter die Anzeigetafel. */
+
 .game {
+  position: relative;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto minmax(0, 1fr) auto auto auto auto auto auto;
-  grid-template-areas: 'head' 'number' 'mic' 'note' 'info' 'others' 'pad' 'bar';
-  padding: 10px var(--gutter) 10px;
-  gap: 6px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  grid-template-areas: 'top' 'focus' 'board' 'pad' 'bar';
+  gap: 12px;
+  padding: 10px var(--gutter) 12px;
   max-width: 1400px;
   margin: 0 auto;
+  isolation: isolate;
 }
 
-.game-head {
-  grid-area: head;
+.game-top {
+  grid-area: top;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
   gap: 12px;
 }
 
+/* ---- Fokus ---- */
+
+.game-focus {
+  grid-area: focus;
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  isolation: isolate;
+}
+
+.game-meta {
+  font-size: var(--sg-fs-sm);
+  font-weight: 500;
+  color: var(--sg-ink-2);
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+}
+
+.game-meta-dim {
+  color: var(--sg-ink-3);
+}
+
 .game-player {
-  font-size: clamp(var(--s-28), 6vmin, 4rem);
+  font-size: clamp(var(--sg-fs-head), 4.2vmin, 2.25rem);
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.game-score {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(var(--s-21), 4vmin, var(--s-37));
-  color: var(--sisal-dim);
-  white-space: nowrap;
-}
-
 .game-number {
-  grid-area: number;
+  flex: 1 1 0;
+  width: 100%;
   min-height: 0;
 }
 
-.game-info {
-  grid-area: info;
-}
-
-.game-info p {
-  margin: 0;
-}
-
-.game-route {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(var(--s-28), 7vmin, 4.5rem);
-  text-align: center;
-  line-height: 1.1;
-}
-
-.game-last {
+.game-chips {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--sisal-dim);
-  font-size: var(--s-16);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  min-height: 32px;
 }
 
-.game-avg {
-  white-space: nowrap;
-}
-
-.game-others {
-  grid-area: others;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--board-line);
-}
-
-.game-others li {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: 'name rest' 'meta rest';
-  align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--board-line);
-}
-
-.game-other-name {
-  grid-area: name;
+.chip-route {
+  color: var(--sg-ink);
   font-weight: 600;
-}
-
-.game-other-meta {
-  grid-area: meta;
-  color: var(--sisal-dim);
-  font-size: var(--s-14);
-}
-
-.game-other-rest {
-  grid-area: rest;
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(var(--s-37), 8vmin, 5rem);
-  line-height: 1;
+  font-size: var(--sg-fs-body);
   font-variant-numeric: tabular-nums;
 }
 
+.game-start-mic {
+  margin-top: 8px;
+  min-height: 56px;
+  padding: 0 28px;
+}
+
+.game-start-mic svg {
+  width: 20px;
+  height: 20px;
+}
+
+.game-voice-note {
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-2);
+  max-width: 34em;
+}
+
+/* ---- Anzeigetafel: jeder Spieler mit eigenem Namen, Rest, Legs und Average ---- */
+
+.game-board {
+  grid-area: board;
+  margin: 0;
+  padding: 6px 8px;
+}
+
+.board {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'name rest' 'stats rest';
+  align-items: center;
+  column-gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--sg-r-md);
+}
+
+.board-row + .board-row {
+  margin-top: 2px;
+}
+
+.board-row[aria-current='true'] {
+  background: var(--sg-glass-strong);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+}
+
+.board-name {
+  grid-area: name;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-row[aria-current='true'] .board-name::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--sg-ink);
+  vertical-align: middle;
+}
+
+.board-stats {
+  grid-area: stats;
+  display: flex;
+  gap: 12px;
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-rest {
+  grid-area: rest;
+  font-size: var(--sg-fs-title);
+  font-weight: 600;
+  letter-spacing: var(--sg-track-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-last {
+  padding: 6px 10px 4px;
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-3);
+  border-top: 1px solid var(--sg-hairline);
+  margin-top: 6px;
+}
+
+/* ---- Pad und Leiste ---- */
+
 .game-pad {
   grid-area: pad;
+  margin: 0;
+  padding: 12px;
 }
 
 .game-bar {
   grid-area: bar;
+  margin: 0;
   display: flex;
+  align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  padding: 8px;
+  border-radius: var(--sg-r-pill);
 }
 
 .game-bar .btn {
-  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 0 18px;
+  white-space: nowrap;
 }
 
-.game-with-pad .game-others li {
-  padding: 2px 0;
+.game-bar-pad svg {
+  width: 18px;
+  height: 18px;
 }
 
-.game-with-pad .game-other-rest {
-  font-size: var(--s-28);
+.game-bar-spacer {
+  flex: 1;
 }
 
-.game-with-pad .game-route {
-  font-size: var(--s-28);
+.game-bar .icon-btn {
+  width: 48px;
+  height: 48px;
 }
 
-/* Querformat: Zahl links, Spalte rechts */
-@media (orientation: landscape) and (min-aspect-ratio: 5/4) {
+/* Pad offen: Fokus kompakter */
+.game-with-pad .game-chips {
+  display: none;
+}
+
+/* Handy hoch mit offenem Pad: der Fokus weicht, die Tafel zeigt nur noch den Spieler am Zug (mit Rest) */
+@media (max-width: 899px) and (orientation: portrait) {
+  .game-with-pad {
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 'top' 'board' 'pad' 'bar';
+  }
+  .game-with-pad .game-focus {
+    display: none;
+  }
+  .game-with-pad .board-row:not([aria-current='true']) {
+    display: none;
+  }
+  .game-with-pad .board-last {
+    display: none;
+  }
+}
+
+/* ---- Breit (MacBook, Tablet quer, Handy quer): Fokus links, Tafel + Pad rechts ---- */
+
+@media (min-width: 900px), (orientation: landscape) and (min-aspect-ratio: 5/4) {
   .game {
-    grid-template-columns: minmax(0, 1.6fr) minmax(18rem, 1fr);
-    grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
     grid-template-areas:
-      'head head'
-      'number mic'
-      'number note'
-      'number others'
-      'number info'
-      'number pad'
-      'bar bar';
-    column-gap: 24px;
+      'top top'
+      'focus board'
+      'focus pad'
+      'focus bar';
+    column-gap: 28px;
   }
-  .game-others {
+  .game-board {
     align-self: start;
-  }
-  .game-route {
-    text-align: left;
   }
   .game-pad {
     align-self: end;
   }
-  .game-with-pad .game-info {
-    display: none;
-  }
-  .game-pad .pad-key {
-    min-height: 40px;
+  .game-with-pad .game-chips {
+    display: flex;
   }
 }
 
-/* sehr niedrig (Handy quer): kompaktere Leiste */
-@media (max-height: 480px) {
+/* Handy quer: sehr wenig Höhe */
+@media (max-height: 500px) {
   .game {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    gap: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    gap: 6px;
   }
-  .game-bar .btn {
-    min-height: 40px;
-    padding: 0.3em 0.8em;
+  .game-player {
+    font-size: var(--sg-fs-body);
+  }
+  .game-meta {
+    font-size: var(--sg-fs-xs);
+  }
+  .board-row {
+    padding: 4px 8px;
+  }
+  .board-rest {
+    font-size: var(--sg-fs-head);
+  }
+  .board-last {
+    display: none;
   }
   .game-pad .pad-quick {
     display: none;
   }
+  .game-pad {
+    padding: 8px;
+  }
+  .game-pad .pad-key {
+    min-height: 40px;
+  }
+  /* quer mit Pad: Tafel weicht, der Fokus links zeigt den Spieler am Zug */
+  .game-with-pad .game-board {
+    display: none;
+  }
+  .game-with-pad .game-pad {
+    align-self: stretch;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .game-pad .pad-display {
+    padding: 6px 14px;
+    font-size: var(--sg-fs-head);
+  }
+  .game-with-pad {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'top top'
+      'focus pad'
+      'focus bar';
+  }
 }
+
+/* ---- Sheets ---- */
 
 .sheet {
   position: fixed;
   left: 50%;
-  bottom: calc(var(--ring-width) + 12px + env(safe-area-inset-bottom));
+  bottom: calc(14px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
-  width: min(32rem, calc(100% - 2 * var(--gutter) - 2 * var(--ring-width)));
+  width: min(30rem, calc(100% - 2 * var(--gutter)));
   z-index: 30;
   display: grid;
-  gap: 8px;
-  padding: 16px;
-  background: var(--board-raised);
-  border: 1px solid var(--board-line);
-  border-radius: 14px;
-  box-shadow: 0 10px 40px rgb(0 0 0 / 0.45);
+  gap: 10px;
+  padding: 20px;
+  background: var(--sg-glass-strong);
+  -webkit-backdrop-filter: var(--sg-blur-strong);
+  backdrop-filter: var(--sg-blur-strong);
+  border: 1px solid var(--sg-glass-border);
+  border-radius: var(--sg-r-xl);
+  box-shadow: var(--sg-hi), var(--sg-shadow-3);
 }
 
 .sheet h2 {
-  font-size: var(--s-28);
+  font-size: var(--sg-fs-head);
+  text-align: center;
   margin-bottom: 4px;
 }
 
@@ -205,57 +340,39 @@
   gap: 8px;
 }
 
-.match-over-title {
-  font-size: clamp(var(--s-50), 12vmin, 7rem);
-  margin-top: var(--s-28);
+/* ---- Matchende ---- */
+
+.match-over {
+  isolation: isolate;
+  text-align: center;
 }
 
-.match-over-score {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--s-28);
-  color: var(--sisal-dim);
-  margin: 0 0 var(--s-28);
+.match-over-aura {
+  width: 380px;
+  height: 380px;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+}
+
+.match-over .game-meta {
+  margin-top: 56px;
+}
+
+.match-over-title {
+  font-size: var(--sg-fs-hero);
+  line-height: var(--sg-lh-hero);
+  margin: 8px 0 40px;
+}
+
+.match-over-card {
+  padding: 8px 16px;
+  text-align: left;
+  overflow-x: auto;
 }
 
 .match-over-actions {
-  display: flex;
+  display: grid;
   gap: 12px;
-  margin-top: var(--s-28);
-}
-
-.stat-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-table th,
-.stat-table td {
-  text-align: right;
-  padding: 8px 6px;
-  border-bottom: 1px solid var(--board-line);
-}
-
-.stat-table th:first-child {
-  text-align: left;
-}
-
-.stat-table thead th {
-  color: var(--sisal-dim);
-  font-weight: 600;
-  font-size: var(--s-14);
-}
-
-.game-start-mic {
-  grid-area: mic;
-  min-height: 72px;
-  font-size: var(--s-21);
-}
-
-.game-voice-note {
-  grid-area: note;
-  margin: 0;
-  font-size: var(--s-14);
-  color: var(--sisal-dim);
+  margin-top: 24px;
 }

@@ -5,7 +5,7 @@ test('Bot-Gegner wirft selbst', async ({ page }) => {
   const errors = collectConsoleErrors(page);
   await freshApp(page);
   await page.goto('./');
-  await page.getByRole('checkbox', { name: 'Bot' }).nth(1).check();
+  await page.getByRole('switch', { name: 'Bot' }).nth(1).check();
   await page.getByTestId('custom-start').click();
   await page.getByRole('button', { name: 'Tippen' }).click();
   await enterScore(page, 60);

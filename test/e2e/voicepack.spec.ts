@@ -109,6 +109,7 @@ test('Ohne installiertes Paket: Systemstimme, keine Konsolenfehler', async ({ pa
   await startAndEnter(page, 60);
   await expect.poll(() => spoken(page)).toContainEqual(expect.stringContaining('Sechzig.'));
   await page.goto('./#/settings');
+  await page.getByText('Erweitert').click();
   await expect(page.getByText('noch kein Ansager-Paket installiert')).toBeVisible();
   expect(errors).toEqual([]);
 });

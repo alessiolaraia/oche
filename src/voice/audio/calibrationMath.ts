@@ -44,3 +44,50 @@ export function computeCalibration(
     warning = 'Auch mit maximaler Verstärkung ist die Stimme leise. Gerät näher heranstellen.';
   return { gainDb, gateDb, noiseDb, speechDb, marginDb: margin, warning };
 }
+
+/** Umgebungslautstärke, vom Nutzer gewählt. */
+export type Environment = 'veryQuiet' | 'quiet' | 'medium' | 'loud' | 'veryLoud';
+
+export const ENVIRONMENTS: readonly Environment[] = ['veryQuiet', 'quiet', 'medium', 'loud', 'veryLoud'];
+
+/** Geschätztes Raumrauschen am Mikro (dBFS, vor der Verstärkung). */
+const NOISE_DB: Record<Environment, number> = {
+  veryQuiet: -72,
+  quiet: -64,
+  medium: -56,
+  loud: -48,
+  veryLoud: -42,
+};
+
+/** Geschätzter Sprachpegel (laut gesprochen) bei 0,5 m Abstand, dBFS vor der Verstärkung. */
+const SPEECH_AT_HALF_METER = -26;
+
+export interface PresetResult {
+  gainDb: number;
+  gateDb: number;
+  minConfidence: number;
+  noiseSuppression: boolean;
+}
+
+/**
+ * Einstellungen aus Entfernung (Meter) und Umgebung – ohne Messung.
+ * Sprache fällt mit 6 dB pro Entfernungs-Verdopplung; Verstärkung bringt sie auf ca. −20 dBFS,
+ * das Gate liegt zwischen Raumrauschen und Stimme (näher am Rauschen).
+ */
+export function presetCalibration(distanceM: number, env: Environment): PresetResult {
+  const d = Math.max(0.3, Math.min(6, distanceM));
+  const speech = SPEECH_AT_HALF_METER - 20 * Math.log10(d / 0.5);
+  const gainDb = Math.round(Math.max(0, Math.min(MAX_GAIN_DB, SPEECH_TARGET_DB - speech)));
+  const noise = NOISE_DB[env] + gainDb;
+  const voice = speech + gainDb;
+  const gap = Math.max(0, voice - noise);
+  const gateDb = Math.round(Math.max(-75, Math.min(-25, noise + Math.max(4, gap * 0.4))));
+  const loudness = ENVIRONMENTS.indexOf(env);
+  return {
+    gainDb,
+    gateDb,
+    // in lauter Umgebung strenger, damit Gerede seltener als Zahl durchgeht
+    minConfidence: [0.5, 0.52, 0.55, 0.62, 0.68][loudness]!,
+    noiseSuppression: true,
+  };
+}

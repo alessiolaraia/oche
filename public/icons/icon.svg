@@ -1,11 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Oche: Board-Schwarz, Sisal-Ring als Doppelring, ein rotes und ein grünes Segment -->
-  <rect width="512" height="512" fill="#1a1714"/>
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#e3d3b0" stroke-width="44"/>
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#d2372c" stroke-width="44"
-          stroke-dasharray="47.1 895.4" stroke-dashoffset="23.6" transform="rotate(-90 256 256)"/>
-  <circle cx="256" cy="256" r="150" fill="none" stroke="#2fa463" stroke-width="44"
-          stroke-dasharray="47.1 895.4" stroke-dashoffset="-23.5" transform="rotate(-90 256 256)"/>
-  <circle cx="256" cy="256" r="34" fill="#2fa463"/>
-  <circle cx="256" cy="256" r="14" fill="#d2372c"/>
+  <!-- Oche im Soft-Glass-Stil: warmes Off-White, Blau-Apricot-Aura, schwarzer Glas-Ring (Doppelring) -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7F5F2"/><stop offset=".55" stop-color="#F1EEEA"/><stop offset="1" stop-color="#EEEAE5"/>
+    </linearGradient>
+    <radialGradient id="blue" cx=".3" cy=".38" r=".5"><stop offset="0" stop-color="#76A8EC" stop-opacity=".85"/><stop offset="1" stop-color="#76A8EC" stop-opacity="0"/></radialGradient>
+    <radialGradient id="apricot" cx=".7" cy=".66" r=".5"><stop offset="0" stop-color="#FAA858" stop-opacity=".85"/><stop offset="1" stop-color="#FAA858" stop-opacity="0"/></radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="28"/></filter>
+    <linearGradient id="ink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3936"/><stop offset="1" stop-color="#1E1D1B"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <g filter="url(#soft)"><rect x="56" y="56" width="400" height="400" fill="url(#blue)"/><rect x="56" y="56" width="400" height="400" fill="url(#apricot)"/></g>
+  <circle cx="256" cy="256" r="138" fill="none" stroke="url(#ink)" stroke-width="46"/>
+  <circle cx="256" cy="238" r="138" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="6" stroke-dasharray="230 640" transform="rotate(-160 256 256)"/>
+  <circle cx="256" cy="256" r="30" fill="url(#ink)"/>
+  <circle cx="249" cy="248" r="9" fill="#fff" fill-opacity=".25"/>
 </svg>

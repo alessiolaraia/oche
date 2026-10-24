@@ -1,0 +1,368 @@
+/* Aus dem Soft-Glass-UI-Skill (assets/soft-glass.css) übernommen – Tokens und Bausteine unverändert. */
+/* ==========================================================================
+   Soft Glass UI — design tokens + component classes
+   Look: milky frosted glass on warm off-white, soft extruded depth,
+   near-black pill CTAs, a warm blue→apricot "aura" glow behind focal content.
+   Drop this file into any web project (plain CSS, React, Vue, Svelte, Next).
+   ========================================================================== */
+
+:root {
+  /* ---- Canvas & surfaces ------------------------------------------------ */
+  --sg-canvas: #efebe7; /* warm greige page behind everything */
+  --sg-screen: #f3f0ec; /* app background (milk)              */
+  --sg-screen-sheen: linear-gradient(180deg, #f7f5f2 0%, #f1eeea 55%, #eeeae5 100%);
+  --sg-glass: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 248, 245, 0.56) 100%);
+  --sg-glass-strong: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(252, 250, 248, 0.78) 100%);
+  --sg-glass-sunken: rgba(240, 237, 233, 0.65);
+  --sg-glass-border: rgba(255, 255, 255, 0.85);
+  --sg-hairline: rgba(30, 25, 20, 0.07);
+
+  /* ---- Ink ---------------------------------------------------------------- */
+  --sg-ink: #1c1b1a; /* headings, primary text  */
+  --sg-ink-2: #4a4743; /* body                   */
+  --sg-ink-3: #8a857f; /* placeholders, captions */
+  --sg-on-dark: #faf8f5;
+
+  /* ---- Dark pill (primary CTA) -------------------------------------------- */
+  --sg-dark-top: #3a3936;
+  --sg-dark-bottom: #1e1d1b;
+
+  /* ---- Aura glow ---------------------------------------------------------- */
+  --sg-aura-blue: rgba(118, 168, 236, 0.8);
+  --sg-aura-apricot: rgba(250, 168, 88, 0.8);
+  --sg-aura-blur: 38px;
+
+  /* ---- Radius -------------------------------------------------------------- */
+  --sg-r-xs: 10px;
+  --sg-r-sm: 14px;
+  --sg-r-md: 20px; /* nested tiles            */
+  --sg-r-lg: 26px; /* cards, composer         */
+  --sg-r-xl: 34px; /* sheets, big panels      */
+  --sg-r-pill: 999px;
+
+  /* ---- Elevation: soft, long, warm-tinted. Always paired with an inner top highlight. */
+  /* the 'thick glass rim': bright inner edge + faint inner bottom shade */
+  --sg-hi:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.75), inset 0 2px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 6px rgba(120, 100, 80, 0.06);
+  --sg-shadow-1: 0 1px 2px rgba(60, 45, 30, 0.06), 0 4px 10px -2px rgba(60, 45, 30, 0.08);
+  --sg-shadow-2: 0 2px 4px rgba(60, 45, 30, 0.05), 0 12px 28px -8px rgba(60, 45, 30, 0.16);
+  --sg-shadow-3: 0 4px 8px rgba(60, 45, 30, 0.05), 0 24px 56px -16px rgba(60, 45, 30, 0.22);
+  --sg-shadow-dark: 0 1px 1px rgba(0, 0, 0, 0.25), 0 8px 18px -6px rgba(20, 15, 10, 0.45);
+  --sg-hi-dark: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -2px 4px rgba(0, 0, 0, 0.35);
+
+  /* ---- Blur ---------------------------------------------------------------- */
+  --sg-blur: blur(22px) saturate(160%);
+  --sg-blur-strong: blur(36px) saturate(180%);
+
+  /* ---- Type ---------------------------------------------------------------- */
+  --sg-font:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial,
+    sans-serif;
+  --sg-fs-hero: 34px;
+  --sg-lh-hero: 1.12;
+  --sg-fs-title: 26px;
+  --sg-fs-head: 19px;
+  --sg-fs-body: 15px;
+  --sg-fs-sm: 13px;
+  --sg-fs-xs: 11px;
+  --sg-track-tight: -0.022em;
+
+  /* ---- Spacing (4pt grid) --------------------------------------------------- */
+  --sg-1: 4px;
+  --sg-2: 8px;
+  --sg-3: 12px;
+  --sg-4: 16px;
+  --sg-5: 20px;
+  --sg-6: 24px;
+  --sg-8: 32px;
+  --sg-10: 40px;
+
+  /* ---- Motion --------------------------------------------------------------- */
+  --sg-ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+  --sg-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+.sg-app {
+  font-family: var(--sg-font);
+  color: var(--sg-ink);
+  background: var(--sg-screen-sheen);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.008em;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.sg-hero {
+  font-size: var(--sg-fs-hero);
+  line-height: var(--sg-lh-hero);
+  font-weight: 600;
+  letter-spacing: var(--sg-track-tight);
+}
+.sg-title {
+  font-size: var(--sg-fs-title);
+  line-height: 1.18;
+  font-weight: 600;
+  letter-spacing: var(--sg-track-tight);
+}
+.sg-head {
+  font-size: var(--sg-fs-head);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.sg-body {
+  font-size: var(--sg-fs-body);
+  color: var(--sg-ink-2);
+}
+.sg-caption {
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-3);
+}
+.sg-micro {
+  font-size: var(--sg-fs-xs);
+  color: var(--sg-ink-3);
+}
+
+/* ==========================================================================
+   Aura — the warm blue→apricot glow. Place ONE per screen behind focal content.
+   ========================================================================== */
+.sg-aura {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 30% 40%, var(--sg-aura-blue), transparent 100%),
+    radial-gradient(closest-side at 72% 64%, var(--sg-aura-apricot), transparent 100%);
+  filter: blur(var(--sg-aura-blur));
+}
+
+/* ==========================================================================
+   Glass surfaces
+   ========================================================================== */
+.sg-glass {
+  background: var(--sg-glass);
+  -webkit-backdrop-filter: var(--sg-blur);
+  backdrop-filter: var(--sg-blur);
+  border: 1px solid var(--sg-glass-border);
+  border-radius: var(--sg-r-lg);
+  box-shadow: var(--sg-hi), var(--sg-shadow-2);
+}
+.sg-glass--raised {
+  background: var(--sg-glass-strong);
+  box-shadow: var(--sg-hi), var(--sg-shadow-3);
+}
+.sg-glass--tile {
+  border-radius: var(--sg-r-md);
+  background: var(--sg-glass-strong);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+}
+.sg-glass--sunken {
+  background: var(--sg-glass-sunken);
+  box-shadow:
+    inset 0 2px 6px rgba(60, 45, 30, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* fallback where backdrop-filter is unavailable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .sg-glass,
+  .sg-btn--light,
+  .sg-icon-btn,
+  .sg-chip {
+    background: #fbfaf8;
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.sg-btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sg-2);
+  height: 48px;
+  padding: 0 var(--sg-6);
+  width: 100%;
+  border-radius: var(--sg-r-pill);
+  font: 500 var(--sg-fs-body)/1 var(--sg-font);
+  letter-spacing: -0.01em;
+  transition:
+    transform 0.18s var(--sg-ease),
+    box-shadow 0.18s var(--sg-ease),
+    filter 0.18s;
+}
+.sg-btn:active {
+  transform: scale(0.975);
+}
+.sg-btn:focus-visible {
+  outline: 2px solid var(--sg-ink);
+  outline-offset: 3px;
+}
+
+.sg-btn--dark {
+  color: var(--sg-on-dark);
+  background: linear-gradient(180deg, var(--sg-dark-top), var(--sg-dark-bottom));
+  box-shadow: var(--sg-hi-dark), var(--sg-shadow-dark);
+}
+.sg-btn--dark:hover {
+  filter: brightness(1.08);
+}
+
+.sg-btn--light {
+  color: var(--sg-ink);
+  background: var(--sg-glass-strong);
+  -webkit-backdrop-filter: var(--sg-blur);
+  backdrop-filter: var(--sg-blur);
+  border: 1px solid var(--sg-glass-border);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+}
+
+.sg-icon-btn {
+  appearance: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  color: var(--sg-ink);
+  background: var(--sg-glass-strong);
+  -webkit-backdrop-filter: var(--sg-blur);
+  backdrop-filter: var(--sg-blur);
+  border: 1px solid var(--sg-glass-border);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+  transition: transform 0.18s var(--sg-spring);
+}
+.sg-icon-btn:active {
+  transform: scale(0.92);
+}
+.sg-icon-btn--dark {
+  color: var(--sg-on-dark);
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--sg-dark-top), var(--sg-dark-bottom));
+  box-shadow: var(--sg-hi-dark), var(--sg-shadow-dark);
+}
+.sg-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   Chips, divider, checklist, composer
+   ========================================================================== */
+.sg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--sg-r-pill);
+  font: 500 var(--sg-fs-sm)/1 var(--sg-font);
+  color: var(--sg-ink-2);
+  background: var(--sg-glass-strong);
+  -webkit-backdrop-filter: var(--sg-blur);
+  backdrop-filter: var(--sg-blur);
+  border: 1px solid var(--sg-glass-border);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+}
+.sg-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--sg-r-pill);
+  font: 500 10px/1 var(--sg-font);
+  color: var(--sg-ink-2);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    var(--sg-hi),
+    0 1px 3px rgba(60, 45, 30, 0.12);
+}
+
+.sg-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sg-4);
+  color: var(--sg-ink-3);
+  font-size: var(--sg-fs-sm);
+}
+.sg-divider::before,
+.sg-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--sg-hairline);
+}
+
+.sg-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-2);
+}
+.sg-check::before {
+  content: '';
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--sg-ink)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center/100% no-repeat;
+}
+
+.sg-composer {
+  border-radius: var(--sg-r-lg);
+  padding: var(--sg-4);
+  display: grid;
+  gap: var(--sg-5);
+}
+.sg-composer textarea {
+  all: unset;
+  font: 400 var(--sg-fs-body)/1.4 var(--sg-font);
+  color: var(--sg-ink);
+  min-height: 22px;
+}
+.sg-composer textarea::placeholder {
+  color: var(--sg-ink-3);
+}
+.sg-composer__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sg-2);
+}
+.sg-composer__row .spacer {
+  flex: 1;
+}
+
+/* ==========================================================================
+   Accessibility & motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .sg-btn,
+  .sg-icon-btn {
+    transition: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .sg-glass,
+  .sg-btn--light,
+  .sg-icon-btn,
+  .sg-chip {
+    background: #fbfaf8;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

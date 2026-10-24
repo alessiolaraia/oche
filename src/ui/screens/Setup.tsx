@@ -4,6 +4,8 @@ import type { InMode, MatchConfig, OutMode, Player } from '../../engine/types';
 import { newId, useMatch } from '../../store/match';
 import { useSettings } from '../../store/settings';
 import { startVoice } from '../../voice/control';
+import { Choice } from '../components/controls';
+import { Icon } from '../components/Icon';
 import { navigate } from '../router';
 import './setup.css';
 
@@ -21,7 +23,6 @@ export function Setup() {
   const [bots, setBots] = useState<Record<number, number>>({});
   const [more, setMore] = useState(false);
   const canResume = useMatch((m) => m.state !== null && m.state.winner === null);
-  const [customScore, setCustomScore] = useState('');
 
   const go = (config: MatchConfig) => {
     settings.update('players', { recent: config.players.filter((p) => !p.bot).map((p) => p.name) });
@@ -45,7 +46,7 @@ export function Setup() {
       outMode: 'double',
       legs: { mode: 'firstTo', count: 3 },
       sets: null,
-      players: players(names.slice(0, 2).length === 2 ? names.slice(0, 2) : ['Spieler 1', 'Spieler 2']),
+      players: players(names.length >= 2 ? names.slice(0, 2) : [names[0] ?? 'Spieler 1', 'Spieler 2']),
       startOrder: 'alternate',
     });
 
@@ -60,157 +61,178 @@ export function Setup() {
       startOrder: g.startOrder,
     });
 
+  const first = names[0]?.trim() || 'Spieler 1';
+  const second = names[1]?.trim() || 'Spieler 2';
+
   return (
     <div className="screen setup">
       <header className="setup-head">
-        <h1 className="setup-brand">Oche</h1>
-        <nav className="setup-nav">
-          <a href="#/stats">Statistik</a>
-          <a href="#/training">Training</a>
-          <a href="#/settings">Einstellungen</a>
+        <span className="setup-brand">
+          <span className="setup-mark" aria-hidden="true" />
+          Oche
+        </span>
+        <nav className="setup-nav" aria-label="Bereiche">
+          <a className="icon-btn" href="#/stats" aria-label="Statistik">
+            <Icon name="chart" />
+          </a>
+          <a className="icon-btn" href="#/training" aria-label="Training">
+            <Icon name="target" />
+          </a>
+          <a className="icon-btn" href="#/settings" aria-label="Einstellungen">
+            <Icon name="settings" />
+          </a>
         </nav>
       </header>
 
+      <h1 className="sg-hero setup-hero">
+        Darts zählen,
+        <br />
+        nur mit der Stimme.
+      </h1>
+
       {canResume && (
-        <button className="btn setup-resume" onClick={() => navigate('game')}>
+        <button className="btn btn-block setup-resume" onClick={() => navigate('game')}>
           Laufendes Spiel fortsetzen
         </button>
       )}
 
-      <button className="setup-quick" onClick={quickStart} data-testid="quick-start">
-        <span className="setup-quick-score">501</span>
-        <span className="setup-quick-text">
-          {names[0] || 'Spieler 1'} gegen {names[1] || 'Spieler 2'}
-          <small>Double-Out, First to 3 Legs</small>
-        </span>
-      </button>
+      <section className="card setup-quick" aria-label="Schnellstart">
+        <div className="sg-aura setup-aura" aria-hidden="true" />
+        <div className="setup-quick-head">
+          <span className="setup-quick-score">501</span>
+          <span className="setup-quick-text">
+            <strong>
+              {first} gegen {second}
+            </strong>
+            <small>Double-Out, First to 3 Legs</small>
+          </span>
+        </div>
+        <button className="btn btn-primary btn-block" onClick={quickStart} data-testid="quick-start">
+          Spiel starten
+        </button>
+      </section>
 
-      <h2 className="section-title">Spieler</h2>
-      <ol className="list setup-players">
-        {names.map((n, i) => (
-          <li key={i} className="row">
-            <input
-              type="text"
-              value={n}
-              aria-label={`Name Spieler ${i + 1}`}
-              onChange={(e) => setNames(names.map((x, k) => (k === i ? e.target.value : x)))}
-            />
-            <label className="setup-bot">
+      <h2 className="card-title">Spieler</h2>
+      <div className="card">
+        <ol className="setup-players">
+          {names.map((n, i) => (
+            <li key={i} className="row">
               <input
-                type="checkbox"
-                checked={bots[i] !== undefined}
-                onChange={(e) => {
-                  const rest = Object.fromEntries(Object.entries(bots).filter(([k]) => Number(k) !== i));
-                  setBots(e.target.checked ? { ...rest, [i]: 60 } : rest);
-                }}
+                type="text"
+                value={n}
+                aria-label={`Name Spieler ${i + 1}`}
+                onChange={(e) => setNames(names.map((x, k) => (k === i ? e.target.value : x)))}
               />
-              Bot
-            </label>
-            {bots[i] !== undefined && (
-              <label className="setup-bot-avg">
-                Ø
+              <label className="setup-bot">
+                Bot
                 <input
-                  type="number"
-                  min={20}
-                  max={110}
-                  value={bots[i]}
-                  aria-label="Ziel-Average des Bots"
-                  onChange={(e) => setBots({ ...bots, [i]: Number(e.target.value) })}
+                  type="checkbox"
+                  role="switch"
+                  aria-label="Bot"
+                  checked={bots[i] !== undefined}
+                  onChange={(e) => {
+                    const rest = Object.fromEntries(Object.entries(bots).filter(([k]) => Number(k) !== i));
+                    setBots(e.target.checked ? { ...rest, [i]: 60 } : rest);
+                  }}
                 />
               </label>
-            )}
-            <span className="setup-player-actions">
+              {bots[i] !== undefined && (
+                <label className="setup-bot-avg">
+                  Ø
+                  <input
+                    type="number"
+                    min={20}
+                    max={110}
+                    value={bots[i]}
+                    aria-label="Ziel-Average des Bots"
+                    onChange={(e) => setBots({ ...bots, [i]: Number(e.target.value) })}
+                  />
+                </label>
+              )}
               <button
-                className="btn btn-quiet"
-                aria-label="Nach oben"
-                disabled={i === 0}
-                onClick={() => {
-                  const next = [...names];
-                  [next[i - 1], next[i]] = [next[i]!, next[i - 1]!];
-                  setNames(next);
-                }}
-              >
-                ↑
-              </button>
-              <button
-                className="btn btn-quiet"
+                className="icon-btn setup-remove"
                 aria-label="Entfernen"
                 disabled={names.length <= 1}
                 onClick={() => setNames(names.filter((_, k) => k !== i))}
               >
-                ✕
+                <Icon name="close" />
               </button>
-            </span>
-          </li>
-        ))}
-      </ol>
-      {names.length < 8 && (
-        <button className="btn" onClick={() => setNames([...names, `Spieler ${names.length + 1}`])}>
-          Spieler hinzufügen
-        </button>
-      )}
+            </li>
+          ))}
+        </ol>
+        {names.length < 8 && (
+          <div className="row">
+            <button
+              className="btn btn-quiet"
+              onClick={() => setNames([...names, `Spieler ${names.length + 1}`])}
+            >
+              + Spieler hinzufügen
+            </button>
+          </div>
+        )}
+      </div>
 
-      <button className="btn btn-quiet setup-more" aria-expanded={more} onClick={() => setMore(!more)}>
+      <button className="btn btn-block setup-more" aria-expanded={more} onClick={() => setMore(!more)}>
         {more ? 'Weniger Optionen' : 'Spielmodus anpassen'}
       </button>
 
       {more && (
-        <div className="list">
-          <div className="row">
-            <span className="label">Startpunkte</span>
-            <div className="segmented setup-wrap">
-              {START_SCORES.map((s) => (
-                <button
-                  key={s}
-                  aria-pressed={g.startScore === s}
-                  onClick={() => settings.update('game', { startScore: s })}
-                >
-                  {s}
-                </button>
-              ))}
-              <input
-                type="number"
-                className="setup-custom-score"
-                placeholder="frei"
-                aria-label="Freie Startpunktzahl"
-                value={customScore}
-                min={2}
-                max={9999}
-                onChange={(e) => {
-                  setCustomScore(e.target.value);
-                  const v = Number(e.target.value);
-                  if (Number.isInteger(v) && v >= 2) settings.update('game', { startScore: v });
-                }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <span className="label">In</span>
-            <Seg
-              value={g.inMode}
-              options={['straight', 'double', 'master']}
-              labels={MODE_LABEL}
-              onChange={(v) => settings.update('game', { inMode: v })}
+        <div className="card">
+          <Choice<string>
+            full
+            label="Startpunkte"
+            value={String(g.startScore)}
+            options={Object.fromEntries(START_SCORES.map((s) => [String(s), String(s)]))}
+            onChange={(v) => settings.update('game', { startScore: Number(v) })}
+          />
+          <label className="row">
+            <span className="label">Eigene Startpunktzahl</span>
+            <input
+              className="setup-count"
+              type="number"
+              min={2}
+              max={9999}
+              placeholder="frei"
+              aria-label="Freie Startpunktzahl"
+              value={START_SCORES.includes(g.startScore) ? '' : g.startScore}
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                if (Number.isInteger(v) && v >= 2) settings.update('game', { startScore: v });
+              }}
             />
-          </div>
-          <div className="row">
-            <span className="label">Out</span>
-            <Seg
-              value={g.outMode}
-              options={['straight', 'double', 'master']}
-              labels={MODE_LABEL}
-              onChange={(v) => settings.update('game', { outMode: v })}
-            />
-          </div>
+          </label>
+          <Choice<OutMode>
+            full
+            label="Auschecken"
+            value={g.outMode}
+            options={MODE_LABEL}
+            onChange={(v) => settings.update('game', { outMode: v })}
+          />
+          <Choice<InMode>
+            full
+            label="Einsteigen"
+            value={g.inMode}
+            options={MODE_LABEL}
+            onChange={(v) => settings.update('game', { inMode: v })}
+          />
           <div className="row">
             <span className="label">Legs</span>
-            <Seg
-              value={g.legs.mode}
-              options={['firstTo', 'bestOf']}
-              labels={{ firstTo: 'First to', bestOf: 'Best of' }}
-              onChange={(v) => settings.update('game', { legs: { ...g.legs, mode: v } })}
-            />
+            <div className="segmented">
+              <button
+                aria-pressed={g.legs.mode === 'firstTo'}
+                onClick={() => settings.update('game', { legs: { ...g.legs, mode: 'firstTo' } })}
+              >
+                First to
+              </button>
+              <button
+                aria-pressed={g.legs.mode === 'bestOf'}
+                onClick={() => settings.update('game', { legs: { ...g.legs, mode: 'bestOf' } })}
+              >
+                Best of
+              </button>
+            </div>
             <input
+              className="setup-count"
               type="number"
               min={1}
               max={21}
@@ -221,78 +243,52 @@ export function Setup() {
               }
             />
           </div>
-          <div className="row">
-            <label htmlFor="sets-on" className="label">
-              Mit Sets
-            </label>
+          <label className="row">
+            <span className="label">Mit Sets</span>
             <input
-              id="sets-on"
               type="checkbox"
+              role="switch"
               checked={g.sets !== null}
               onChange={(e) =>
                 settings.update('game', { sets: e.target.checked ? { mode: 'firstTo', count: 2 } : null })
               }
             />
-            {g.sets && (
-              <>
-                <Seg
-                  value={g.sets.mode}
-                  options={['firstTo', 'bestOf']}
-                  labels={{ firstTo: 'First to', bestOf: 'Best of' }}
-                  onChange={(v) => settings.update('game', { sets: { ...g.sets!, mode: v } })}
-                />
-                <input
-                  type="number"
-                  min={1}
-                  max={13}
-                  value={g.sets.count}
-                  aria-label="Anzahl Sets"
-                  onChange={(e) =>
-                    settings.update('game', {
-                      sets: { ...g.sets!, count: Math.max(1, Number(e.target.value)) },
-                    })
-                  }
-                />
-              </>
-            )}
-          </div>
-          <div className="row">
-            <span className="label">Wer beginnt</span>
-            <Seg
-              value={g.startOrder}
-              options={['alternate', 'bullOut']}
-              labels={{ alternate: 'Reihenfolge', bullOut: 'Bull-Out' }}
-              onChange={(v) => settings.update('game', { startOrder: v })}
-            />
-          </div>
+          </label>
+          {g.sets && (
+            <div className="row">
+              <span className="label">Sets (First to)</span>
+              <input
+                className="setup-count"
+                type="number"
+                min={1}
+                max={13}
+                value={g.sets.count}
+                aria-label="Anzahl Sets"
+                onChange={(e) =>
+                  settings.update('game', {
+                    sets: { ...g.sets!, count: Math.max(1, Number(e.target.value)) },
+                  })
+                }
+              />
+            </div>
+          )}
+          <Choice<'alternate' | 'bullOut'>
+            full
+            label="Wer beginnt?"
+            value={g.startOrder}
+            options={{ alternate: 'Reihenfolge', bullOut: 'Bull-Out' }}
+            onChange={(v) => settings.update('game', { startOrder: v })}
+          />
         </div>
       )}
 
-      <button className="btn btn-primary setup-start" onClick={customStart} data-testid="custom-start">
-        {g.startScore} starten ({names.length} {names.length === 1 ? 'Spieler' : 'Spieler'})
+      <button
+        className="btn btn-primary btn-block setup-start"
+        onClick={customStart}
+        data-testid="custom-start"
+      >
+        {g.startScore} mit {names.length} {names.length === 1 ? 'Spieler' : 'Spielern'} starten
       </button>
-    </div>
-  );
-}
-
-function Seg<T extends string>({
-  value,
-  options,
-  labels,
-  onChange,
-}: {
-  value: T;
-  options: readonly T[];
-  labels: Partial<Record<T, string>>;
-  onChange: (v: T) => void;
-}) {
-  return (
-    <div className="segmented">
-      {options.map((o) => (
-        <button key={o} aria-pressed={value === o} onClick={() => onChange(o)}>
-          {labels[o] ?? o}
-        </button>
-      ))}
     </div>
   );
 }

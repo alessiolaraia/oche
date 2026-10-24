@@ -1,38 +1,43 @@
 .level {
   position: relative;
-  height: 28px;
-  border-radius: 6px;
-  background: var(--board-raised);
-  border: 1px solid var(--board-line);
+  height: 32px;
+  border-radius: var(--sg-r-pill);
+  background: var(--sg-glass-sunken);
+  box-shadow:
+    inset 0 2px 6px rgba(60, 45, 30, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
   overflow: hidden;
 }
 
 .level-bar {
   position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--wire);
+  inset: 3px auto 3px 3px;
+  border-radius: var(--sg-r-pill);
+  background: var(--sg-ink-3);
+  opacity: 0.6;
   transition: width 50ms linear;
 }
 
 .level-bar[data-open='true'] {
-  background: var(--ring-green);
+  opacity: 1;
+  background: linear-gradient(180deg, var(--sg-dark-top), var(--sg-dark-bottom));
 }
 
 .level-gate {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 5px;
+  bottom: 5px;
   width: 3px;
-  background: var(--sisal);
+  border-radius: 2px;
+  background: var(--sg-ink);
 }
 
 .level-text {
   position: absolute;
-  right: 8px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: var(--s-14);
+  font-size: var(--sg-fs-sm);
   font-variant-numeric: tabular-nums;
-  color: var(--sisal);
-  text-shadow: 0 0 4px var(--board);
+  color: var(--sg-ink-2);
 }

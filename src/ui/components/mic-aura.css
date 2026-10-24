@@ -1,0 +1,67 @@
+.mic-aura {
+  width: min(78vmin, 520px);
+  height: min(78vmin, 520px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--aura-scale, 1));
+  transition:
+    transform 0.12s linear,
+    opacity 0.4s var(--sg-ease),
+    filter 0.4s var(--sg-ease);
+}
+
+.mic-aura[data-status='off'] {
+  opacity: 0.25;
+  filter: blur(var(--sg-aura-blur)) grayscale(1);
+}
+
+.mic-aura[data-status='paused'] {
+  opacity: 0.35;
+  filter: blur(var(--sg-aura-blur)) grayscale(1);
+}
+
+.mic-aura[data-status='loading'] {
+  animation: aura-breathe 1.4s ease-in-out infinite;
+}
+
+.mic-aura[data-status='listening'] {
+  animation: aura-breathe 3.6s ease-in-out infinite;
+}
+
+.mic-aura[data-status='hearing'] {
+  opacity: 1;
+}
+
+@keyframes aura-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.mic-chip {
+  gap: 8px;
+}
+
+.mic-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sg-ink-3);
+}
+
+.mic-chip[data-status='listening'] .mic-dot,
+.mic-chip[data-status='hearing'] .mic-dot {
+  background: var(--sg-ink);
+  box-shadow: 0 0 0 3px rgba(28, 27, 26, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mic-aura {
+    animation: none !important;
+    transition: none;
+  }
+}

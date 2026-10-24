@@ -26,8 +26,8 @@ export default defineConfig(({ mode }) => ({
         scope: '.',
         display: 'standalone',
         orientation: 'any',
-        background_color: '#1a1714',
-        theme_color: '#1a1714',
+        background_color: '#EFEBE7',
+        theme_color: '#F3F0EC',
         categories: ['sports', 'games', 'utilities'],
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },

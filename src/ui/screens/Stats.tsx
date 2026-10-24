@@ -6,6 +6,7 @@ import type { LegRecord } from '../../engine/types';
 import { reduce } from '../../engine/x01';
 import { pickSettings, useSettings } from '../../store/settings';
 import { LineChart, type Point } from '../components/LineChart';
+import { Icon } from '../components/Icon';
 import './stats.css';
 
 interface PlayerMatch {
@@ -107,20 +108,21 @@ export function Stats() {
   return (
     <div className="screen stats">
       <header className="screen-head">
-        <h1>Statistik</h1>
         <a
-          className="link-back"
+          className="icon-btn"
           href="#/"
+          aria-label="Zurück"
           onClick={(e) => history.length > 1 && (e.preventDefault(), history.back())}
         >
-          Zurück
+          <Icon name="back" />
         </a>
+        <h1>Statistik</h1>
       </header>
 
       {matches === null ? (
-        <p>Lade …</p>
+        <p className="hint">Lade …</p>
       ) : names.length === 0 ? (
-        <p>
+        <p className="card card-pad sg-body">
           Noch keine Spiele. Nach dem ersten Match steht hier dein Average, deine Checkout-Quote und der
           Verlauf.
         </p>
@@ -135,7 +137,7 @@ export function Stats() {
           </div>
 
           {total && (
-            <dl className="stats-kpis">
+            <dl className="card stats-kpis">
               <Kpi label="3-Dart-Average" value={fmt(total.average)} />
               <Kpi label="First 9" value={fmt(total.first9)} />
               <Kpi
@@ -152,67 +154,73 @@ export function Stats() {
             </dl>
           )}
 
-          <h2 className="section-title">Average pro Spiel</h2>
-          {points.length >= 2 ? (
-            <LineChart points={points} yLabel="3-Dart-Average" />
-          ) : (
-            <p className="hint">Ab zwei Spielen siehst du hier den Verlauf.</p>
-          )}
+          <h2 className="card-title">Average pro Spiel</h2>
+          <div className="card card-pad">
+            {points.length >= 2 ? (
+              <LineChart points={points} yLabel="3-Dart-Average" />
+            ) : (
+              <p className="hint">Ab zwei Spielen siehst du hier den Verlauf.</p>
+            )}
+          </div>
 
-          <h2 className="section-title">Spiele</h2>
-          <table className="stat-table">
-            <thead>
-              <tr>
-                <th scope="col">Datum</th>
-                <th scope="col">Gegner</th>
-                <th scope="col">Ø</th>
-                <th scope="col">Checkout</th>
-                <th scope="col">Ergebnis</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...perMatch].reverse().map(({ match, index, stats, won }) => (
-                <tr key={match.id}>
-                  <th scope="row">{new Date(match.startedAt).toLocaleDateString('de-DE')}</th>
-                  <td>
-                    {match.config.players
-                      .filter((_, i) => i !== index)
-                      .map((p) => p.name)
-                      .join(', ') || 'Solo'}
-                  </td>
-                  <td>{fmt(stats.average)}</td>
-                  <td>{stats.checkoutRate === null ? '–' : `${Math.round(stats.checkoutRate * 100)} %`}</td>
-                  <td>{match.finishedAt ? (won ? 'Sieg' : 'Niederlage') : 'offen'}</td>
+          <h2 className="card-title">Spiele</h2>
+          <div className="card stats-table-card">
+            <table className="stat-table">
+              <thead>
+                <tr>
+                  <th scope="col">Datum</th>
+                  <th scope="col">Gegner</th>
+                  <th scope="col">Ø</th>
+                  <th scope="col">Checkout</th>
+                  <th scope="col">Ergebnis</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {[...perMatch].reverse().map(({ match, index, stats, won }) => (
+                  <tr key={match.id}>
+                    <th scope="row">{new Date(match.startedAt).toLocaleDateString('de-DE')}</th>
+                    <td>
+                      {match.config.players
+                        .filter((_, i) => i !== index)
+                        .map((p) => p.name)
+                        .join(', ') || 'Solo'}
+                    </td>
+                    <td>{fmt(stats.average)}</td>
+                    <td>{stats.checkoutRate === null ? '–' : `${Math.round(stats.checkoutRate * 100)} %`}</td>
+                    <td>{match.finishedAt ? (won ? 'Sieg' : 'Niederlage') : 'offen'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
 
-      <h2 className="section-title">Daten übertragen</h2>
-      <p className="hint">
-        Exportiere alles als JSON-Datei und importiere sie auf dem anderen Gerät (z. B. per AirDrop oder
-        Mail).
-      </p>
-      <div className="stats-io">
-        <button className="btn" onClick={() => void doExport()}>
-          Exportieren
-        </button>
-        <button className="btn" onClick={() => fileRef.current?.click()}>
-          Importieren
-        </button>
-        <input
-          ref={fileRef}
-          type="file"
-          accept="application/json,.json"
-          hidden
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f) void doImport(f);
-            e.target.value = '';
-          }}
-        />
+      <h2 className="card-title">Daten übertragen</h2>
+      <div className="card card-pad stack">
+        <p className="hint">
+          Exportiere alles als JSON-Datei und importiere sie auf dem anderen Gerät (z. B. per AirDrop oder
+          Mail).
+        </p>
+        <div className="stats-io">
+          <button className="btn" onClick={() => void doExport()}>
+            Exportieren
+          </button>
+          <button className="btn" onClick={() => fileRef.current?.click()}>
+            Importieren
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) void doImport(f);
+              e.target.value = '';
+            }}
+          />
+        </div>
       </div>
       {message && <p role="status">{message}</p>}
     </div>

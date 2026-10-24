@@ -1,6 +1,10 @@
+.training-modes {
+  list-style: none;
+}
+
 .training-modes h2 {
-  font-size: var(--s-28);
-  margin-bottom: 4px;
+  font-size: var(--sg-fs-head);
+  margin-bottom: 2px;
 }
 
 .training-modes .row {
@@ -8,39 +12,53 @@
   align-items: center;
 }
 
+.training-modes .btn {
+  min-height: 44px;
+}
+
 .atc {
+  position: relative;
+  isolation: isolate;
   height: 100%;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto auto;
-  gap: 10px;
-  padding: 10px var(--gutter);
+  gap: 12px;
+  padding: 10px var(--gutter) 12px;
   max-width: 900px;
   margin: 0 auto;
 }
 
 .atc-target {
+  position: relative;
+  isolation: isolate;
   min-height: 0;
   display: grid;
   place-items: center;
 }
 
+.atc-aura {
+  width: min(70vmin, 420px);
+  height: min(70vmin, 420px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .atc-bull,
 .atc-done {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(4rem, 26vmin, 16rem);
+  font-weight: 600;
+  font-size: clamp(4rem, 24vmin, 14rem);
+  letter-spacing: -0.04em;
   line-height: 0.9;
-  margin: 0;
   text-align: center;
 }
 
 .atc-done {
-  font-size: clamp(2.5rem, 12vmin, 7rem);
-  color: var(--ring-green);
+  font-size: clamp(2.2rem, 10vmin, 5rem);
 }
 
 .atc-hint {
-  margin: 0;
+  text-align: center;
 }
 
 .atc-hits {
@@ -51,12 +69,12 @@
 
 .atc-hits .pad-key {
   min-height: 72px;
-  font-size: var(--s-37);
+  font-size: var(--sg-fs-title);
 }
 
-.game-training {
-  grid-area: note;
-  margin: 0;
-  color: var(--sisal-dim);
-  font-weight: 600;
+.atc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }

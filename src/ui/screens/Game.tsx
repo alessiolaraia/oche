@@ -14,17 +14,20 @@ import { botVisit, skillFor } from '../../engine/bot';
 import { checkoutRoute, formatRoute } from '../../engine/checkouts';
 import { matchStats } from '../../engine/stats';
 import type { MatchState } from '../../engine/types';
+import { keepScreenOn } from '../../platform/wakeLock';
 import { useMatch } from '../../store/match';
 import { useSession } from '../../store/session';
 import { useSettings } from '../../store/settings';
 import { useTraining } from '../../store/training';
+import { useVoice } from '../../store/voice';
+import { capitalize } from '../components/controls';
 import { BigNumber } from '../components/BigNumber';
 import { BoardPad } from '../components/BoardPad';
+import { Icon } from '../components/Icon';
+import { MicAura, MicChip } from '../components/MicAura';
 import { MicButton } from '../components/MicButton';
 import { NumberPad } from '../components/NumberPad';
-import { keepScreenOn } from '../../platform/wakeLock';
-import { useVoice } from '../../store/voice';
-import { startVoice } from '../../voice/control';
+import { startVoice, stopVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './game.css';
 
@@ -35,26 +38,27 @@ function fmtAvg(n: number | null): string {
 function scoreLine(state: MatchState): string {
   const p = state.players;
   if (p.length !== 2) return `Leg ${state.legInSet}`;
-  const legs = `Legs ${p[0]!.legsWon}:${p[1]!.legsWon}`;
-  return state.config.sets ? `Sets ${p[0]!.setsWon}:${p[1]!.setsWon}, ${legs}` : legs;
+  const legs = `Legs ${p[0]!.legsWon} : ${p[1]!.legsWon}`;
+  return state.config.sets ? `Sets ${p[0]!.setsWon} : ${p[1]!.setsWon}   ${legs}` : legs;
 }
 
 export function Game() {
   const state = useMatch((s) => s.state);
   const events = useMatch((s) => s.events);
   const config = useMatch((s) => s.config);
+  const kind = useMatch((s) => s.kind);
   const question = useSession((s) => s.question);
   const showRoute = useSettings((s) => s.display.showCheckoutRoute);
   const boardPadDefault = useSettings((s) => s.display.boardPad);
-  const [pad, setPad] = useState<'none' | 'numbers' | 'board'>('none');
-  const [menu, setMenu] = useState(false);
   const keepAwake = useSettings((s) => s.display.keepAwake);
   const voiceEnabled = useSettings((s) => s.voice.enabled);
+  const trigger = useSettings((s) => s.voice.trigger);
   const micStatus = useVoice((s) => s.status);
   const micError = useVoice((s) => s.error);
   const modelProgress = useVoice((s) => s.modelProgress);
-  const kind = useMatch((s) => s.kind);
   const training = useTraining();
+  const [pad, setPad] = useState<'none' | 'numbers' | 'board'>('none');
+  const [menu, setMenu] = useState(false);
 
   // Bot-Gegner wirft nach kurzer Pause selbst
   const botAvg = state && state.winner === null ? config?.players[state.current]?.bot?.average : undefined;
@@ -77,94 +81,116 @@ export function Game() {
   if (!state || !config) {
     return (
       <div className="screen">
-        <p>Kein Spiel aktiv.</p>
+        <p className="hint">Kein Spiel aktiv.</p>
         <button className="btn btn-primary" onClick={() => navigate('setup')}>
           Spiel einrichten
         </button>
       </div>
     );
   }
+  if (state.winner !== null && kind === 'x01') return <MatchOver state={state} />;
 
   const cur = state.current;
   const me = state.players[cur]!;
   const meCfg = config.players[cur]!;
+  const myStats = matchStats(state, cur);
   const route = me.isIn ? checkoutRoute(me.remaining, config.outMode) : null;
   const needsBullOut = config.startOrder === 'bullOut' && events.length === 0;
   const last = state.lastVisit;
-  const others = state.players.map((p, i) => ({ p, i })).filter(({ i }) => i !== cur);
-
-  if (state.winner !== null && kind === 'x01') return <MatchOver state={state} />;
   const trainingDone = training.results.filter((r) => r.success).length;
+  const legsTarget =
+    config.legs.mode === 'firstTo' ? `First to ${config.legs.count}` : `Best of ${config.legs.count}`;
 
   return (
     <div className={`game${pad !== 'none' ? ' game-with-pad' : ''}`}>
-      <header className="game-head">
+      <header className="game-top">
+        <button className="icon-btn" aria-label="Menü" aria-expanded={menu} onClick={() => setMenu(!menu)}>
+          <Icon name="menu" />
+        </button>
+        <MicChip />
+        <button className="icon-btn" aria-label="Einstellungen" onClick={() => navigate('settings')}>
+          <Icon name="settings" />
+        </button>
+      </header>
+
+      <section className="game-focus" aria-label={`${meCfg.name}: Rest ${me.remaining}`}>
+        <MicAura />
+        <p className="game-meta">
+          {kind === 'x01' ? (
+            <>
+              {scoreLine(state)} <span className="game-meta-dim">{legsTarget}</span>
+            </>
+          ) : (
+            <span data-testid="training-status">
+              {kind === '121' ? '121-Challenge' : 'Checkout-Training'}: Ziel {training.target}, geschafft{' '}
+              {trainingDone} von {training.results.length}
+            </span>
+          )}
+        </p>
         <h1 className="game-player" data-testid="active-player">
           {meCfg.name}
         </h1>
-        <span className="game-score">{scoreLine(state)}</span>
-      </header>
-
-      <section className="game-number" aria-label={`${meCfg.name}: Rest ${me.remaining}`}>
-        <BigNumber value={me.remaining} label={`Rest ${me.remaining}`} />
-      </section>
-
-      {voiceEnabled && micStatus === 'off' && pad === 'none' && (
-        <button
-          className="btn btn-primary game-start-mic"
-          onClick={() => void startVoice()}
-          data-testid="start-voice"
-        >
-          Sprachsteuerung starten
-        </button>
-      )}
-      {kind !== 'x01' && (
-        <p className="game-training" data-testid="training-status">
-          {kind === '121' ? '121-Challenge' : 'Checkout-Training'}: Ziel {training.target}, geschafft{' '}
-          {trainingDone} von {training.results.length}
-        </p>
-      )}
-      {(micError || modelProgress) && (
-        <p className={`game-voice-note${micError ? ' warn' : ''}`} role="status">
-          {micError ?? modelProgress}
-        </p>
-      )}
-
-      <section className="game-info">
-        <p className="game-route" data-testid="checkout-route">
-          {showRoute && route ? formatRoute(route) : ' '}
-        </p>
-        <p className="game-last">
-          {last ? (
-            <>
-              zuletzt {config.players[last.player]!.name}: {last.bust ? 'Bust' : last.scored}
-            </>
-          ) : (
-            'Sag „Wurf“ und die Punktzahl – oder tippe.'
+        <div className="game-number">
+          <BigNumber value={me.remaining} label={`Rest ${me.remaining}`} />
+        </div>
+        <div className="game-chips">
+          <span className="chip" title="3-Dart-Average in diesem Spiel">
+            Ø {fmtAvg(myStats.average)}
+          </span>
+          {showRoute && route && (
+            <span className="chip chip-route" data-testid="checkout-route">
+              {formatRoute(route)}
+            </span>
           )}
-          <span className="game-avg">Ø {fmtAvg(matchStats(state, cur).average)}</span>
-        </p>
+        </div>
+        {voiceEnabled && micStatus === 'off' && pad === 'none' && (
+          <button
+            className="btn btn-primary game-start-mic"
+            onClick={() => void startVoice()}
+            data-testid="start-voice"
+          >
+            <Icon name="mic" /> Sprachsteuerung starten
+          </button>
+        )}
+        {(micError || modelProgress) && (
+          <p className={`game-voice-note${micError ? ' warn' : ''}`} role="status">
+            {micError ?? modelProgress}
+          </p>
+        )}
       </section>
 
-      {state.players.length > 1 && (
-        <ul className="game-others">
-          {others.map(({ p, i }) => (
-            <li key={config.players[i]!.id}>
-              <span className="game-other-name">{config.players[i]!.name}</span>
-              <span className="game-other-rest" data-testid={`rest-${i}`}>
-                {p.remaining}
-              </span>
-              <span className="game-other-meta">
-                {config.sets ? `${p.setsWon} S, ` : ''}
-                {p.legsWon} L, Ø {fmtAvg(matchStats(state, i).average)}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <section className="game-board card" aria-label="Spielstand">
+        <ol className="board">
+          {state.players.map((p, i) => {
+            const st = i === cur ? myStats : matchStats(state, i);
+            return (
+              <li
+                key={config.players[i]!.id}
+                className="board-row"
+                aria-current={i === cur ? 'true' : undefined}
+              >
+                <span className="board-name">{config.players[i]!.name}</span>
+                <span className="board-stats">
+                  {config.sets ? <span>Sets {p.setsWon}</span> : null}
+                  <span>Legs {p.legsWon}</span>
+                  <span>Ø {fmtAvg(st.average)}</span>
+                </span>
+                <span className="board-rest" data-testid={`rest-${i}`}>
+                  {p.remaining}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+        <p className="board-last">
+          {last
+            ? `Zuletzt: ${config.players[last.player]!.name} – ${last.bust ? 'Bust' : last.scored}`
+            : `Sag „${capitalize(trigger)} sechzig“ – oder tippe.`}
+        </p>
+      </section>
 
       {pad !== 'none' && (
-        <section className="game-pad">
+        <section className="game-pad card">
           {pad === 'numbers' ? (
             <NumberPad
               onSubmit={(n) => submitVisit(n, { source: 'touch' })}
@@ -176,26 +202,36 @@ export function Game() {
         </section>
       )}
 
-      <nav className="game-bar" aria-label="Spielsteuerung">
-        <button
-          className="btn"
-          aria-expanded={pad !== 'none'}
-          onClick={() => setPad(pad === 'none' ? (boardPadDefault ? 'board' : 'numbers') : 'none')}
-        >
-          {pad === 'none' ? 'Tippen' : 'Pad zu'}
-        </button>
-        {pad !== 'none' && (
-          <button className="btn" onClick={() => setPad(pad === 'numbers' ? 'board' : 'numbers')}>
-            {pad === 'numbers' ? 'Einzeldarts' : 'Summe'}
+      <nav className="game-bar card" aria-label="Spielsteuerung">
+        {pad === 'none' ? (
+          <button
+            className="btn game-bar-pad"
+            aria-expanded={false}
+            onClick={() => setPad(boardPadDefault ? 'board' : 'numbers')}
+          >
+            <Icon name="keypad" />
+            Tippen
           </button>
+        ) : (
+          <>
+            <button
+              className="icon-btn"
+              aria-label="Pad zu"
+              aria-expanded={true}
+              onClick={() => setPad('none')}
+            >
+              <Icon name="close" />
+            </button>
+            <button className="btn btn-quiet" onClick={() => setPad(pad === 'numbers' ? 'board' : 'numbers')}>
+              {pad === 'numbers' ? 'Einzeldarts' : 'Summe'}
+            </button>
+          </>
         )}
-        <button className="btn" onClick={() => undo('touch')}>
-          Zurück
+        <span className="game-bar-spacer" />
+        <button className="icon-btn" aria-label="Zurück" onClick={() => undo('touch')}>
+          <Icon name="undo" />
         </button>
         <MicButton />
-        <button className="btn btn-quiet" aria-expanded={menu} onClick={() => setMenu(!menu)}>
-          Menü
-        </button>
       </nav>
 
       {menu && (
@@ -212,11 +248,19 @@ export function Game() {
           <button className="btn" onClick={() => navigate('stats')}>
             Statistik
           </button>
-          <button className="btn" onClick={() => navigate('settings')}>
-            Einstellungen
-          </button>
+          {micStatus !== 'off' && (
+            <button
+              className="btn"
+              onClick={() => {
+                stopVoice();
+                setMenu(false);
+              }}
+            >
+              Mikro aus
+            </button>
+          )}
           <button
-            className="btn btn-danger"
+            className="btn"
             onClick={() => {
               if (kind !== 'x01') {
                 stopTraining();
@@ -270,35 +314,38 @@ function MatchOver({ state }: { state: MatchState }) {
   const winner = config.players[state.winner!]!;
   return (
     <div className="screen match-over">
+      <div className="sg-aura match-over-aura" aria-hidden="true" />
+      <p className="game-meta">{scoreLine(state)}</p>
       <h1 className="match-over-title">{winner.name} gewinnt</h1>
-      <p className="match-over-score">{scoreLine(state)}</p>
-      <table className="stat-table">
-        <thead>
-          <tr>
-            <th scope="col">Spieler</th>
-            <th scope="col">Ø</th>
-            <th scope="col">First 9</th>
-            <th scope="col">Checkout</th>
-            <th scope="col">Highfinish</th>
-            <th scope="col">180</th>
-          </tr>
-        </thead>
-        <tbody>
-          {config.players.map((p, i) => {
-            const s = matchStats(state, i);
-            return (
-              <tr key={p.id}>
-                <th scope="row">{p.name}</th>
-                <td>{fmtAvg(s.average)}</td>
-                <td>{fmtAvg(s.first9)}</td>
-                <td>{s.checkoutRate === null ? '–' : `${Math.round(s.checkoutRate * 100)} %`}</td>
-                <td>{s.highestFinish ?? '–'}</td>
-                <td>{s.count180}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="card match-over-card">
+        <table className="stat-table">
+          <thead>
+            <tr>
+              <th scope="col">Spieler</th>
+              <th scope="col">Ø</th>
+              <th scope="col">First 9</th>
+              <th scope="col">Checkout</th>
+              <th scope="col">Highfinish</th>
+              <th scope="col">180</th>
+            </tr>
+          </thead>
+          <tbody>
+            {config.players.map((p, i) => {
+              const s = matchStats(state, i);
+              return (
+                <tr key={p.id}>
+                  <th scope="row">{p.name}</th>
+                  <td>{fmtAvg(s.average)}</td>
+                  <td>{fmtAvg(s.first9)}</td>
+                  <td>{s.checkoutRate === null ? '–' : `${Math.round(s.checkoutRate * 100)} %`}</td>
+                  <td>{s.highestFinish ?? '–'}</td>
+                  <td>{s.count180}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <div className="match-over-actions">
         <button
           className="btn btn-primary"

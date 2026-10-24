@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSettings } from '../../store/settings';
 import { useVoice } from '../../store/voice';
+import { presetCalibration } from '../../voice/audio/calibrationMath';
 import { startVoice } from '../../voice/control';
-import { Calibration } from '../components/Calibration';
 import { capitalize } from '../components/controls';
+import { LevelMeter } from '../components/LevelMeter';
+import { MicSetup } from '../components/MicSetup';
 import { navigate } from '../router';
 
 const isIos = () =>
@@ -13,20 +15,20 @@ const isStandalone = () =>
   matchMedia('(display-mode: standalone)').matches ||
   (navigator as Navigator & { standalone?: boolean }).standalone === true;
 
-const STEPS = ['Willkommen', 'Mikro', 'Kalibrieren', 'Test'] as const;
+const STEPS = ['Willkommen', 'Mikro', 'Abstand', 'Test'] as const;
 
 export function Onboarding() {
   const [step, setStep] = useState(0);
-  const setOnboarded = useSettings((s) => s.setOnboarded);
-  const trigger = useSettings((s) => s.voice.trigger);
+  const settings = useSettings();
   const status = useVoice((s) => s.status);
   const error = useVoice((s) => s.error);
   const progress = useVoice((s) => s.modelProgress);
   const results = useVoice((s) => s.results);
+  const trigger = settings.voice.trigger;
 
   const finish = () => {
     useVoice.getState().set({ testMode: false });
-    setOnboarded(true);
+    settings.setOnboarded(true);
     navigate('setup');
   };
 
@@ -35,58 +37,68 @@ export function Onboarding() {
     useVoice.getState().set({ testMode: step === 3 });
   }, [step]);
 
+  // Startwerte aus der Voreinstellung (2,5 m, mittel), falls noch nie kalibriert
+  useEffect(() => {
+    const v = useSettings.getState().voice;
+    useSettings.getState().update('voice', presetCalibration(v.distanceM, v.environment));
+  }, []);
+
   const micReady = status === 'listening' || status === 'hearing' || status === 'paused';
-  const testHeard = results.find((r) => r.accepted && r.note?.startsWith('Test: score'));
+  const heard = results.find((r) => r.accepted && r.note?.startsWith('Test: score'));
 
   return (
     <div className="screen onboarding">
+      <div className="sg-aura onboarding-aura" aria-hidden="true" />
       <header className="screen-head">
-        <h1>Einrichten</h1>
+        <span className="onboarding-steps" aria-label={`Schritt ${step + 1} von ${STEPS.length}`}>
+          {STEPS.map((s, i) => (
+            <span key={s} className="onboarding-dot" data-active={i === step} data-done={i < step} />
+          ))}
+        </span>
         <button className="btn btn-quiet" onClick={finish}>
           Überspringen
         </button>
       </header>
-      <ol className="onboarding-steps" aria-label="Schritte">
-        {STEPS.map((s, i) => (
-          <li key={s} aria-current={i === step ? 'step' : undefined} data-done={i < step}>
-            {s}
-          </li>
-        ))}
-      </ol>
 
       {step === 0 && (
         <section className="onboarding-step">
-          <p>
-            Oche zählt deine Darts per Stimme. Leg das Gerät neben das Board, sag „{capitalize(trigger)}{' '}
-            sechzig“ – die App zieht ab und sagt dir den Rest. Anfassen musst du es nicht.
+          <h1 className="sg-hero">
+            Sag einfach,
+            <br />
+            was du geworfen hast.
+          </h1>
+          <p className="sg-body">
+            Leg das Handy neben das Board und sag „{capitalize(trigger)} sechzig“. Oche zieht ab und sagt dir
+            den Rest – anfassen musst du nichts.
           </p>
           {isIos() && !isStandalone() && (
-            <div className="onboarding-ios">
-              <h2>Erst auf den Home-Bildschirm</h2>
-              <p>
-                Tippe in Safari unten auf Teilen, dann auf „Zum Home-Bildschirm“ und öffne Oche von dort. Als
-                App bleibt der Bildschirm an und das Mikro läuft stabiler.
+            <div className="card card-pad">
+              <h2 className="sg-head">Erst auf den Home-Bildschirm</h2>
+              <p className="hint">
+                Tippe in Safari auf Teilen und dann auf „Zum Home-Bildschirm“. Als App bleibt der Bildschirm
+                an und das Mikro läuft stabiler.
               </p>
             </div>
           )}
-          <button className="btn btn-primary" onClick={() => setStep(1)}>
-            Weiter
+          <button className="btn btn-primary btn-block" onClick={() => setStep(1)}>
+            Los geht’s
           </button>
         </section>
       )}
 
       {step === 1 && (
         <section className="onboarding-step">
-          <p>Oche braucht dein Mikrofon. Die Erkennung läuft auf dem Gerät – nichts wird hochgeladen.</p>
+          <h1 className="sg-title">Mikrofon erlauben</h1>
+          <p className="sg-body">Die Erkennung läuft auf deinem Gerät. Nichts wird hochgeladen.</p>
           {status === 'off' && (
-            <button className="btn btn-primary onboarding-big" onClick={() => void startVoice()}>
+            <button className="btn btn-primary btn-block" onClick={() => void startVoice()}>
               Mikro erlauben
             </button>
           )}
-          {status === 'loading' && <p aria-live="polite">{progress ?? 'Starte Mikro …'}</p>}
+          {status === 'loading' && <p className="hint">{progress ?? 'Starte Mikro …'}</p>}
           {micReady && <p className="ok">Mikro läuft.</p>}
           {error && <p className="warn">{error}</p>}
-          <button className="btn" disabled={!micReady} onClick={() => setStep(2)}>
+          <button className="btn btn-block" disabled={!micReady} onClick={() => setStep(2)}>
             Weiter
           </button>
         </section>
@@ -94,8 +106,11 @@ export function Onboarding() {
 
       {step === 2 && (
         <section className="onboarding-step">
-          <Calibration />
-          <button className="btn" onClick={() => setStep(3)}>
+          <h1 className="sg-title">Wo steht das Handy?</h1>
+          <div className="card">
+            <MicSetup showTest={false} />
+          </div>
+          <button className="btn btn-primary btn-block" onClick={() => setStep(3)}>
             Weiter
           </button>
         </section>
@@ -103,15 +118,25 @@ export function Onboarding() {
 
       {step === 3 && (
         <section className="onboarding-step">
-          <p className="calibration-step">Sag vom Abwurf aus: „{capitalize(trigger)} sechzig“</p>
-          {testHeard ? (
-            <p className="ok">Verstanden: „{testHeard.text}“</p>
+          <h1 className="sg-title">Probier es aus</h1>
+          <p className="sg-body">Sag vom Abwurf aus: „{capitalize(trigger)} sechzig“.</p>
+          <LevelMeter gateDb={settings.voice.gateDb} />
+          {heard ? (
+            <p className="ok">Verstanden: „{heard.text}“</p>
           ) : (
             <p className="hint">Ich höre zu … {results[0] ? `Zuletzt: „${results[0].text}“` : ''}</p>
           )}
-          <button className="btn btn-primary" onClick={finish}>
-            Los geht’s
-          </button>
+          <p className="hint">
+            Klappt es nicht? Geh zurück und stell eine größere Entfernung oder „lauter“ ein.
+          </p>
+          <div className="onboarding-actions">
+            <button className="btn" onClick={() => setStep(2)}>
+              Zurück
+            </button>
+            <button className="btn btn-primary" onClick={finish}>
+              Fertig
+            </button>
+          </div>
         </section>
       )}
     </div>

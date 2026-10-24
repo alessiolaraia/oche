@@ -1,6 +1,3 @@
-import '@fontsource-variable/big-shoulders-display';
-import '@fontsource/barlow/latin-400';
-import '@fontsource/barlow/latin-600';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';

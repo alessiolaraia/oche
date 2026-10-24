@@ -11,8 +11,8 @@ test('komplettes Match nur per Stimme', async ({ page }) => {
   const errors = collectConsoleErrors(page);
   await warmUp(page);
   await quickStartWithVoice(page);
-  await expect(page.getByText('Legs 1:0')).toBeVisible({ timeout: 90_000 });
-  await expect(page.getByText('Legs 2:0')).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText('Legs 1 : 0')).toBeVisible({ timeout: 90_000 });
+  await expect(page.getByText('Legs 2 : 0')).toBeVisible({ timeout: 60_000 });
   await expect(page.getByText('Spieler 1 gewinnt')).toBeVisible({ timeout: 60_000 });
   // Statistik: Bust und Korrektur sind korrekt verbucht – A hat 501 in 9 + 3 (Bust) Darts im ersten Leg
   await expect(page.getByRole('row', { name: /Spieler 1/ })).toBeVisible();

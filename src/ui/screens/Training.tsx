@@ -11,6 +11,7 @@ import { BigNumber } from '../components/BigNumber';
 import { capitalize } from '../components/controls';
 import { MicButton } from '../components/MicButton';
 import { navigate } from '../router';
+import { Icon } from '../components/Icon';
 import './training.css';
 
 const MODES: { mode: TrainingMode; title: string; text: string }[] = [
@@ -71,12 +72,12 @@ export function Training() {
   return (
     <div className="screen training">
       <header className="screen-head">
-        <h1>Training</h1>
-        <a className="link-back" href="#/">
-          Zurück
+        <a className="icon-btn" href="#/" aria-label="Zurück">
+          <Icon name="back" />
         </a>
+        <h1>Training</h1>
       </header>
-      <ul className="list training-modes">
+      <ul className="card training-modes">
         {MODES.map((m) => (
           <li key={m.mode} className="row">
             <div className="label">
@@ -110,13 +111,14 @@ function AroundTheClock() {
 
   return (
     <div className="atc">
-      <header className="game-head">
-        <h1 className="game-player">Around the Clock</h1>
-        <span className="game-score" data-testid="atc-darts">
+      <header className="atc-head">
+        <h1 className="sg-head">Around the Clock</h1>
+        <span className="chip" data-testid="atc-darts">
           {atc.darts} Darts
         </span>
       </header>
       <section className="atc-target" aria-label={`Ziel ${atcLabel(atc.target)}`}>
+        <div className="sg-aura atc-aura" aria-hidden="true" />
         {done ? (
           <p className="atc-done">Geschafft mit {atc.darts} Darts</p>
         ) : atc.target <= 20 ? (
@@ -138,7 +140,7 @@ function AroundTheClock() {
           ))}
         </div>
       )}
-      <nav className="game-bar">
+      <nav className="game-bar card">
         <button className="btn" onClick={() => undo('touch')}>
           Zurück
         </button>

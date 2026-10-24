@@ -5,6 +5,7 @@ import { useSettings } from '../../store/settings';
 import { useVoice } from '../../store/voice';
 import { startVoice, stopVoice, voskSupported } from '../../voice/control';
 import { webSpeechSupported } from '../../voice/webSpeechEngine';
+import { Icon } from '../components/Icon';
 import { LevelMeter } from '../components/LevelMeter';
 import { PackTester } from '../components/PackTester';
 import { VoiceLog } from '../components/VoiceLog';
@@ -75,10 +76,10 @@ export function Debug() {
   return (
     <div className="screen debug">
       <header className="screen-head">
-        <h1>Diagnose</h1>
-        <a className="link-back" href="#/settings">
-          Zurück
+        <a className="icon-btn" href="#/settings" aria-label="Zurück">
+          <Icon name="back" />
         </a>
+        <h1>Diagnose</h1>
       </header>
       <div className="debug-actions">
         {v.status === 'off' ? (
@@ -107,20 +108,26 @@ export function Debug() {
         </p>
       ))}
       <LevelMeter gateDb={gateDb} />
-      <table className="stat-table debug-table">
-        <tbody>
-          {rows.map(([k, val]) => (
-            <tr key={k}>
-              <th scope="row">{k}</th>
-              <td>{val}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <h2 className="section-title">Klang-Paket</h2>
-      <PackTester />
-      <h2 className="section-title">Letzte 20 Rohergebnisse</h2>
-      <VoiceLog limit={20} />
+      <div className="card">
+        <table className="stat-table debug-table">
+          <tbody>
+            {rows.map(([k, val]) => (
+              <tr key={k}>
+                <th scope="row">{k}</th>
+                <td>{val}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <h2 className="card-title">Klang-Paket</h2>
+      <div className="card card-pad">
+        <PackTester />
+      </div>
+      <h2 className="card-title">Letzte 20 Rohergebnisse</h2>
+      <div className="card card-pad">
+        <VoiceLog limit={20} />
+      </div>
       <p className="hint">{navigator.userAgent}</p>
     </div>
   );

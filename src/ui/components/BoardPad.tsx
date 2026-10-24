@@ -28,7 +28,7 @@ export function BoardPad({ onSubmit }: { onSubmit: (darts: Dart[]) => void }) {
         ))}
         <span className="pad-dart-sum">{darts.reduce((s, d) => s + dartValue(d), 0)}</span>
       </div>
-      <div className="segmented pad-mult" role="group" aria-label="Multiplikator">
+      <div className="segmented segmented-full pad-mult" role="group" aria-label="Multiplikator">
         {([1, 2, 3] as const).map((m) => (
           <button key={m} type="button" aria-pressed={mult === m} onClick={() => setMult(m)}>
             {MULT_LABEL[m]}
