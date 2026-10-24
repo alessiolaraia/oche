@@ -35,8 +35,6 @@ test('komplettes 501-Leg per Touch inkl. Bust, Korrektur per Zurück und Checkou
 
   // A checkt 141
   await enterScore(page, 141);
-  await expect(page.getByRole('dialog', { name: 'Nachfrage' })).toBeVisible();
-  await page.getByRole('dialog', { name: 'Nachfrage' }).getByRole('button', { name: '3' }).click();
 
   // Pad schließen: dann ist der Fokus mit Leg-Stand und Rest wieder sichtbar (Handy hoch blendet ihn aus)
   await page.getByRole('button', { name: 'Pad zu' }).click();

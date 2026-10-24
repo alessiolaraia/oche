@@ -5,20 +5,16 @@ Läuft als Web-App auf dem Mac und als installierte App auf iPhone und Android, 
 
 ## Sprachbefehle
 
-| Sagen                                           | Wirkung                           |
-| ----------------------------------------------- | --------------------------------- |
-| „Wurf sechzig“, „Wurf hundertachtzig“           | Aufnahme für den Spieler am Zug   |
-| „Wurf null“, „Wurf nichts“                      | 0 Punkte                          |
-| „Wurf Triple zwanzig, Doppel zehn, Single fünf“ | Einzeldarts, Summe wird gebildet  |
-| „Überworfen“                                    | Bust                              |
-| „Zurück“, „Rückgängig“                          | letzte Aufnahme rückgängig        |
-| „Korrektur fünfundvierzig“                      | letzte Aufnahme durch 45 ersetzen |
-| „Nein“, „Falsch“ (bis 3 s danach)               | gerade erkannte Eingabe verwerfen |
-| „Rest“                                          | Rest und Checkout-Weg ansagen     |
-| „Check mit zwei“, „Aus mit drei“                | Checkout mit 2 bzw. 3 Darts       |
-| „Neues Leg“, „Pause“, „Weiter“, „Mikro aus“     | Steuerung                         |
+Bewusst nur zwei – so löst Gerede am Tisch nichts aus:
 
-Triggerwort („Wurf“) und Modus (Trigger oder Direkt) stellst du unter Einstellungen, Sprache und Mikro ein.
+| Sagen                                                     | Wirkung                                                               |
+| --------------------------------------------------------- | --------------------------------------------------------------------- |
+| „Wurf sechzig“, „Wurf hundert einundvierzig“, „Wurf null“ | Punkte der Aufnahme (zu viel geworfen = Bust, erkennt die App selbst) |
+| „Wurf … (kurze Pause) … sechzig“                          | geht auch getrennt                                                    |
+| „Zurück“                                                  | letzte Aufnahme rückgängig                                            |
+
+Das Triggerwort („Wurf“) kannst du in den Einstellungen unter „Sprache“ frei wählen – die App prüft, ob das
+Sprachmodell das Wort kennt.
 
 ## Auf dem Handy installieren
 

@@ -44,13 +44,14 @@ def words(n: int) -> str:
 CONFUSABLE_PAIRS = [(16, 60), (17, 70), (14, 40), (18, 80), (19, 90), (13, 30), (15, 50), (2, 3), (12, 20)]
 CONFUSABLES = sorted({n for p in CONFUSABLE_PAIRS for n in p})
 NUMBERS = [0, 1, 5, 7, 9, 11, 21, 26, 41, 45, 57, 81, 85, 95, 99, 100, 101, 121, 125, 140, 141, 160, 171, 177, 180]
+# Nur „Trigger + Zahl“ und „Zurück“ sind Befehle; frühere Befehle gehören zu den Negativen (dürfen nichts auslösen)
 COMMANDS = [
-    ("Überworfen.", "ueberworfen", {"type": "bust"}),
     ("Zurück.", "zurueck", {"type": "undo"}),
-    ("Korrektur fünfundvierzig.", "korrektur_45", {"type": "correct", "value": 45}),
-    ("Rest.", "rest", {"type": "remaining"}),
-    ("Neues Leg.", "neues_leg", {"type": "newLeg"}),
     ("Wurf nichts.", "wurf_nichts", {"type": "score", "value": 0}),
+    ("Überworfen.", "ueberworfen", None),
+    ("Korrektur fünfundvierzig.", "korrektur_45", None),
+    ("Rest.", "rest", None),
+    ("Neues Leg.", "neues_leg", None),
 ]
 CHATTER = [
     "Hast du gestern das Spiel gesehen? Das war echt knapp.",
@@ -73,7 +74,13 @@ APP_SPEECH = ["Sechzig. Rest vierhunderteinundvierzig.", "Hundertachtzig!", "Du 
 def say(text: str, voice: str) -> np.ndarray:
     with tempfile.TemporaryDirectory() as d:
         aiff = os.path.join(d, "x.aiff")
-        subprocess.run(["say", "-v", voice, "-o", aiff, text], check=True)
+        for attempt in range(3):  # `say` hängt selten – mit Zeitlimit neu versuchen
+            try:
+                subprocess.run(["say", "-v", voice, "-o", aiff, text], check=True, timeout=30)
+                break
+            except subprocess.TimeoutExpired:
+                if attempt == 2:
+                    raise
         wav = os.path.join(d, "x.wav")
         subprocess.run(["afconvert", "-f", "WAVE", "-d", f"LEI16@{SR}", "-c", "1", aiff, wav], check=True)
         y, _ = sf.read(wav, dtype="float32")
@@ -189,7 +196,8 @@ def main():
                       norm(y, -14 if not hard else -10), end, [tag, cond])
             for text, slug, expected in COMMANDS:
                 y, end = scene(say(text, voice), hard)
-                entry(f"commands/{slug}__{tag}_{cond}.ogg", "commands", expected, norm(y, -14), end, [tag, cond])
+                set_ = "commands" if expected else "negatives"
+                entry(f"{set_}/{slug}__{tag}_{cond}.ogg", set_, expected, norm(y, -14), end, [tag, cond])
         print("Stimme fertig:", tag, flush=True)
 
     # Negative: Gespräche, Fernsehen, Musik, Einschläge, App-eigene Ansagen – erwartet: nichts
