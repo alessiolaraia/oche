@@ -19,5 +19,16 @@ export function TriggerRing() {
 
   // `now` wird erst nach Ablauf aktualisiert – bis dahin gilt der Rand als an
   const on = armedUntil > now;
-  return <div className="trigger-ring" data-on={on} aria-hidden="true" />;
+  return (
+    <div className="trigger-ring" data-on={on} aria-hidden="true">
+      {/* Unschärfe auf dem Container, Maske auf dem Kind – sonst entsteht innen eine harte Kante */}
+      <div className="ring-blur ring-blur-haze">
+        <div className="ring-layer ring-layer-haze" />
+      </div>
+      <div className="ring-blur ring-blur-glow">
+        <div className="ring-layer ring-layer-glow" />
+      </div>
+      <div className="ring-layer ring-layer-line" />
+    </div>
+  );
 }

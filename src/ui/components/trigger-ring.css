@@ -1,36 +1,96 @@
-/* Rand in den Aura-Farben – die einzige Farbe, wie im Soft-Glass-Stil vorgesehen */
+/* Leuchtender Rand im Stil von Apple Intelligence: fließender Farbverlauf entlang der Bildschirmkante,
+   darunter weiche, verschwommene Glüh-Ebenen. Geht an, sobald das Triggerwort fällt. */
+
+@property --ring-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
 .trigger-ring {
+  --ring-colors: #4f8cff, #a35bff, #ff4fa3, #ff8a3d, #ffd23f, #3ee0d0, #4f8cff;
+  --ring-radius: 0px;
   position: fixed;
   inset: 0;
   z-index: 35;
   pointer-events: none;
-  border-radius: 0;
   opacity: 0;
-  box-shadow:
-    inset 0 0 0 7px rgba(118, 168, 236, 0.95),
-    inset 0 0 0 12px rgba(250, 168, 88, 0.75),
-    inset 0 0 70px 26px rgba(250, 168, 88, 0.45),
-    inset 0 0 140px 40px rgba(118, 168, 236, 0.3);
-  transition: opacity 0.18s var(--sg-ease);
+  transform: scale(1.015);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.35s cubic-bezier(0.22, 0.8, 0.24, 1);
+  animation: ring-spin 3.2s linear infinite;
+  animation-play-state: paused;
 }
 
 .trigger-ring[data-on='true'] {
   opacity: 1;
-  animation: ring-pulse 1.1s ease-in-out infinite;
+  transform: scale(1);
+  animation-play-state: running;
 }
 
-@keyframes ring-pulse {
-  0%,
-  100% {
-    opacity: 1;
+.ring-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--ring-radius);
+  background: conic-gradient(from var(--ring-angle), var(--ring-colors));
+  /* nur der Rand bleibt sichtbar: Inhalt-Box ausstanzen */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+/* scharfe Kante */
+.ring-layer-line {
+  padding: 4px;
+}
+
+.ring-blur {
+  position: absolute;
+  inset: 0;
+}
+
+/* weiches Glühen nach innen */
+.ring-blur-glow {
+  filter: blur(12px);
+  opacity: 0.9;
+}
+
+.ring-layer-glow {
+  padding: 14px;
+}
+
+/* breiter Schein */
+.ring-blur-haze {
+  filter: blur(34px);
+  opacity: 0.5;
+}
+
+.ring-layer-haze {
+  padding: 34px;
+}
+
+@keyframes ring-spin {
+  to {
+    --ring-angle: 360deg;
   }
-  50% {
-    opacity: 0.7;
+}
+
+/* Handys: Ecken wie das Display abrunden */
+@media (max-width: 600px) {
+  .trigger-ring {
+    --ring-radius: 44px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trigger-ring[data-on='true'] {
+  .trigger-ring {
     animation: none;
+    transition: opacity 0.2s;
+    transform: none;
   }
 }

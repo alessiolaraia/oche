@@ -10,6 +10,7 @@ import { buildGrammar, type Command } from './commands';
 import { decide } from './decide/decide';
 import { isEchoMuted, onEchoMute } from './echo';
 import type { SpeechEngine, Transcript } from './engine';
+import { normalizeTokens } from './lexicon.de';
 import { tokenize } from './numbers.de';
 import { loadVocab } from './vocab';
 import { VoskEngine } from './voskEngine';
@@ -119,9 +120,10 @@ const ARMED_MS = 4000;
 /** Rand leuchten lassen, sobald das Triggerwort (Direkt-Modus: irgendeine Sprache) zu hören ist. */
 function markArmed(text: string): void {
   const v = useSettings.getState().voice;
-  const t = tokenize(text);
+  // schon im laufenden Teilergebnis – sobald das Wort fällt, auch nach „äh“ oder Störgeräusch davor
+  const t = normalizeTokens(tokenize(text));
   if (t.length === 0) return;
-  const heardTrigger = v.mode === 'direct' || t[0] === v.trigger.toLowerCase();
+  const heardTrigger = v.mode === 'direct' || t.slice(0, 3).includes(v.trigger.toLowerCase());
   if (heardTrigger) voice().set({ armedUntil: Date.now() + ARMED_MS });
 }
 
