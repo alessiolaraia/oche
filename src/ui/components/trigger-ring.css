@@ -1,39 +1,32 @@
-/* Leuchtender Rand im Stil von Apple Intelligence: fließender Farbverlauf entlang der Bildschirmkante,
-   darunter weiche, verschwommene Glüh-Ebenen. Geht an, sobald das Triggerwort fällt. */
-
-@property --ring-angle {
-  syntax: '<angle>';
-  inherits: true;
-  initial-value: 0deg;
-}
+/* Leuchtender Rand im Stil von Apple Intelligence: kräftiger Farbverlauf entlang der Bildschirmkante,
+   darunter breite, weiche Glüh-Ebenen nach innen. Geht an, sobald das Triggerwort fällt.
+   Der Verlauf dreht sich per `transform` (läuft in Safari, Chrome, Firefox gleich) – jede Ebene stanzt
+   per Maske nur ihren Rand aus. */
 
 .trigger-ring {
-  --ring-colors: #4f8cff, #a35bff, #ff4fa3, #ff8a3d, #ffd23f, #3ee0d0, #4f8cff;
+  --ring-colors: #3d7bff, #9b4dff, #ff3d9a, #ff7a2e, #ffc61a, #2ee6d0, #3d7bff;
   --ring-radius: 0px;
   position: fixed;
   inset: 0;
   z-index: 35;
   pointer-events: none;
   opacity: 0;
-  transform: scale(1.015);
+  transform: scale(1.02);
   transition:
-    opacity 0.22s ease-out,
+    opacity 0.18s ease-out,
     transform 0.35s cubic-bezier(0.22, 0.8, 0.24, 1);
-  animation: ring-spin 3.2s linear infinite;
-  animation-play-state: paused;
 }
 
 .trigger-ring[data-on='true'] {
   opacity: 1;
   transform: scale(1);
-  animation-play-state: running;
 }
 
 .ring-layer {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   border-radius: var(--ring-radius);
-  background: conic-gradient(from var(--ring-angle), var(--ring-colors));
   /* nur der Rand bleibt sichtbar: Inhalt-Box ausstanzen */
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -44,9 +37,27 @@
     linear-gradient(#000 0 0);
 }
 
-/* scharfe Kante */
+/* drehender Verlauf, groß genug, um jede Ecke abzudecken */
+.ring-layer::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150vmax;
+  height: 150vmax;
+  margin: -75vmax 0 0 -75vmax;
+  background: conic-gradient(var(--ring-colors));
+  animation: ring-spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.trigger-ring[data-on='true'] .ring-layer::before {
+  animation-play-state: running;
+}
+
+/* scharfe, helle Kante */
 .ring-layer-line {
-  padding: 4px;
+  padding: 5px;
 }
 
 .ring-blur {
@@ -54,43 +65,53 @@
   inset: 0;
 }
 
-/* weiches Glühen nach innen */
+/* kräftiges Glühen */
 .ring-blur-glow {
-  filter: blur(12px);
-  opacity: 0.9;
+  filter: blur(16px) saturate(1.3);
 }
 
 .ring-layer-glow {
-  padding: 14px;
+  padding: 26px;
 }
 
-/* breiter Schein */
+/* breiter Schein weit nach innen */
 .ring-blur-haze {
-  filter: blur(34px);
-  opacity: 0.5;
+  filter: blur(48px) saturate(1.4);
+  opacity: 0.75;
 }
 
 .ring-layer-haze {
-  padding: 34px;
+  padding: 80px;
 }
 
 @keyframes ring-spin {
   to {
-    --ring-angle: 360deg;
+    transform: rotate(360deg);
   }
 }
 
-/* Handys: Ecken wie das Display abrunden */
+/* Handys: Ecken wie das Display abrunden, Schein etwas schmaler */
 @media (max-width: 600px) {
   .trigger-ring {
     --ring-radius: 44px;
+  }
+  .ring-layer-haze {
+    padding: 36px;
+  }
+  .ring-blur-haze {
+    opacity: 0.6;
+  }
+  .ring-layer-glow {
+    padding: 18px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .trigger-ring {
-    animation: none;
     transition: opacity 0.2s;
     transform: none;
+  }
+  .ring-layer::before {
+    animation: none;
   }
 }
