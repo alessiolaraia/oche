@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "e2e": "playwright test --project=desktop --project=phone --project=phone-landscape --project=iphone && npm run e2e:voice",
+    "e2e": "playwright test --project=desktop --project=phone --project=phone-landscape --project=iphone && playwright test --project=intro --workers=1 && npm run e2e:voice",
     "e2e:voice": "playwright test --project=voice --workers=1",
     "eval:voice": "playwright test --project=eval --workers=1 --reporter=line",
     "corpus": ".cache/tts-venv/bin/python scripts/voice-corpus/generate.py",
@@ -30,6 +30,7 @@
     "onnxruntime-web": "^1.30.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "three": "^0.180.0",
     "zustand": "^5.0.16"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.180.0",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "eslint": "^10.13.0",

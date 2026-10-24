@@ -98,6 +98,27 @@ function render(c: AudioContext, s: Sfx): number {
       noiseBurst(c, 0, 0.04, 0.2);
       return 0.12;
     }
+    case 'whoosh': {
+      // Pfeil fliegt vorbei: Rauschen, dessen Tonhöhe ansteigt (Zeitlupe → eher tief)
+      const len = Math.floor(c.sampleRate * 0.95);
+      const buf = c.createBuffer(1, len, c.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      const src = c.createBufferSource();
+      src.buffer = buf;
+      const f = c.createBiquadFilter();
+      f.type = 'bandpass';
+      f.Q.value = 3;
+      f.frequency.setValueAtTime(350, c.currentTime);
+      f.frequency.exponentialRampToValueAtTime(1800, c.currentTime + 0.9);
+      const g = c.createGain();
+      g.gain.setValueAtTime(0.0001, c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.22, c.currentTime + 0.75);
+      g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.95);
+      src.connect(f).connect(g).connect(c.destination);
+      src.start();
+      return 0.2;
+    }
     case 'match':
       noiseBurst(c, 0, 1.2, 0.1);
       [0, 4, 7, 12, 7, 12, 16, 19, 24].forEach((s2, i) => tone(c, note(s2), i * 0.1, 0.4, 'triangle', 0.2));

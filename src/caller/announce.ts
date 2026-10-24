@@ -6,7 +6,16 @@ import type { Settings } from '../settings/types';
 import { cuesToText, phrasebook, type Cue, type Phrasebook } from './phrases';
 
 export type Sfx =
-  'accept' | 'notUnderstood' | 'bust' | 'maximum' | 'ton' | 'highFinish' | 'leg' | 'match' | 'thud';
+  | 'accept'
+  | 'notUnderstood'
+  | 'bust'
+  | 'maximum'
+  | 'ton'
+  | 'highFinish'
+  | 'leg'
+  | 'match'
+  | 'thud'
+  | 'whoosh';
 
 export interface Announcement {
   /** Bausteine in Reihenfolge – Clip aus dem Klang-Paket oder Systemstimme. */
@@ -117,9 +126,13 @@ export function announce(
         true,
       );
     }
+    // Intro: Zischen beim Wurf, Einschlag, dann „Hundertachtzig!“
+    case 'introThrow':
+      return out([], 'whoosh');
     case 'introDart':
-      // Intro: drei Einschläge, beim dritten „Hundertachtzig!“
-      return e.n === 3 ? out(pb.maximum, 'maximum') : out([], 'thud');
+      return out([], 'thud');
+    case 'introMaximum':
+      return out(pb.maximum, 'maximum');
     case 'legRestarted':
       return out(pb.newLeg, null, true);
     case 'control':

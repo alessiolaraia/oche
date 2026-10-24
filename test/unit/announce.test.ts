@@ -44,8 +44,9 @@ describe('Ansagen', () => {
   });
 
   it('Intro: Einschläge als Effekt, beim dritten „Hundertachtzig!“', () => {
-    expect(announce({ type: 'introDart', n: 1 }, plain, ctx)).toMatchObject({ text: '', sfx: 'thud' });
-    expect(announce({ type: 'introDart', n: 3 }, plain, ctx)).toMatchObject({
+    expect(announce({ type: 'introThrow', n: 1 }, plain, ctx)).toMatchObject({ text: '', sfx: 'whoosh' });
+    expect(announce({ type: 'introDart', n: 3 }, plain, ctx)).toMatchObject({ text: '', sfx: 'thud' });
+    expect(announce({ type: 'introMaximum' }, plain, ctx)).toMatchObject({
       text: 'Hundertachtzig!',
       sfx: 'maximum',
     });

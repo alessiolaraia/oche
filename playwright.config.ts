@@ -17,11 +17,21 @@ export default defineConfig({
     {
       name: 'desktop',
       use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
-      testIgnore: '**/voice/**',
+      testIgnore: ['**/voice/**', '**/intro.spec.ts'],
     },
-    { name: 'phone', use: { ...devices['Pixel 7'] }, testIgnore: '**/voice/**' },
-    { name: 'phone-landscape', use: { ...devices['Pixel 7 landscape'] }, testIgnore: '**/voice/**' },
-    { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: '**/voice/**' },
+    { name: 'phone', use: { ...devices['Pixel 7'] }, testIgnore: ['**/voice/**', '**/intro.spec.ts'] },
+    {
+      name: 'phone-landscape',
+      use: { ...devices['Pixel 7 landscape'] },
+      testIgnore: ['**/voice/**', '**/intro.spec.ts'],
+    },
+    { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: ['**/voice/**', '**/intro.spec.ts'] },
+    // 3D-Intro (WebGL per Software im Headless-Browser) – braucht viel CPU, daher eigenes Projekt
+    {
+      name: 'intro',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } },
+      testMatch: '**/intro.spec.ts',
+    },
     // Sprach-Eval über den Korpus (npm run eval:voice)
     {
       name: 'eval',

@@ -1,23 +1,23 @@
-/* Intro vor dem Spiel: dunkle Bühne, Kamerafahrt auf die Triple 20, drei Einschläge, „180“, Namen. */
+/* Intro vor dem Spiel: 3D-Szene als Hintergrund, darüber Kino-Einblendungen. */
 
 .intro {
   --intro-colors: #3d7bff, #9b4dff, #ff3d9a, #ff7a2e, #ffc61a, #2ee6d0, #3d7bff;
+  --intro-chrome: linear-gradient(180deg, #ffffff 0%, #e9ecf2 38%, #9aa1ae 50%, #f4f6fa 64%, #ffffff 100%);
   position: fixed;
   inset: 0;
   z-index: 50;
   overflow: hidden;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(120% 90% at 50% 40%, #24211e 0%, #0d0c0b 55%, #050505 100%);
+  background: #060606;
   color: #faf8f5;
   font-family: var(--sg-font);
   cursor: pointer;
   user-select: none;
-  animation: intro-in 0.35s ease-out both;
+  -webkit-user-select: none;
+  animation: intro-in 0.4s ease-out both;
 }
 
 .intro[data-phase='out'] {
-  animation: intro-out 0.55s cubic-bezier(0.6, 0, 0.8, 0.4) forwards;
+  animation: intro-out 0.6s cubic-bezier(0.6, 0, 0.8, 0.4) forwards;
 }
 
 @keyframes intro-in {
@@ -29,364 +29,441 @@
 @keyframes intro-out {
   to {
     opacity: 0;
-    transform: scale(1.12);
-    filter: blur(14px);
+    transform: scale(1.1);
+    filter: blur(16px);
   }
 }
 
-/* farbiges Licht hinter dem Board – wie die Aura im übrigen Design */
-.intro-aura {
-  position: absolute;
-  width: 70vmax;
-  height: 70vmax;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-.intro-aura-a {
-  background: #3d6fd8;
-  left: -30vmax;
-  top: -25vmax;
-  animation: intro-drift 5s ease-in-out both;
-}
-
-.intro-aura-b {
-  background: #e07a2c;
-  right: -30vmax;
-  bottom: -30vmax;
-  animation: intro-drift 5s ease-in-out reverse both;
-}
-
-@keyframes intro-drift {
-  from {
-    transform: translate(-6vmax, 4vmax);
-  }
-  to {
-    transform: translate(6vmax, -4vmax);
-  }
-}
-
-.intro-stage {
+.intro-canvas {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: filter 0.9s ease;
+}
+
+.intro[data-phase='names'] .intro-canvas,
+.intro[data-phase='out'] .intro-canvas {
+  filter: blur(7px) brightness(0.42) saturate(1.2);
+}
+
+.intro-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* Kinobalken */
+.intro-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 9vh;
+  background: #000;
+  z-index: 2;
+  animation: intro-bar 0.7s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+}
+
+.intro-bar-top {
+  top: 0;
+  transform-origin: top;
+}
+
+.intro-bar-bottom {
+  bottom: 0;
+  transform-origin: bottom;
+}
+
+@keyframes intro-bar {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* Zwischenstand wie eine TV-Bauchbinde */
+.intro-lower {
+  position: absolute;
+  left: max(20px, 5vw);
+  bottom: calc(9vh + 18px);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 18px 10px 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(30, 30, 34, 0.75), rgba(10, 10, 12, 0.75));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: intro-lower 0.45s cubic-bezier(0.2, 1.1, 0.3, 1) both;
+}
+
+@keyframes intro-lower {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+.intro-lower-darts {
+  display: flex;
+  gap: 6px;
+}
+
+.intro-chip {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition:
-    filter 0.6s ease,
-    opacity 0.6s ease;
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
 }
 
-.intro[data-phase='max'] .intro-stage {
-  filter: brightness(0.75);
+.intro-chip[data-on='true'] {
+  color: #fff;
+  background: linear-gradient(135deg, #c62a28, #8f1717);
+  border-color: rgba(255, 120, 110, 0.6);
+  box-shadow: 0 0 16px rgba(230, 60, 50, 0.45);
 }
 
-.intro[data-phase='names'] .intro-stage,
-.intro[data-phase='out'] .intro-stage {
-  filter: brightness(0.35) blur(6px);
-}
-
-.intro-svg {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: max(100vw, 100vh);
-  height: max(100vw, 100vh);
-  transform: translate(-50%, -50%);
-  overflow: visible;
-}
-
-/* Kamera: vom ganzen Board auf die Triple 20, die dann in der Bildmitte steht */
-.intro-cam {
-  transform-origin: 0px -103px;
-  animation:
-    intro-cam 2.2s cubic-bezier(0.3, 0.6, 0.2, 1) both,
-    intro-shake 0.18s ease-out 0.56s,
-    intro-shake 0.18s ease-out 1.06s,
-    intro-shake-big 0.32s ease-out 1.56s;
-}
-
-@keyframes intro-cam {
-  from {
-    transform: translate(0px, 0px) scale(0.55) rotate(-14deg);
-  }
-  to {
-    transform: translate(0px, 103px) scale(2.5) rotate(0deg);
-  }
-}
-
-/* Schütteln addiert sich nicht zur Kamera – daher als kurze Verschiebung am Kameraende formuliert */
-@keyframes intro-shake {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  30% {
-    translate: 0 1.6px;
-  }
-  60% {
-    translate: 0 -0.8px;
-  }
-}
-
-@keyframes intro-shake-big {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  20% {
-    translate: 1.5px 2.5px;
-  }
-  45% {
-    translate: -1.5px -1.5px;
-  }
-  70% {
-    translate: 0.8px 0.8px;
-  }
-}
-
-.intro-board-num {
-  fill: #f4f1ea;
-  font: 700 19px/1 var(--sg-font);
-  text-anchor: middle;
-  dominant-baseline: central;
-}
-
-/* Pfeil fliegt aus Richtung Werfer (groß, unscharf) ins Board und federt nach */
-.intro-dart {
-  transform-origin: 0 0;
-  opacity: 0;
-  animation: intro-dart 0.5s both;
-}
-
-@keyframes intro-dart {
-  0% {
-    opacity: 0;
-    transform: translate(150px, 260px) scale(3.4) rotate(-6deg);
-    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
-  }
-  20% {
-    opacity: 1;
-  }
-  76% {
-    opacity: 1;
-    transform: translate(0px, 0px) scale(1) rotate(0deg);
-    animation-timing-function: ease-out;
-  }
-  84% {
-    transform: rotate(5deg);
-  }
-  92% {
-    transform: rotate(-2.5deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-}
-
-/* Lichtblitz beim Einschlag */
-.intro-hit {
-  fill: none;
-  stroke: #fff;
-  stroke-width: 1.4;
-  opacity: 0;
-  transform-origin: 0 0;
-  animation: intro-hit 0.45s ease-out both;
-}
-
-@keyframes intro-hit {
-  0% {
-    opacity: 0;
-    transform: scale(0.2);
-  }
-  1% {
-    opacity: 0.95;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2.2);
-  }
-}
-
-.intro-hud {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-
-.intro-count {
-  position: absolute;
-  bottom: 14vh;
-  font-size: clamp(56px, 13vw, 120px);
+.intro-total {
+  min-width: 2.4ch;
+  font-size: 34px;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
-  animation: intro-pop 0.3s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  animation: intro-pop 0.35s cubic-bezier(0.2, 1.5, 0.4, 1) both;
 }
 
 @keyframes intro-pop {
   from {
     opacity: 0;
-    transform: scale(1.6);
+    transform: scale(1.5);
   }
 }
 
-/* „180“ knallt rein, mit Farbverlauf und Druckwelle */
+/* Weißer Blitz beim 180-Moment */
+.intro-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(circle at 50% 50%, #fff, rgba(255, 255, 255, 0.6) 60%, transparent);
+  pointer-events: none;
+  animation: intro-flash 0.5s ease-out forwards;
+}
+
+@keyframes intro-flash {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* „180“ in Chrom mit farbigem Glühen */
+.intro-max-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  pointer-events: none;
+}
+
 .intro-max {
-  position: relative;
-  font-size: clamp(120px, 34vw, 300px);
+  grid-area: 1 / 1;
+  font-size: clamp(130px, 36vw, 340px);
   font-weight: 900;
+  font-style: italic;
   letter-spacing: -0.06em;
-  line-height: 1;
-  background: linear-gradient(100deg, var(--intro-colors));
-  background-size: 300% 100%;
+  line-height: 0.9;
+  padding: 0 0.08em;
+  background:
+    linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.95) 50%, transparent 60%),
+    var(--intro-chrome);
+  background-size:
+    250% 100%,
+    100% 100%;
+  background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 28px rgba(155, 77, 255, 0.55)) drop-shadow(0 0 60px rgba(255, 61, 154, 0.35));
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 26px rgba(155, 77, 255, 0.75))
+    drop-shadow(0 0 70px rgba(255, 61, 154, 0.45));
   animation:
-    intro-slam 0.5s cubic-bezier(0.2, 1.3, 0.35, 1) both,
-    intro-sheen 2.4s linear infinite;
+    intro-slam 0.55s cubic-bezier(0.2, 1.25, 0.35, 1) both,
+    intro-sheen 1.6s ease-in-out 0.4s infinite;
 }
 
-.intro[data-phase='names'] .intro-max,
-.intro[data-phase='out'] .intro-max {
-  animation:
-    intro-max-away 0.6s cubic-bezier(0.5, 0, 0.3, 1) forwards,
-    intro-sheen 2.4s linear infinite;
+.intro-max-label {
+  grid-area: 2 / 1;
+  margin-top: 0.6em;
+  font-size: clamp(14px, 2.6vw, 22px);
+  font-weight: 700;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  animation: intro-label 0.6s ease-out 0.25s both;
+}
+
+@keyframes intro-label {
+  from {
+    opacity: 0;
+    letter-spacing: 1.4em;
+  }
+}
+
+.intro[data-phase='names'] .intro-max-wrap,
+.intro[data-phase='out'] .intro-max-wrap {
+  animation: intro-max-away 0.6s cubic-bezier(0.5, 0, 0.3, 1) forwards;
 }
 
 @keyframes intro-slam {
   0% {
     opacity: 0;
-    transform: scale(3);
-    filter: blur(18px);
+    transform: scale(2.8) rotate(-4deg);
+    filter: blur(20px);
   }
-  60% {
+  55% {
     opacity: 1;
   }
 }
 
 @keyframes intro-sheen {
+  from {
+    background-position:
+      150% 0,
+      0 0;
+  }
   to {
-    background-position: 300% 0;
+    background-position:
+      -60% 0,
+      0 0;
   }
 }
 
 @keyframes intro-max-away {
   to {
     opacity: 0;
-    transform: translateY(-30vh) scale(0.45);
+    transform: translateY(-14vh) scale(0.6);
+    filter: blur(8px);
   }
 }
 
 .intro-shock {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 60vmin;
-  height: 60vmin;
-  margin: -30vmin 0 0 -30vmin;
+  grid-area: 1 / 1;
+  width: 70vmin;
+  height: 70vmin;
   border-radius: 50%;
   background: conic-gradient(var(--intro-colors));
-  -webkit-mask: radial-gradient(closest-side, transparent 88%, #000 90%, transparent 100%);
-  mask: radial-gradient(closest-side, transparent 88%, #000 90%, transparent 100%);
+  -webkit-mask: radial-gradient(closest-side, transparent 86%, #000 90%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 86%, #000 90%, transparent 100%);
+  filter: blur(2px);
   opacity: 0;
-  animation: intro-shock 0.9s cubic-bezier(0.1, 0.7, 0.3, 1) 0.08s both;
+  animation: intro-shock 1s cubic-bezier(0.1, 0.7, 0.3, 1) 0.06s both;
 }
 
 @keyframes intro-shock {
   0% {
     opacity: 1;
-    transform: scale(0.2);
+    transform: scale(0.15);
   }
   100% {
     opacity: 0;
-    transform: scale(2.6);
+    transform: scale(2.4);
   }
 }
 
-/* Namen: groß, gestaffelt, „vs“ dazwischen */
+/* Namen: groß, Chrom, mit farbiger Kante; „VS“ als leuchtendes Emblem */
 .intro-names {
   position: absolute;
   inset: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.15em;
+  gap: 0.1em;
   padding: 0 16px;
-  font-size: clamp(40px, 9vw, 140px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  text-align: center;
+  font-size: clamp(48px, 14vw, 150px);
   pointer-events: none;
 }
 
-.intro-name-wrap {
+.intro-names[data-count='3'],
+.intro-names[data-count='4'] {
+  font-size: clamp(32px, 8vw, 100px);
+}
+
+.intro-names[data-count='5'],
+.intro-names[data-count='6'],
+.intro-names[data-count='7'],
+.intro-names[data-count='8'] {
+  font-size: clamp(24px, 5.5vw, 64px);
+}
+
+.intro-name-row {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15em;
+  gap: 0.1em;
 }
 
 .intro-name {
+  position: relative;
   max-width: 92vw;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-  animation: intro-name 0.55s cubic-bezier(0.2, 1.2, 0.3, 1) both;
+  padding: 0 0.1em 0.06em;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  background: var(--intro-chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5)) drop-shadow(0 8px 30px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 0 24px var(--glow));
+  animation: intro-name 0.75s cubic-bezier(0.2, 1, 0.3, 1) calc(var(--i) * 0.35s + 0.05s) both;
 }
 
-.intro-name-wrap:nth-child(odd) .intro-name {
-  --from: -60vw;
+.intro-name[data-side='a'] {
+  --glow: rgba(61, 123, 255, 0.7);
+  --from: -50vw;
 }
 
-.intro-name-wrap:nth-child(even) .intro-name {
-  --from: 60vw;
+.intro-name[data-side='b'] {
+  --glow: rgba(255, 122, 46, 0.7);
+  --from: 50vw;
 }
 
 @keyframes intro-name {
-  from {
+  0% {
     opacity: 0;
-    transform: translateX(var(--from)) skewX(-12deg);
-    filter: blur(10px);
+    transform: translateX(var(--from)) skewX(-14deg);
+    filter: blur(12px);
+  }
+  60% {
+    opacity: 1;
   }
 }
 
 .intro-vs {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.15em;
+  font-size: 0.55em;
+  animation: intro-vs 0.6s cubic-bezier(0.2, 1.5, 0.4, 1) calc(var(--i) * 0.35s - 0.15s) both;
+}
+
+.intro-vs-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--intro-colors));
+  -webkit-mask: radial-gradient(closest-side, transparent 78%, #000 82%);
+  mask: radial-gradient(closest-side, transparent 78%, #000 82%);
+  filter: drop-shadow(0 0 12px rgba(155, 77, 255, 0.9));
+  animation: intro-spin 2.4s linear infinite;
+}
+
+.intro-vs-text {
   font-size: 0.42em;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes intro-vs {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-90deg);
+  }
+}
+
+@keyframes intro-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Lichtstreifen, der einmal quer durchzieht */
+.intro-streak {
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3d7bff 30%, #fff 50%, #ff7a2e 70%, transparent);
+  filter: blur(0.5px) drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+  transform-origin: center;
+  animation: intro-streak 1.2s cubic-bezier(0.3, 0.7, 0.2, 1) 0.1s both;
+}
+
+@keyframes intro-streak {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0.25;
+  }
+}
+
+.intro-format {
+  margin-top: 0.9em;
+  font-size: clamp(13px, 2.4vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  background: linear-gradient(100deg, var(--intro-colors));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: intro-pop 0.4s cubic-bezier(0.2, 1.4, 0.4, 1) 0.1s both;
+  color: rgba(255, 255, 255, 0.7);
+  animation: intro-label 0.8s ease-out 0.7s both;
 }
 
 .intro-skip {
   position: absolute;
-  bottom: max(18px, env(safe-area-inset-bottom));
-  font-size: 13px;
-  color: rgba(250, 248, 245, 0.45);
+  z-index: 3;
+  bottom: calc(9vh + 10px);
+  right: max(16px, 4vw);
+  font-size: 12px;
+  color: rgba(250, 248, 245, 0.4);
 }
 
-/* Querformat (Handy quer, Laptop): Namen nebeneinander */
+/* Querformat: Namen nebeneinander */
 @media (min-aspect-ratio: 4/3) {
   .intro-names {
     flex-direction: row;
-    gap: 0.4em;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0.35em;
   }
-  .intro-name-wrap {
+  .intro-name-row {
     flex-direction: row;
-    gap: 0.4em;
+    gap: 0.35em;
+  }
+  .intro-format {
+    flex-basis: 100%;
+    text-align: center;
   }
 }
