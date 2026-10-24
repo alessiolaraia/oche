@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
-export type Route = 'setup' | 'game' | 'stats' | 'settings' | 'onboarding' | 'training' | 'debug' | 'eval';
+export type Route =
+  'setup' | 'game' | 'stats' | 'settings' | 'onboarding' | 'training' | 'cricket' | 'debug' | 'eval';
 const ROUTES: readonly Route[] = [
   'setup',
   'game',
@@ -8,6 +9,7 @@ const ROUTES: readonly Route[] = [
   'settings',
   'onboarding',
   'training',
+  'cricket',
   'debug',
   'eval',
 ];

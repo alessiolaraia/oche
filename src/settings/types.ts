@@ -6,7 +6,7 @@ export type EnginePreference = 'auto' | 'vosk' | 'webspeech';
 export type CallerStyle = 'plain' | 'arena';
 export type VoiceSource = 'pack' | 'system';
 
-export type ArenaStyle = 'stage' | 'neon';
+export type ArenaStyle = 'stage' | 'fire';
 
 export interface Settings {
   game: {

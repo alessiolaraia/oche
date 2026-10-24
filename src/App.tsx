@@ -18,6 +18,7 @@ import { Settings } from './ui/screens/Settings';
 import { Setup } from './ui/screens/Setup';
 import { Stats } from './ui/screens/Stats';
 import { Training } from './ui/screens/Training';
+import { Cricket } from './ui/screens/Cricket';
 import { startVoice, stopVoice } from './voice/control';
 import './ui/styles.css';
 
@@ -47,7 +48,7 @@ export function App() {
 
   // Statusleiste passend zur dunklen Arena im Spiel
   useEffect(() => {
-    const dark = route === 'game';
+    const dark = route === 'game' || route === 'cricket';
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0B0B0D' : '#F3F0EC');
   }, [route]);
 
@@ -73,6 +74,7 @@ export function App() {
         {route === 'settings' && <Settings />}
         {route === 'onboarding' && <Onboarding />}
         {route === 'training' && <Training />}
+        {route === 'cricket' && <Cricket />}
         {route === 'debug' && <Debug />}
         {route === 'eval' && <Eval />}
       </main>

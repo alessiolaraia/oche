@@ -8,6 +8,7 @@ import {
   atcLabel,
   atcStart,
   next121,
+  safehouse121,
   randomCheckoutTarget,
 } from '../../src/engine/training';
 
@@ -22,11 +23,20 @@ describe('Training', () => {
     }
   });
 
-  it('121: geschafft → höher, Bogeys werden übersprungen, nicht geschafft → gleich', () => {
+  it('121: geschafft → eins höher, nicht geschafft → eins tiefer (nie unter 121), Bogeys übersprungen', () => {
     expect(next121(121, true)).toBe(122);
     expect(next121(121, false)).toBe(121);
+    expect(next121(125, false)).toBe(124);
     expect(next121(158, true)).toBe(160);
+    expect(next121(160, false)).toBe(158);
     expect(next121(170, true)).toBe(170);
+  });
+
+  it('121-Safehouse: Checkout in ≤ 3 Darts sichert das Ziel', () => {
+    expect(safehouse121(121, 130, true, 3)).toBe(130);
+    expect(safehouse121(121, 130, true, 6)).toBe(121);
+    expect(safehouse121(128, 130, false, 9)).toBe(128);
+    expect(next121(130, false, 130)).toBe(130);
   });
 
   it('Around the Clock', () => {

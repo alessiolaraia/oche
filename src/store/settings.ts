@@ -23,7 +23,12 @@ export function withDefaults(saved: Partial<Settings> | undefined): Settings {
       flags: { ...DEFAULT_SETTINGS.voice.flags, ...s.voice?.flags },
     },
     caller: { ...DEFAULT_SETTINGS.caller, ...s.caller },
-    display: { ...DEFAULT_SETTINGS.display, ...s.display },
+    display: {
+      ...DEFAULT_SETTINGS.display,
+      ...s.display,
+      // „Neon“ gibt es nicht mehr – wird zu „Feuer“
+      ...((s.display?.arena as string | undefined) === 'neon' ? { arena: 'fire' as const } : {}),
+    },
     onboarded: s.onboarded ?? DEFAULT_SETTINGS.onboarded,
   };
 }

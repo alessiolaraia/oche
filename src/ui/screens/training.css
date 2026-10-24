@@ -78,3 +78,48 @@
   justify-content: space-between;
   gap: 12px;
 }
+
+/* Minigames: Cricket als großes Element oben */
+.minigame-hero {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  color: var(--sg-on-dark);
+  border: 0;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(224, 51, 47, 0.5), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgba(27, 154, 82, 0.35), transparent 60%),
+    linear-gradient(160deg, #2b2a2e, #121214);
+  box-shadow: var(--sg-hi-dark), var(--sg-shadow-3);
+}
+
+.minigame-hero h2 {
+  font-size: var(--sg-fs-title);
+  font-weight: 800;
+  font-style: italic;
+}
+
+.minigame-hero .label {
+  display: grid;
+  gap: 4px;
+}
+
+.minigame-hero small {
+  color: rgba(250, 248, 245, 0.7);
+}
+
+.minigame-hero .btn-primary {
+  color: #111;
+  background: linear-gradient(180deg, #fff, #d4d6db);
+}
+
+.minigame-tag {
+  justify-self: start;
+  font-size: var(--sg-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--sg-r-pill);
+  background: rgba(255, 255, 255, 0.12);
+}

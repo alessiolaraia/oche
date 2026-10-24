@@ -92,10 +92,10 @@ export function Settings() {
           hint={
             display.arena === 'stage'
               ? 'Bühne: dunkel, Zahlen in Chrom, Tafel wie im TV.'
-              : 'Neon: Bar-Wand mit Leuchtröhren in Pink und Cyan.'
+              : 'Feuer: Glut von unten, aufsteigende Funken, Zahlen wie geschmolzenes Metall.'
           }
           value={display.arena}
-          options={{ stage: 'Bühne', neon: 'Neon' }}
+          options={{ stage: 'Bühne', fire: 'Feuer' }}
           onChange={(v) => s.update('display', { arena: v })}
         />
         <Toggle

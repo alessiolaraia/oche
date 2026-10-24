@@ -16,6 +16,8 @@ interface TrainingStore {
   atc: AtcState;
   atcHistory: AtcState[];
   results: RoundResult[];
+  /** 121: Untergrenze (121 oder per Safehouse gesichertes Ziel). */
+  floor121: number;
   set: (p: Partial<Omit<TrainingStore, 'set'>>) => void;
 }
 
@@ -26,5 +28,6 @@ export const useTraining = create<TrainingStore>()((set) => ({
   atc: atcStart(),
   atcHistory: [],
   results: [],
+  floor121: 121,
   set: (p) => set(p),
 }));

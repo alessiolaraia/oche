@@ -4,6 +4,7 @@ import { submitVisit, undo } from '../../app/controller';
 import { db, type TrainingResult } from '../../db/db';
 import { ATC_DONE, atcLabel, type TrainingMode } from '../../engine/training';
 import { useSettings } from '../../store/settings';
+import { useCricket } from '../../store/cricket';
 import { useTraining } from '../../store/training';
 import { useVoice } from '../../store/voice';
 import { startVoice } from '../../voice/control';
@@ -16,6 +17,11 @@ import './training.css';
 
 const MODES: { mode: TrainingMode; title: string; text: string }[] = [
   {
+    mode: '121',
+    title: '121-Challenge',
+    text: 'Neun Darts für 121 auf Doppel. Geschafft: eins höher, sonst eins tiefer (nie unter 121). In drei Darts gecheckt: Ziel gesichert.',
+  },
+  {
     mode: 'atc',
     title: 'Around the Clock',
     text: 'Von 1 bis 20, dann Bull. Sag pro Aufnahme die Treffer: „Wurf zwei“.',
@@ -24,11 +30,6 @@ const MODES: { mode: TrainingMode; title: string; text: string }[] = [
     mode: 'checkout',
     title: 'Checkout-Training',
     text: 'Zufällige Reste von 2 bis 170, drei Darts pro Rest.',
-  },
-  {
-    mode: '121',
-    title: '121-Challenge',
-    text: 'Neun Darts für 121. Geschafft: eins höher. Sonst nochmal.',
   },
 ];
 
@@ -66,6 +67,8 @@ export function Training() {
   const mode = useTraining((s) => s.mode);
   const history = useHistory(mode);
   const voiceEnabled = useSettings((s) => s.voice.enabled);
+  const recent = useSettings((s) => s.players.recent);
+  const cricketNames = [recent[0] ?? 'Spieler 1', recent[1] ?? 'Spieler 2'];
 
   if (mode === 'atc') return <AroundTheClock />;
 
@@ -75,8 +78,30 @@ export function Training() {
         <a className="icon-btn" href="#/" aria-label="Zurück">
           <Icon name="back" />
         </a>
-        <h1>Training</h1>
+        <h1>Minigames</h1>
       </header>
+      <section className="card minigame-hero" aria-label="Cricket">
+        <div className="label">
+          <span className="minigame-tag">2 Spieler</span>
+          <h2>Cricket</h2>
+          <small>
+            15 bis 20 und Bull. Drei Marks schließen ein Ziel, danach gibt es Punkte, solange der Gegner offen
+            ist. Wer alles zu hat und vorne liegt, gewinnt.
+          </small>
+          <small>{cricketNames.join(' gegen ')} · Eingabe per Tippen (S/D/T pro Ziel)</small>
+        </div>
+        <button
+          className="btn btn-primary"
+          data-testid="minigame-cricket"
+          onClick={() => {
+            useCricket.getState().start(cricketNames);
+            navigate('cricket');
+          }}
+        >
+          Cricket starten
+        </button>
+      </section>
+      <h2 className="card-title">Solo</h2>
       <ul className="card training-modes">
         {MODES.map((m) => (
           <li key={m.mode} className="row">

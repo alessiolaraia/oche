@@ -141,3 +141,59 @@
     flex-basis: 100%;
   }
 }
+
+/* Minigames: drei Kacheln */
+.setup-minigames {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.minigame-tile {
+  appearance: none;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  min-height: 96px;
+  padding: 14px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--sg-on-dark);
+  border: 0;
+  border-radius: var(--sg-r-lg);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(224, 51, 47, 0.45), transparent 60%),
+    linear-gradient(160deg, #2b2a2e, #121214);
+  box-shadow: var(--sg-hi-dark), var(--sg-shadow-dark);
+  transition: transform 0.18s var(--sg-spring);
+}
+
+.minigame-tile:nth-child(2) {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(27, 154, 82, 0.5), transparent 60%),
+    linear-gradient(160deg, #2b2a2e, #121214);
+}
+
+.minigame-tile:nth-child(3) {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(255, 138, 61, 0.45), transparent 60%),
+    linear-gradient(160deg, #2b2a2e, #121214);
+}
+
+.minigame-tile:active {
+  transform: scale(0.97);
+}
+
+.minigame-tile-title {
+  font-size: var(--sg-fs-head);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.minigame-tile small {
+  font-size: var(--sg-fs-xs);
+  color: rgba(250, 248, 245, 0.65);
+  line-height: 1.3;
+}

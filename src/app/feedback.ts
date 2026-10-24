@@ -17,6 +17,8 @@ export type FeedbackEvent =
   | { type: 'introThrow'; n: number }
   | { type: 'introDart'; n: number }
   | { type: 'introMaximum' }
+  | { type: 'cricketDart'; marks: number }
+  | { type: 'cricketWon'; name: string }
   | { type: 'legRestarted'; state: MatchState }
   | { type: 'control'; action: 'pause' | 'resume' | 'micOff' | 'stop' }
   | { type: 'trainingTarget'; mode: 'atc' | 'checkout' | '121'; target: number; label: string }

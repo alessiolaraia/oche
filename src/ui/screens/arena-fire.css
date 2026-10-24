@@ -1,0 +1,273 @@
+/* Arena „Feuer“: Glut von unten, aufsteigende Funken, Zahlen wie geschmolzenes Metall.
+   Baut auf .arena (Bühne) auf und ersetzt Farben, Licht und Oberflächen. */
+
+.arena[data-arena='fire'] {
+  --fire-hot: #fff3c4;
+  --fire-yellow: #ffc23d;
+  --fire-orange: #ff7a1a;
+  --fire-red: #e2290f;
+  --fire-deep: #7a0f05;
+  --board-red: var(--fire-red);
+  --arena-molten: linear-gradient(180deg, #fffbe6 0%, #ffe08a 28%, #ffa22e 55%, #f2501a 78%, #b81c0a 100%);
+
+  --sg-ink: #fff6ec;
+  --sg-ink-2: rgba(255, 238, 220, 0.74);
+  --sg-ink-3: rgba(255, 210, 170, 0.5);
+  --sg-glass: linear-gradient(180deg, rgba(36, 22, 18, 0.78), rgba(16, 9, 7, 0.78));
+  --sg-glass-strong: linear-gradient(180deg, rgba(48, 28, 22, 0.88), rgba(20, 11, 8, 0.88));
+  --sg-glass-border: rgba(255, 140, 60, 0.18);
+  --sg-hairline: rgba(255, 140, 60, 0.12);
+  --sg-on-dark: #1a0904;
+  --sg-dark-top: #ffc65a;
+  --sg-dark-bottom: #ff6a1a;
+  --sg-hi-dark: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(150, 30, 0, 0.35);
+  --sg-shadow-dark: 0 0 26px -4px rgba(255, 110, 30, 0.7);
+  --sg-aura-blue: rgba(255, 90, 20, 0.45);
+  --sg-aura-apricot: rgba(255, 190, 60, 0.45);
+}
+
+/* Grund: fast schwarz oben, Glut unten */
+.app:has(.arena[data-arena='fire']) {
+  background:
+    radial-gradient(
+      120% 55% at 50% 115%,
+      rgba(255, 110, 20, 0.55),
+      rgba(180, 30, 5, 0.25) 45%,
+      transparent 70%
+    ),
+    radial-gradient(80% 50% at 50% -10%, rgba(255, 200, 140, 0.08), transparent 70%),
+    linear-gradient(180deg, #0b0706 0%, #140806 60%, #2a0904 100%);
+}
+
+/* Flackernde Hitze am unteren Rand */
+.arena[data-arena='fire']::before {
+  content: '';
+  position: fixed;
+  left: -10%;
+  right: -10%;
+  bottom: -12vh;
+  height: 45vh;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(30% 60% at 20% 100%, rgba(255, 160, 40, 0.55), transparent 70%),
+    radial-gradient(28% 70% at 50% 100%, rgba(255, 90, 20, 0.6), transparent 70%),
+    radial-gradient(30% 55% at 80% 100%, rgba(255, 140, 30, 0.5), transparent 70%);
+  filter: blur(28px);
+  animation: fire-flicker 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes fire-flicker {
+  0% {
+    transform: scaleY(1) translateX(0);
+    opacity: 0.85;
+  }
+  35% {
+    transform: scaleY(1.12) translateX(-1.5%);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleY(0.94) translateX(1.5%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(1.06) translateX(0);
+    opacity: 0.95;
+  }
+}
+
+/* Aufsteigende Funken: zwei Punktmuster, verschieden schnell */
+.arena[data-arena='fire']::after {
+  content: '';
+  position: fixed;
+  inset: 0 0 -100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.6px 1.6px at 12% 18%, rgba(255, 210, 120, 0.9), transparent 100%),
+    radial-gradient(1.2px 1.2px at 37% 62%, rgba(255, 150, 60, 0.85), transparent 100%),
+    radial-gradient(2px 2px at 68% 34%, rgba(255, 190, 90, 0.8), transparent 100%),
+    radial-gradient(1.4px 1.4px at 86% 76%, rgba(255, 120, 40, 0.85), transparent 100%),
+    radial-gradient(1.8px 1.8px at 54% 88%, rgba(255, 220, 140, 0.75), transparent 100%),
+    radial-gradient(1.1px 1.1px at 24% 48%, rgba(255, 170, 70, 0.8), transparent 100%);
+  background-size:
+    220px 260px,
+    300px 340px,
+    260px 300px,
+    340px 380px,
+    280px 320px,
+    200px 240px;
+  -webkit-mask: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.6) 40%, transparent 80%);
+  mask: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.6) 40%, transparent 80%);
+  animation: fire-embers 16s linear infinite;
+  will-change: transform;
+}
+
+@keyframes fire-embers {
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+/* angedeutete Scheibe in Glutfarben */
+.arena[data-arena='fire'] .game-focus::before {
+  background:
+    radial-gradient(closest-side, transparent 58%, rgba(255, 110, 30, 0.28) 58.5% 62%, transparent 62.5%),
+    radial-gradient(closest-side, transparent 92%, rgba(255, 70, 20, 0.24) 92.5% 96%, transparent 96.5%),
+    repeating-conic-gradient(from -9deg, rgba(255, 170, 90, 0.06) 0 18deg, rgba(255, 170, 90, 0) 18deg 36deg);
+}
+
+.arena[data-arena='fire'] .game-meta {
+  background: rgba(20, 8, 4, 0.6);
+  border-color: rgba(255, 140, 50, 0.45);
+  box-shadow: 0 0 18px -6px rgba(255, 110, 30, 0.8);
+}
+
+.arena[data-arena='fire'] .game-player {
+  text-shadow: 0 0 22px rgba(255, 110, 30, 0.65);
+  /* Schein nicht am Rand abschneiden (Name hat overflow: hidden für „…“) */
+  padding: 0.15em 0.5em;
+  margin-block: -0.15em;
+}
+
+.arena[data-arena='fire'] .game-player::before {
+  background: var(--fire-orange);
+  filter: drop-shadow(0 0 8px var(--fire-orange));
+}
+
+/* Restzahl: geschmolzenes Metall mit Hitzeschein */
+.arena[data-arena='fire'] .big-number-digits {
+  background: var(--arena-molten);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 2px 0 rgba(60, 10, 0, 0.6)) drop-shadow(0 0 22px rgba(255, 120, 30, 0.55))
+    drop-shadow(0 0 60px rgba(255, 60, 10, 0.35));
+  animation: fire-heat 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes fire-heat {
+  from {
+    filter: drop-shadow(0 2px 0 rgba(60, 10, 0, 0.6)) drop-shadow(0 0 18px rgba(255, 120, 30, 0.45))
+      drop-shadow(0 0 50px rgba(255, 60, 10, 0.3));
+  }
+  to {
+    filter: drop-shadow(0 2px 0 rgba(60, 10, 0, 0.6)) drop-shadow(0 0 28px rgba(255, 140, 40, 0.7))
+      drop-shadow(0 0 72px rgba(255, 70, 10, 0.45));
+  }
+}
+
+/* Kacheln: Kohle mit glühender Oberkante */
+.arena[data-arena='fire'] .game-stat {
+  background:
+    radial-gradient(120% 80% at 50% 120%, rgba(255, 90, 20, 0.22), transparent 60%),
+    linear-gradient(180deg, rgba(34, 20, 16, 0.94), rgba(14, 8, 6, 0.94));
+}
+
+.arena[data-arena='fire'] .game-stat::before,
+.arena[data-arena='fire'] .game-stat:first-child::before {
+  background: linear-gradient(
+    90deg,
+    var(--fire-red),
+    var(--fire-orange),
+    var(--fire-yellow),
+    var(--fire-orange),
+    var(--fire-red)
+  );
+  box-shadow: 0 0 12px rgba(255, 120, 30, 0.9);
+}
+
+/* Tafel */
+.arena[data-arena='fire'] .game-board,
+.arena[data-arena='fire'] .game-history,
+.arena[data-arena='fire'] .ck-board {
+  background:
+    radial-gradient(120% 60% at 50% 120%, rgba(255, 80, 20, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(30, 17, 13, 0.94), rgba(12, 7, 5, 0.94));
+  border-color: rgba(255, 130, 50, 0.22);
+  box-shadow:
+    0 18px 40px -16px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 120, 40, 0.08);
+}
+
+.arena[data-arena='fire'] .board-row[aria-current='true'] {
+  background: linear-gradient(90deg, rgba(255, 90, 20, 0.28), rgba(255, 90, 20, 0) 75%);
+}
+
+.arena[data-arena='fire'] .board-row[aria-current='true']::before {
+  background: linear-gradient(180deg, var(--fire-yellow), var(--fire-orange), var(--fire-red));
+  box-shadow: 0 0 18px rgba(255, 120, 30, 0.95);
+}
+
+.arena[data-arena='fire'] .board-num {
+  background: linear-gradient(180deg, #ff9a3c, #d8340e);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 14px -2px rgba(255, 100, 20, 0.7);
+}
+
+.arena[data-arena='fire'] .board-row[aria-current='true'] .board-rest,
+.arena[data-arena='fire'] .ck-points {
+  background: var(--arena-molten);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.arena[data-arena='fire'] .history-row:first-child .history-score {
+  color: var(--fire-yellow);
+}
+
+.arena[data-arena='fire'] .game-bar,
+.arena[data-arena='fire'] .ck-bar {
+  background: linear-gradient(180deg, rgba(36, 20, 15, 0.92), rgba(14, 8, 6, 0.92));
+}
+
+.arena[data-arena='fire'] .mic-chip[data-status='listening'] .mic-dot,
+.arena[data-arena='fire'] .mic-chip[data-status='hearing'] .mic-dot {
+  background: var(--fire-orange);
+  box-shadow: 0 0 10px var(--fire-orange);
+}
+
+/* Cricket */
+.arena[data-arena='fire'] .ck-player[aria-current='true'] {
+  background: linear-gradient(180deg, rgba(255, 100, 20, 0.26), rgba(255, 100, 20, 0));
+}
+
+.arena[data-arena='fire'] .ck-player[aria-current='true']::before {
+  background: var(--fire-orange);
+  box-shadow: 0 0 12px var(--fire-orange);
+}
+
+.arena[data-arena='fire'] .ck-marks[data-n='3'] {
+  stroke: var(--fire-yellow);
+  filter: drop-shadow(0 0 6px rgba(255, 140, 30, 0.95));
+}
+
+/* Bestätigungs-Blitz */
+.app:has(.arena[data-arena='fire']) .flash[data-kind='accept'],
+.app:has(.arena[data-arena='fire']) .flash[data-kind='info'] {
+  background: radial-gradient(70% 60% at 50% 55%, rgba(255, 110, 20, 0.3), rgba(10, 5, 3, 0.9) 70%);
+}
+
+.app:has(.arena[data-arena='fire']) .flash[data-kind='accept'] .flash-text {
+  background: linear-gradient(180deg, #fffbe6 0%, #ffe08a 28%, #ffa22e 55%, #f2501a 78%, #b81c0a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(255, 110, 20, 0.7));
+}
+
+/* Matchende */
+.match-over.arena[data-arena='fire'] .match-over-title {
+  background: var(--arena-molten);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(255, 100, 20, 0.6));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena[data-arena='fire']::before,
+  .arena[data-arena='fire']::after,
+  .arena[data-arena='fire'] .big-number-digits {
+    animation: none;
+  }
+}

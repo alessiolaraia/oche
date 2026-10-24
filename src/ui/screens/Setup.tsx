@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { startMatch } from '../../app/controller';
+import { startTraining } from '../../app/training';
+import { useCricket } from '../../store/cricket';
 import type { InMode, MatchConfig, OutMode, Player } from '../../engine/types';
 import { newId } from '../../store/match';
 import { useSettings } from '../../store/settings';
@@ -74,7 +76,7 @@ export function Setup() {
           <a className="icon-btn" href="#/stats" aria-label="Statistik">
             <Icon name="chart" />
           </a>
-          <a className="icon-btn" href="#/training" aria-label="Training">
+          <a className="icon-btn" href="#/training" aria-label="Minigames">
             <Icon name="target" />
           </a>
           <a className="icon-btn" href="#/settings" aria-label="Einstellungen">
@@ -103,6 +105,37 @@ export function Setup() {
         <button className="btn btn-primary btn-block" onClick={quickStart} data-testid="quick-start">
           Spiel starten
         </button>
+      </section>
+
+      <h2 className="card-title">Minigames</h2>
+      <section className="setup-minigames" aria-label="Minigames">
+        <button
+          className="minigame-tile"
+          data-testid="setup-cricket"
+          onClick={() => {
+            useCricket.getState().start([first, second]);
+            navigate('cricket');
+          }}
+        >
+          <span className="minigame-tile-title">Cricket</span>
+          <small>15–20 und Bull schließen</small>
+        </button>
+        <button
+          className="minigame-tile"
+          data-testid="setup-121"
+          onClick={() => {
+            startTraining('121');
+            if (settings.voice.enabled) void startVoice();
+            navigate('game');
+          }}
+        >
+          <span className="minigame-tile-title">121</span>
+          <small>Checkout-Leiter, 9 Darts</small>
+        </button>
+        <a className="minigame-tile" href="#/training">
+          <span className="minigame-tile-title">Mehr</span>
+          <small>Around the Clock, Checkout</small>
+        </a>
       </section>
 
       <h2 className="card-title">Spieler</h2>

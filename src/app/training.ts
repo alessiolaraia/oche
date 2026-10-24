@@ -8,6 +8,7 @@ import {
   atcLabel,
   atcStart,
   next121,
+  safehouse121,
   randomCheckoutTarget,
   type TrainingMode,
 } from '../engine/training';
@@ -45,7 +46,14 @@ function startRound(mode: 'checkout' | '121', target: number) {
 
 export function startTraining(mode: TrainingMode): void {
   const t = useTraining.getState();
-  t.set({ mode, results: [], atc: atcStart(), atcHistory: [], maxVisits: mode === 'checkout' ? 1 : 3 });
+  t.set({
+    mode,
+    results: [],
+    atc: atcStart(),
+    atcHistory: [],
+    maxVisits: mode === 'checkout' ? 1 : 3,
+    floor121: 121,
+  });
   if (mode === 'atc') {
     useMatch.getState().close();
     setTrainingHooks({ visit: atcVisit, undo: atcUndo });
@@ -109,10 +117,12 @@ export function installTraining(): () => void {
     t.set({ results: [...t.results, { target: t.target, success: won, darts }] });
     void save(mode, t.target, won, darts);
     emitFeedback({ type: 'trainingResult', success: won, darts });
+    const floor = mode === '121' ? safehouse121(t.floor121, t.target, won, darts) : t.floor121;
+    t.set({ floor121: floor });
     clearTimeout(timer);
     timer = setTimeout(() => {
       if (useTraining.getState().mode !== mode) return;
-      startRound(mode, mode === '121' ? next121(t.target, won) : randomCheckoutTarget(rng));
+      startRound(mode, mode === '121' ? next121(t.target, won, floor) : randomCheckoutTarget(rng));
     }, NEXT_ROUND_MS);
   });
   return () => {

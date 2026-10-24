@@ -131,6 +131,11 @@ export function announce(
       return out([], 'whoosh');
     case 'introDart':
       return out([], 'thud');
+    // Cricket: kurzer Ton pro Dart (Triple kräftiger), am Ende Sieger-Ansage
+    case 'cricketDart':
+      return out([], e.marks === 3 ? 'ton' : e.marks === 0 ? null : 'accept');
+    case 'cricketWon':
+      return out(pb.matchShot(e.name), special ? 'match' : 'leg', true);
     case 'introMaximum':
       return out(pb.maximum, 'maximum');
     case 'legRestarted':

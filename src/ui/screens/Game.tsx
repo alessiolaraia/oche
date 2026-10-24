@@ -31,7 +31,7 @@ import { startVoice, stopVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './game.css';
 import './arena.css';
-import './arena-neon.css';
+import './arena-fire.css';
 
 function fmtAvg(n: number | null): string {
   return n === null ? '–' : n.toFixed(1).replace('.', ',');

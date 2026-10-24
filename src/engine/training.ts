@@ -12,12 +12,21 @@ export function randomCheckoutTarget(rng: Rng): number {
   }
 }
 
-/** 121-Challenge: geschafft → eins höher (Bogeys überspringen), nicht geschafft → gleiches Ziel. */
-export function next121(target: number, success: boolean): number {
-  if (!success) return target;
-  let t = Math.min(170, target + 1);
-  while (t < 170 && !isFinishable(t, 'double', 3)) t++;
-  return t;
+/**
+ * 121 (Checkout-Leiter): neun Darts für das Ziel.
+ * Geschafft → eins höher, nicht geschafft → eins tiefer, aber nie unter `floor` (121 bzw. „Safehouse“).
+ * Bogeys (159, 162, …) werden in beide Richtungen übersprungen; Obergrenze 170.
+ */
+export function next121(target: number, success: boolean, floor = 121): number {
+  const step = success ? 1 : -1;
+  let t = target + step;
+  while (t > floor && t < 170 && !isFinishable(t, 'double', 3)) t += step;
+  return Math.max(floor, Math.min(170, t));
+}
+
+/** Safehouse: Checkout in höchstens drei Darts sichert das geschaffte Ziel als neue Untergrenze. */
+export function safehouse121(floor: number, target: number, success: boolean, darts: number): number {
+  return success && darts <= 3 ? Math.max(floor, target) : floor;
 }
 
 /** Around the Clock: 1 → 20, dann Bull (21). Fertig bei 22. */
