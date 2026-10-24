@@ -41,8 +41,14 @@ export default defineConfig(({ mode }) => ({
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         navigateFallback: 'index.html',
         // Das Modell (45 MB) cacht Vosk selbst entpackt in IndexedDB – nicht doppelt im SW.
-        globIgnores: ['models/**', 'voices/**'],
+        globIgnores: ['models/**', 'voices/**', 'ort/**', '**/ort-wasm*'],
         runtimeCaching: [
+          // Silero-VAD: ONNX-Laufzeit + Modell beim ersten Laden cachen (offline danach)
+          {
+            urlPattern: ({ url }) => /ort-wasm|silero_vad/.test(url.pathname),
+            handler: 'CacheFirst',
+            options: { cacheName: 'oche-vad' },
+          },
           // Klang-Paket: Clips ändern sich nie (neue Version = neuer Schlüsselsatz), Manifest frisch halten
           {
             urlPattern: ({ url }) => url.pathname.includes('/voices/') && url.pathname.endsWith('.m4a'),

@@ -1,6 +1,5 @@
 import { useSettings } from '../../store/settings';
 import type { CallerStyle, EnginePreference, VoiceMode } from '../../settings/types';
-import { TRIGGER_SUGGESTIONS } from '../../voice/triggers';
 import { Calibration } from '../components/Calibration';
 import { capitalize, Choice, Range, Toggle } from '../components/controls';
 import { Icon } from '../components/Icon';
@@ -46,15 +45,7 @@ export function Settings() {
           options={{ trigger: 'Mit Triggerwort', direct: 'Zahl allein' }}
           onChange={(v) => s.update('voice', { mode: v })}
         />
-        {voice.mode === 'trigger' && (
-          <Choice<string>
-            full
-            label="Triggerwort"
-            value={voice.trigger}
-            options={Object.fromEntries(TRIGGER_SUGGESTIONS.slice(0, 4).map((w) => [w, capitalize(w)]))}
-            onChange={(w) => s.update('voice', { trigger: w })}
-          />
-        )}
+        {voice.mode === 'trigger' && <TriggerCustom />}
       </div>
 
       <h2 className="card-title">Ansagen</h2>
@@ -174,13 +165,6 @@ export function Settings() {
               format={(v) => `${(v / 1000).toFixed(1).replace('.', ',')} s`}
               onChange={(v) => s.update('voice', { confirmWindowMs: v })}
             />
-            <Toggle
-              label="Einzeldarts erkennen"
-              hint="„Triple zwanzig, Doppel zehn, Single fünf“"
-              checked={voice.singleDarts}
-              onChange={(v) => s.update('voice', { singleDarts: v })}
-            />
-            <TriggerCustom />
 
             <h3 className="card-title">Stimme und Ansagen</h3>
             <VoicePicker />

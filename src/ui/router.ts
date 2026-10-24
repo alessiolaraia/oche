@@ -1,7 +1,16 @@
 import { useSyncExternalStore } from 'react';
 
-export type Route = 'setup' | 'game' | 'stats' | 'settings' | 'onboarding' | 'training' | 'debug';
-const ROUTES: readonly Route[] = ['setup', 'game', 'stats', 'settings', 'onboarding', 'training', 'debug'];
+export type Route = 'setup' | 'game' | 'stats' | 'settings' | 'onboarding' | 'training' | 'debug' | 'eval';
+const ROUTES: readonly Route[] = [
+  'setup',
+  'game',
+  'stats',
+  'settings',
+  'onboarding',
+  'training',
+  'debug',
+  'eval',
+];
 
 function read(): Route {
   const h = location.hash.replace(/^#\/?/, '').split('?')[0] ?? '';

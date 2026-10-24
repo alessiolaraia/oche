@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSettings } from '../../store/settings';
+import { TRIGGER_SUGGESTIONS } from '../../voice/triggers';
 import { loadVocab } from '../../voice/vocab';
 import { capitalize } from './controls';
 
@@ -20,7 +21,7 @@ export function TriggerCustom() {
   return (
     <div className="stack trigger-custom">
       <label className="label" htmlFor="custom-trigger">
-        Eigenes Triggerwort
+        Triggerwort
         <small>
           {known === true
             ? 'Kennt das Sprachmodell.'
@@ -28,15 +29,28 @@ export function TriggerCustom() {
               ? 'Kennt das Sprachmodell nicht – bitte ein anderes Wort.'
               : failed
                 ? 'Wortliste nicht geladen – Prüfung nicht möglich.'
-                : `Aktuell: „${capitalize(trigger)}“.`}
+                : `Aktuell: „${capitalize(trigger)}“. Wähle ein Wort, das am Tisch selten fällt – zwei Silben sind am robustesten.`}
         </small>
       </label>
+      <div className="segmented" role="group" aria-label="Vorschläge">
+        {TRIGGER_SUGGESTIONS.map((w) => (
+          <button
+            key={w}
+            type="button"
+            aria-pressed={trigger === w}
+            disabled={vocab ? !vocab.has(w) : false}
+            onClick={() => update('voice', { trigger: w })}
+          >
+            {capitalize(w)}
+          </button>
+        ))}
+      </div>
       <div className="trigger-custom-row">
         <input
           id="custom-trigger"
           type="text"
           value={custom}
-          placeholder={capitalize(trigger)}
+          placeholder="Eigenes Wort eintippen"
           onChange={(e) => setCustom(e.target.value)}
           autoCapitalize="none"
         />

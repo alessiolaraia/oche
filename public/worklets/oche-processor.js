@@ -28,10 +28,19 @@ class OcheProcessor extends AudioWorkletProcessor {
     this.levelSum = 0;
     this.levelCount = 0;
     this.nextLevelAt = 0;
+    // Sauberes Downsampling (Flag dsp2): Tiefpass-FIR (7 kHz, Blackman) + lineare Interpolation
+    this.dsp2 = false;
+    this.fir = makeLowpass(7000 / sampleRate, 63);
+    this.ring = new Float32Array(this.fir.length);
+    this.ringPos = 0;
+    this.k = 0; // Index des aktuellen Eingangssamples
+    this.nextOut = 0; // Position des nächsten 16-kHz-Samples in Eingangssamples
+    this.prevF = 0;
     this.port.onmessage = (e) => {
       const m = e.data;
       if (typeof m.gateDb === 'number') this.gateDb = m.gateDb;
       if (typeof m.muted === 'boolean') this.muted = m.muted;
+      if (typeof m.dsp2 === 'boolean') this.dsp2 = m.dsp2;
     };
   }
 
@@ -68,6 +77,10 @@ class OcheProcessor extends AudioWorkletProcessor {
       this.gain += Math.max(-step, Math.min(step, target - this.gain));
       const y = delayed * this.gain;
 
+      if (this.dsp2) {
+        this.resampleFir(y);
+        continue;
+      }
       // Boxcar-Dezimierung auf 16 kHz
       this.sum += y;
       this.count++;
@@ -102,5 +115,41 @@ class OcheProcessor extends AudioWorkletProcessor {
     return true;
   }
 }
+
+function makeLowpass(fc, n) {
+  const h = new Float32Array(n);
+  const m = (n - 1) / 2;
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    const x = i - m;
+    const sinc = x === 0 ? 2 * fc : Math.sin(2 * Math.PI * fc * x) / (Math.PI * x);
+    const w = 0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (n - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (n - 1));
+    h[i] = sinc * w;
+    sum += h[i];
+  }
+  for (let i = 0; i < n; i++) h[i] /= sum;
+  return h;
+}
+
+OcheProcessor.prototype.resampleFir = function (y) {
+  const n = this.fir.length;
+  this.ring[this.ringPos] = y;
+  this.ringPos = (this.ringPos + 1) % n;
+  let f = 0;
+  for (let j = 0, idx = this.ringPos; j < n; j++, idx = (idx + 1) % n) f += this.fir[j] * this.ring[idx];
+  while (this.nextOut <= this.k) {
+    const frac = this.nextOut - (this.k - 1);
+    this.out[this.outPos++] = this.prevF + (f - this.prevF) * frac;
+    this.nextOut += this.ratio;
+    if (this.outPos === CHUNK) {
+      const chunk = this.out;
+      this.port.postMessage({ type: 'pcm', data: chunk }, [chunk.buffer]);
+      this.out = new Float32Array(CHUNK);
+      this.outPos = 0;
+    }
+  }
+  this.prevF = f;
+  this.k++;
+};
 
 registerProcessor('oche-processor', OcheProcessor);

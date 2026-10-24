@@ -30,6 +30,12 @@ export interface Settings {
     trigger: string;
     /** 0–1: Ergebnisse mit geringerer mittlerer Wort-Konfidenz werden verworfen. */
     minConfidence: number;
+    /** 0–1: Mindest-Konfidenz des Triggerworts (strenger als die Zahl). */
+    triggerMinConfidence: number;
+    /** Gelernte Aliase: gesprochenes Wort → gemeintes Wort (S9). */
+    aliases: Record<string, string>;
+    /** Neue Stufen des Sprachsystems, per Eval freigeschaltet. */
+    flags: { dsp2: boolean; vad: 'off' | 'silero' | 'energy' };
     /** Abstand Gerät ↔ Abwurf in Metern (Kalibrierung). */
     distanceM: number;
     /** Wie laut es im Raum ist (Kalibrierung). */
@@ -78,7 +84,7 @@ export const DEFAULT_SETTINGS: Settings = {
     legs: { mode: 'firstTo', count: 3 },
     sets: null,
     startOrder: 'alternate',
-    askCheckoutDarts: true,
+    askCheckoutDarts: false,
     askDartsAtDouble: false,
   },
   players: { recent: ['Spieler 1', 'Spieler 2'] },
@@ -88,6 +94,9 @@ export const DEFAULT_SETTINGS: Settings = {
     mode: 'trigger',
     trigger: 'wurf',
     minConfidence: 0.55,
+    triggerMinConfidence: 0.6,
+    aliases: {},
+    flags: { dsp2: false, vad: 'off' },
     distanceM: 2.5,
     environment: 'medium',
     gainDb: 20,

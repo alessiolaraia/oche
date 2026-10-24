@@ -114,6 +114,7 @@ export function announce(
     case 'legRestarted':
       return out(pb.newLeg, null, true);
     case 'control':
+      if (e.action === 'stop') return { cues: [], text: '', sfx: null, interrupt: true };
       return out(e.action === 'pause' ? pb.pause : e.action === 'resume' ? pb.resume : pb.micOff, null, true);
     case 'trainingTarget':
       return out(

@@ -10,3 +10,4 @@ playwright-report
 test/e2e/__screenshots__/actual
 *.local
 .DS_Store
+public/ort/

@@ -7,6 +7,8 @@ export interface Transcript {
   alternatives: string[];
   /** 0–1 oder null, wenn die Engine keine liefert. */
   confidence: number | null;
+  /** Wort-Konfidenzen (Vosk) – für die strengere Prüfung des Triggerworts. */
+  words?: { word: string; conf: number }[];
 }
 
 /** Austauschbare Spracherkennung (Vosk im Browser, Web Speech API, später ggf. nativ via Capacitor). */

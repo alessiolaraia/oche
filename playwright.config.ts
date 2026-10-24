@@ -22,6 +22,12 @@ export default defineConfig({
     { name: 'phone', use: { ...devices['Pixel 7'] }, testIgnore: '**/voice/**' },
     { name: 'phone-landscape', use: { ...devices['Pixel 7 landscape'] }, testIgnore: '**/voice/**' },
     { name: 'iphone', use: { ...devices['iPhone 15'] }, testIgnore: '**/voice/**' },
+    // Sprach-Eval über den Korpus (npm run eval:voice)
+    {
+      name: 'eval',
+      testDir: 'test/eval',
+      use: { ...devices['Desktop Chrome'] },
+    },
     // Sprach-E2E (Fake-Mikrofon, echtes Vosk) – braucht Echtzeit-CPU, daher eigenes Projekt, seriell
     {
       name: 'voice',

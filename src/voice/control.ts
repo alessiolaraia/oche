@@ -1,27 +1,16 @@
 // Sprachsteuerung: startet Engine + Audio-Pipeline, wertet Transkripte aus und ruft den Controller auf.
-import {
-  answerQuestion,
-  correctLastVisit,
-  requestRemaining,
-  rejectRecent,
-  restartLeg,
-  submitDarts,
-  submitVisit,
-  undo,
-} from '../app/controller';
+import { submitVisit, undo } from '../app/controller';
 import { emitFeedback } from '../app/feedback';
-import { isFinishable } from '../engine/checkouts';
 import { configureAudioSession } from '../platform/audioSession';
 import { requestPersistentStorage } from '../platform/storage';
-import { useMatch } from '../store/match';
-import { useSession } from '../store/session';
 import { useSettings } from '../store/settings';
 import { useVoice } from '../store/voice';
 import { AudioPipeline, type Level } from './audio/pipeline';
-import { buildGrammar, parseCommand, type Command } from './commands';
+import { buildGrammar, type Command } from './commands';
+import { decide } from './decide/decide';
 import { isEchoMuted, onEchoMute } from './echo';
 import type { SpeechEngine, Transcript } from './engine';
-import { tokenize, parseNumberAt } from './numbers.de';
+import { tokenize } from './numbers.de';
 import { loadVocab } from './vocab';
 import { VoskEngine } from './voskEngine';
 import { WebSpeechEngine, webSpeechSupported } from './webSpeechEngine';
@@ -94,7 +83,7 @@ async function startPipeline(): Promise<AudioPipeline> {
 
 function currentGrammar(vocab: ReadonlySet<string>): string[] {
   const v = useSettings.getState().voice;
-  const grammar = buildGrammar({ trigger: v.trigger, singleDarts: v.singleDarts, vocab });
+  const grammar = buildGrammar({ trigger: v.trigger, vocab, aliases: v.aliases });
   const triggerOk = vocab.has(v.trigger.toLowerCase());
   const warnings: string[] = [];
   if (!triggerOk)
@@ -217,141 +206,79 @@ export function isVoiceRunning(): boolean {
   return engine !== null;
 }
 
-/** Signalisieren nur, wenn es nach einem Befehl klang (Triggerwort bzw. Zahl im Direkt-Modus). */
-function soundedLikeCommand(text: string): boolean {
-  const v = useSettings.getState().voice;
-  const t = tokenize(text);
-  if (t.length === 0) return false;
-  if (t[0] === v.trigger.toLowerCase()) return true;
-  return v.mode === 'direct' && t.some((_, i) => parseNumberAt(t, i) !== null);
-}
+let lastCommit = { key: '', at: 0 };
 
 export function handleTranscript(t: Transcript): void {
   const s = voice();
   voice().set({ partial: '', status: s.status === 'hearing' ? 'listening' : s.status });
-  if (isEchoMuted()) {
-    s.pushResult({
-      at: Date.now(),
-      text: t.text,
-      confidence: t.confidence,
-      accepted: false,
-      note: 'eigene Ansage',
-    });
-    return;
-  }
-  markArmed(t.text);
+  const echoMuted = isEchoMuted();
+  const armed = voice().armedUntil > Date.now();
+  if (!echoMuted) markArmed(t.text);
   const v = useSettings.getState().voice;
-  const opts = {
+  const d = decide(t, {
     mode: v.mode,
     trigger: v.trigger,
-    singleDarts: v.singleDarts,
-    awaitingAnswer: useSession.getState().question !== null,
-  };
-  let cmd: Command | null = null;
-  let used = t.text;
-  for (const candidate of [t.text, ...t.alternatives]) {
-    cmd = parseCommand(candidate, opts);
-    if (cmd) {
-      used = candidate;
-      break;
-    }
-  }
+    aliases: v.aliases,
+    minConfidence: v.minConfidence,
+    triggerMinConfidence: v.triggerMinConfidence,
+    paused,
+    echoMuted,
+    armed,
+  });
   const push = (accepted: boolean, note?: string) =>
     s.pushResult({
       at: Date.now(),
-      text: used,
+      text: d.text,
       confidence: t.confidence,
       accepted,
       ...(note ? { note } : {}),
     });
 
-  if (s.testMode) {
-    push(cmd !== null, cmd ? `Test: ${cmd.type}` : 'kein Befehl');
+  if (s.testMode && d.kind !== 'reject') {
+    push(d.kind === 'accept', d.kind === 'accept' ? `Test: ${d.command.type}` : 'kein Befehl');
     return;
   }
-  if (!cmd) {
-    disarm();
-    push(false, 'kein Befehl');
-    if (soundedLikeCommand(t.text))
-      emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
-    return;
+  switch (d.kind) {
+    case 'arm':
+      push(false, 'Triggerwort – warte auf Zahl');
+      return;
+    case 'ignore':
+      disarm();
+      push(false, 'kein Befehl');
+      if (d.signal) emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
+      return;
+    case 'reject':
+      push(
+        false,
+        d.reason === 'echo'
+          ? 'eigene Ansage'
+          : d.reason === 'paused'
+            ? 'pausiert'
+            : d.reason === 'lowTriggerConfidence'
+              ? 'Triggerwort unsicher'
+              : `zu unsicher (${Math.round((t.confidence ?? 0) * 100)} %)`,
+      );
+      if (d.signal && !s.testMode) emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
+      return;
+    case 'accept': {
+      // Entprellung: gleicher Befehl innerhalb von 1,5 s und alles in 800 ms nach einer Buchung zählt nicht
+      const key = JSON.stringify(d.command);
+      const now = Date.now();
+      if ((key === lastCommit.key && now - lastCommit.at < 1500) || now - lastCommit.at < 800) {
+        push(false, 'doppelt');
+        return;
+      }
+      lastCommit = { key, at: now };
+      push(true);
+      disarm();
+      dispatch(d.command);
+    }
   }
-  if (t.confidence !== null && t.confidence < v.minConfidence) {
-    push(false, `zu unsicher (${Math.round(t.confidence * 100)} %)`);
-    emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
-    return;
-  }
-  if (paused && cmd.type !== 'resume' && cmd.type !== 'micOff') {
-    push(false, 'pausiert');
-    return;
-  }
-  push(true);
-  disarm();
-  dispatch(cmd);
 }
 
 function dispatch(cmd: Command): void {
-  switch (cmd.type) {
-    case 'score':
-      submitVisit(cmd.value, { source: 'voice' });
-      break;
-    case 'darts':
-      submitDarts(cmd.darts, 'voice');
-      break;
-    case 'bust':
-      submitVisit(0, { bust: true, source: 'voice' });
-      break;
-    case 'undo':
-      undo('voice');
-      break;
-    case 'reject':
-      rejectRecent();
-      break;
-    case 'correct':
-      correctLastVisit(cmd.value, 'voice');
-      break;
-    case 'remaining':
-      requestRemaining();
-      break;
-    case 'answer':
-      answerQuestion(cmd.value);
-      break;
-    case 'checkoutDarts':
-      checkoutWithDarts(cmd.value);
-      break;
-    case 'newLeg':
-      restartLeg();
-      break;
-    case 'pause':
-      setPaused(true);
-      break;
-    case 'resume':
-      setPaused(false);
-      break;
-    case 'micOff':
-      emitFeedback({ type: 'control', action: 'micOff' });
-      stopVoice();
-      break;
-  }
-}
-
-/**
- * „Check mit zwei“: beantwortet eine offene Nachfrage; sonst ist es der Checkout selbst
- * (Rest des Spielers am Zug mit n Darts).
- */
-function checkoutWithDarts(n: number): void {
-  if (useSession.getState().question === 'checkoutDarts') {
-    answerQuestion(n);
-    return;
-  }
-  const { state } = useMatch.getState();
-  if (!state || state.winner !== null) return;
-  const p = state.players[state.current]!;
-  if (p.isIn && isFinishable(p.remaining, state.config.outMode, n)) {
-    submitVisit(p.remaining, { dartsUsed: n, source: 'voice' });
-  } else {
-    emitFeedback({ type: 'rejected', reason: 'notFinishable' });
-  }
+  if (cmd.type === 'score') submitVisit(cmd.value, { source: 'voice' });
+  else undo('voice');
 }
 
 // ---- Einstellungen live übernehmen ----
@@ -359,7 +286,7 @@ useSettings.subscribe((s, prev) => {
   if (!pipeline && !engine) return;
   if (s.voice.gainDb !== prev.voice.gainDb) pipeline?.setGain(s.voice.gainDb);
   if (s.voice.gateDb !== prev.voice.gateDb) pipeline?.setGate(s.voice.gateDb);
-  if (s.voice.trigger !== prev.voice.trigger || s.voice.singleDarts !== prev.voice.singleDarts) {
+  if (s.voice.trigger !== prev.voice.trigger || s.voice.aliases !== prev.voice.aliases) {
     const e = engine;
     if (e?.setGrammar) void loadVocab().then((vocab) => e.setGrammar!(currentGrammar(vocab)));
   }

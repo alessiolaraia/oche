@@ -7,6 +7,7 @@ import { Flash } from './ui/components/Flash';
 import { TriggerRing } from './ui/components/TriggerRing';
 import { navigate, useRoute } from './ui/router';
 import { Debug } from './ui/screens/Debug';
+import { Eval } from './ui/screens/Eval';
 import { Game } from './ui/screens/Game';
 import { Onboarding } from './ui/screens/Onboarding';
 import { Settings } from './ui/screens/Settings';
@@ -36,6 +37,7 @@ export function App() {
         {route === 'onboarding' && <Onboarding />}
         {route === 'training' && <Training />}
         {route === 'debug' && <Debug />}
+        {route === 'eval' && <Eval />}
       </main>
       <TriggerRing />
       <Flash />

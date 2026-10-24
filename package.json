@@ -17,6 +17,8 @@
     "test:watch": "vitest",
     "e2e": "playwright test --project=desktop --project=phone --project=phone-landscape --project=iphone && npm run e2e:voice",
     "e2e:voice": "playwright test --project=voice --workers=1",
+    "eval:voice": "playwright test --project=eval --workers=1 --reporter=line",
+    "corpus": ".cache/tts-venv/bin/python scripts/voice-corpus/generate.py",
     "model": "node scripts/fetch-model.mjs",
     "vosk": "node scripts/copy-vosk.mjs",
     "test-audio": "sh scripts/make-test-audio.sh",
@@ -25,6 +27,7 @@
   "dependencies": {
     "@lichess-org/vosk-browser": "^0.0.3",
     "dexie": "^4.4.7",
+    "onnxruntime-web": "^1.30.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "zustand": "^5.0.16"
@@ -32,6 +35,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.1",
+    "@ricky0123/vad-web": "^0.0.31",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

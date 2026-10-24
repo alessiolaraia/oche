@@ -42,7 +42,12 @@ export class VoskEngine implements SpeechEngine {
       if (!text) return;
       const words = m.result.result ?? [];
       const confidence = words.length ? words.reduce((s, w) => s + w.conf, 0) / words.length : null;
-      this.onTranscript?.({ text, alternatives: [], confidence });
+      this.onTranscript?.({
+        text,
+        alternatives: [],
+        confidence,
+        words: words.map((w) => ({ word: w.word, conf: w.conf })),
+      });
     });
     rec.on('partialresult', (m) => {
       if (m.event === 'partialresult') this.onPartial?.(m.result.partial);
