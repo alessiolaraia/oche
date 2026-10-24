@@ -11,7 +11,7 @@ import {
 } from '../../app/controller';
 import { stopTraining } from '../../app/training';
 import { botVisit, skillFor } from '../../engine/bot';
-import { checkoutRoute, formatRoute } from '../../engine/checkouts';
+import { checkoutRoute, dartLabel, formatRoute } from '../../engine/checkouts';
 import { matchStats } from '../../engine/stats';
 import type { MatchState } from '../../engine/types';
 import { keepScreenOn } from '../../platform/wakeLock';
@@ -30,6 +30,7 @@ import { NumberPad } from '../components/NumberPad';
 import { startVoice, stopVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './game.css';
+import './arena.css';
 
 function fmtAvg(n: number | null): string {
   return n === null ? '–' : n.toFixed(1).replace('.', ',');
@@ -106,7 +107,7 @@ export function Game() {
     config.legs.mode === 'firstTo' ? `First to ${config.legs.count}` : `Best of ${config.legs.count}`;
 
   return (
-    <div className={`game${pad !== 'none' ? ' game-with-pad' : ''}`}>
+    <div className={`game arena${pad !== 'none' ? ' game-with-pad' : ''}`}>
       <header className="game-top">
         <button className="icon-btn" aria-label="Menü" aria-expanded={menu} onClick={() => setMenu(!menu)}>
           <Icon name="menu" />
@@ -140,11 +141,11 @@ export function Game() {
         <div className="game-stats">
           <div className="game-stat" title="3-Dart-Average in diesem Spiel">
             <span className="game-stat-value">{fmtAvg(myStats.average)}</span>
-            <span className="game-stat-label">Average</span>
+            <span className="game-stat-label">3-Dart Ø</span>
           </div>
           <div className="game-stat">
             <span className="game-stat-value">{legDarts}</span>
-            <span className="game-stat-label">Darts im Leg</span>
+            <span className="game-stat-label">Darts</span>
           </div>
           <div className="game-stat">
             <span className="game-stat-value">{myLast ? (myLast.bust ? 'Bust' : myLast.scored) : '–'}</span>
@@ -152,8 +153,13 @@ export function Game() {
           </div>
         </div>
         {showRoute && route && (
-          <p className="game-route" data-testid="checkout-route">
-            {formatRoute(route)}
+          <p className="game-route" data-testid="checkout-route" aria-label={formatRoute(route)}>
+            {route.map((d, i) => (
+              <span key={i} className="route-dart" data-m={d.segment === 25 ? 'bull' : d.multiplier}>
+                {i > 0 && ' '}
+                {dartLabel(d)}
+              </span>
+            ))}
           </p>
         )}
         {voiceEnabled && micStatus === 'off' && pad === 'none' && (
@@ -173,7 +179,13 @@ export function Game() {
       </section>
 
       <section className="game-board card" aria-label="Spielstand">
-        <ol className="board">
+        <div className="board-head" aria-hidden="true">
+          <span>Spieler</span>
+          {config.sets ? <span className="board-head-num">Sets</span> : null}
+          <span className="board-head-num">Legs</span>
+          <span className="board-head-rest">Rest</span>
+        </div>
+        <ol className="board" data-sets={config.sets ? 'true' : undefined}>
           {state.players.map((p, i) => {
             const st = i === cur ? myStats : matchStats(state, i);
             return (
@@ -184,9 +196,16 @@ export function Game() {
               >
                 <span className="board-name">{config.players[i]!.name}</span>
                 <span className="board-stats">
-                  {config.sets ? <span>Sets {p.setsWon}</span> : null}
-                  <span>Legs {p.legsWon}</span>
                   <span>Ø {fmtAvg(st.average)}</span>
+                  <span>{st.count180 > 0 ? `180 × ${st.count180}` : ''}</span>
+                </span>
+                {config.sets ? (
+                  <span className="board-num" aria-label={`Sets ${p.setsWon}`}>
+                    {p.setsWon}
+                  </span>
+                ) : null}
+                <span className="board-num" aria-label={`Legs ${p.legsWon}`}>
+                  {p.legsWon}
                 </span>
                 <span className="board-rest" data-testid={`rest-${i}`}>
                   {p.remaining}
@@ -346,7 +365,7 @@ function MatchOver({ state }: { state: MatchState }) {
   const { config } = state;
   const winner = config.players[state.winner!]!;
   return (
-    <div className="screen match-over">
+    <div className="screen match-over arena">
       <div className="sg-aura match-over-aura" aria-hidden="true" />
       <p className="game-meta">{scoreLine(state)}</p>
       <h1 className="match-over-title">{winner.name} gewinnt</h1>

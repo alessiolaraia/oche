@@ -1,0 +1,427 @@
+/* Arena: Spielbildschirm im Wettkampf-Look – passend zum Intro (dunkle Bühne, Chrom, Board-Farben).
+   Überschreibt die Soft-Glass-Tokens nur innerhalb von .arena; alle Bausteine (Karten, Buttons, Pads,
+   Sheets) werden dadurch automatisch dunkel. */
+
+.arena {
+  --board-red: #e0332f;
+  --board-green: #1b9a52;
+  --arena-chrome: linear-gradient(180deg, #ffffff 0%, #eef0f4 40%, #a3a9b5 52%, #f3f5f8 66%, #ffffff 100%);
+
+  --sg-ink: #f6f4f0;
+  --sg-ink-2: rgba(246, 244, 240, 0.74);
+  --sg-ink-3: rgba(246, 244, 240, 0.46);
+  --sg-on-dark: #0e0e10;
+  --sg-glass: linear-gradient(180deg, rgba(40, 40, 46, 0.7) 0%, rgba(18, 18, 21, 0.7) 100%);
+  --sg-glass-strong: linear-gradient(180deg, rgba(54, 54, 60, 0.86) 0%, rgba(26, 26, 30, 0.86) 100%);
+  --sg-glass-sunken: rgba(0, 0, 0, 0.35);
+  --sg-glass-border: rgba(255, 255, 255, 0.09);
+  --sg-hairline: rgba(255, 255, 255, 0.08);
+  --sg-hi: inset 0 1px 0 rgba(255, 255, 255, 0.09), inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  --sg-shadow-1: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --sg-shadow-2: 0 10px 30px -8px rgba(0, 0, 0, 0.6);
+  --sg-shadow-3: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
+  /* Primär-Buttons: Chrom statt Schwarz */
+  --sg-dark-top: #ffffff;
+  --sg-dark-bottom: #c9ccd3;
+  --sg-hi-dark: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -2px 3px rgba(0, 0, 0, 0.18);
+  --sg-shadow-dark: 0 6px 20px -6px rgba(0, 0, 0, 0.7);
+  --sg-aura-blue: rgba(61, 123, 255, 0.55);
+  --sg-aura-apricot: rgba(255, 122, 46, 0.5);
+
+  color: var(--sg-ink);
+}
+
+/* Bühne: Licht von oben auf dunklem Grund */
+.app:has(.arena) {
+  background:
+    radial-gradient(80% 60% at 50% -10%, rgba(255, 238, 214, 0.13), transparent 70%),
+    radial-gradient(120% 90% at 50% 40%, #17161a 0%, #0b0b0d 60%, #060607 100%);
+}
+
+/* ---- Fokus: angedeutete Dartscheibe hinter der Restzahl ---- */
+
+.arena .game-focus::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: min(92vmin, 760px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -48%);
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, transparent 58%, rgba(224, 51, 47, 0.16) 58.5% 62%, transparent 62.5%),
+    radial-gradient(closest-side, transparent 92%, rgba(27, 154, 82, 0.16) 92.5% 96%, transparent 96.5%),
+    repeating-conic-gradient(
+      from -9deg,
+      rgba(255, 255, 255, 0.045) 0 18deg,
+      rgba(255, 255, 255, 0) 18deg 36deg
+    );
+  -webkit-mask: radial-gradient(closest-side, #000 70%, transparent 100%);
+  mask: radial-gradient(closest-side, #000 70%, transparent 100%);
+}
+
+.arena .game-meta {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--sg-r-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--sg-glass-border);
+  font-size: var(--sg-fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sg-ink);
+}
+
+.arena .game-meta-dim {
+  color: var(--sg-ink-3);
+}
+
+/* Name des Werfers: Großbuchstaben, roter Pfeil davor */
+.arena .game-player {
+  margin-top: 6px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.arena .game-player::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.4em;
+  vertical-align: 0.1em;
+  background: var(--board-red);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  filter: drop-shadow(0 0 8px rgba(224, 51, 47, 0.8));
+}
+
+/* Restzahl in Chrom wie die 180 im Intro */
+.arena .big-number-digits {
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  background: var(--arena-chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.5)) drop-shadow(0 0 28px rgba(255, 255, 255, 0.12));
+}
+
+/* Werte unter der Zahl: TV-Kacheln mit farbiger Oberkante */
+.arena .game-stat {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  padding: 12px 6px 10px;
+  background: linear-gradient(180deg, rgba(36, 36, 41, 0.92), rgba(16, 16, 19, 0.92));
+}
+
+.arena .game-stat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--board-green);
+}
+
+.arena .game-stat:first-child::before {
+  background: var(--board-red);
+}
+
+.arena .game-stat-value {
+  font-weight: 800;
+}
+
+.arena .game-stat-label {
+  order: -1;
+  font-size: var(--sg-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Checkout-Weg in Board-Farben: Triple rot, Doppel grün */
+.arena .game-route {
+  display: inline-flex;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.arena .route-dart {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.6em;
+  padding: 0.28em 0.5em;
+  border-radius: 10px;
+  font-weight: 800;
+  font-style: italic;
+  color: #fff;
+  background: linear-gradient(180deg, #3a3a41, #202024);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.7);
+}
+
+.arena .route-dart[data-m='3'],
+.arena .route-dart[data-m='bull'] {
+  background: linear-gradient(180deg, #ef4a44, #b3201d);
+  border-color: rgba(255, 140, 130, 0.5);
+  box-shadow: 0 0 22px -4px rgba(224, 51, 47, 0.7);
+}
+
+.arena .route-dart[data-m='2'] {
+  background: linear-gradient(180deg, #27b866, #12773d);
+  border-color: rgba(120, 230, 160, 0.45);
+  box-shadow: 0 0 22px -4px rgba(27, 154, 82, 0.7);
+}
+
+/* ---- Anzeigetafel wie im TV ---- */
+
+.arena .game-board {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(28, 28, 32, 0.92), rgba(12, 12, 14, 0.92));
+}
+
+.board-head {
+  display: none;
+}
+
+.arena .board-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 3.2em 3.6em;
+  gap: 8px;
+  padding: 8px 14px 6px 20px;
+  font-size: var(--sg-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sg-ink-3);
+  border-bottom: 1px solid var(--sg-hairline);
+}
+
+.arena .board-head:has(span:nth-child(4)) {
+  grid-template-columns: minmax(0, 1fr) 3.2em 3.2em 3.6em;
+}
+
+.arena .board-head-num,
+.arena .board-head-rest {
+  text-align: center;
+}
+
+.arena .board-head-rest {
+  text-align: right;
+}
+
+.arena .board-row {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) 3.2em auto;
+  grid-template-areas: 'name legs rest' 'stats legs rest';
+  border-radius: 0;
+  padding: 12px 14px 12px 20px;
+  column-gap: 8px;
+}
+
+.arena .board[data-sets] .board-row {
+  grid-template-columns: minmax(0, 1fr) 3.2em 3.2em auto;
+  grid-template-areas: 'name sets legs rest' 'stats sets legs rest';
+}
+
+.arena .board[data-sets] .board-num:first-of-type {
+  grid-area: sets;
+}
+
+.arena .board-row + .board-row {
+  margin-top: 0;
+  border-top: 1px solid var(--sg-hairline);
+}
+
+.arena .board-row[aria-current='true'] {
+  background: linear-gradient(90deg, rgba(224, 51, 47, 0.18), rgba(224, 51, 47, 0) 70%);
+  box-shadow: none;
+}
+
+/* roter Balken links = wirft gerade */
+.arena .board-row[aria-current='true']::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--board-red);
+  box-shadow: 0 0 16px rgba(224, 51, 47, 0.9);
+}
+
+.arena .board-row[aria-current='true'] .board-name::before {
+  display: none;
+}
+
+.arena .board-name {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.arena .board-stats {
+  gap: 12px;
+  font-size: var(--sg-fs-sm);
+  font-weight: 600;
+  color: var(--sg-ink-3);
+}
+
+.board-num {
+  display: none;
+}
+
+.arena .board-num {
+  grid-area: legs;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  height: 2.2em;
+  border-radius: 8px;
+  font-size: clamp(1.125rem, 2.6vmin, 1.5rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  background: linear-gradient(180deg, #27b866, #12773d);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.arena .board-rest {
+  min-width: 3.1ch;
+  text-align: right;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.03em;
+}
+
+.arena .board-row[aria-current='true'] .board-rest {
+  background: var(--arena-chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.arena .board-row:not([aria-current='true']) .board-rest {
+  color: var(--sg-ink-2);
+}
+
+.arena .board-last {
+  margin: 0;
+  padding: 10px 20px;
+  font-size: var(--sg-fs-sm);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ---- Verlauf ---- */
+
+.arena .game-history {
+  border-radius: 18px;
+}
+
+.arena .game-history-title {
+  font-size: var(--sg-fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.arena .history-row:first-child .history-score {
+  color: #fff;
+}
+
+.arena .history-score {
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* ---- Leiste, Pads, Chips ---- */
+
+.arena .game-bar {
+  background: linear-gradient(180deg, rgba(34, 34, 39, 0.9), rgba(14, 14, 16, 0.9));
+}
+
+.arena .mic-chip[data-status='listening'] .mic-dot,
+.arena .mic-chip[data-status='hearing'] .mic-dot {
+  background: var(--board-green);
+  box-shadow:
+    0 0 0 3px rgba(27, 154, 82, 0.25),
+    0 0 10px rgba(27, 154, 82, 0.9);
+}
+
+.arena .pad-key-bust {
+  box-shadow: inset 0 0 0 1.5px var(--board-red);
+  color: #ff8a84;
+}
+
+/* Querformat-Handy: Name in normaler Größe */
+@media (max-height: 500px) {
+  .arena .game-meta {
+    padding: 3px 10px;
+  }
+  .arena .board-head {
+    display: none;
+  }
+}
+
+/* ---- Matchende ---- */
+
+.match-over.arena .match-over-title {
+  font-size: clamp(2.25rem, 9vw, 4.5rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  background: var(--arena-chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 26px rgba(155, 77, 255, 0.45));
+}
+
+.match-over.arena .stat-table th,
+.match-over.arena .stat-table td {
+  border-color: var(--sg-hairline);
+}
+
+/* ---- Bestätigungs-Blitz im Spiel: dunkles Glas, Zahl in Chrom; abgelehnt = rot ---- */
+
+.app:has(.arena) .flash[data-kind='accept'],
+.app:has(.arena) .flash[data-kind='info'] {
+  background: radial-gradient(70% 60% at 50% 50%, rgba(27, 154, 82, 0.22), rgba(8, 8, 10, 0.86) 70%);
+}
+
+.app:has(.arena) .flash[data-kind='accept'] .flash-text {
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(180deg, #ffffff 0%, #eef0f4 40%, #a3a9b5 52%, #f3f5f8 66%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 30px rgba(27, 154, 82, 0.6));
+}
+
+.app:has(.arena) .flash[data-kind='info'] .flash-text {
+  color: rgba(246, 244, 240, 0.8);
+}
+
+.app:has(.arena) .flash[data-kind='reject'] {
+  background: radial-gradient(70% 60% at 50% 50%, rgba(224, 51, 47, 0.35), rgba(12, 6, 6, 0.94) 70%);
+}
+
+.app:has(.arena) .flash[data-kind='reject'] .flash-text {
+  color: #fff;
+}
