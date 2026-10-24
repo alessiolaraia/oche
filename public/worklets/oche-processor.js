@@ -3,8 +3,8 @@
 /* global sampleRate, currentFrame, registerProcessor, AudioWorkletProcessor */
 
 const TARGET_RATE = 16000;
-const CHUNK = 1600; // 100 ms bei 16 kHz
-const LOOKAHEAD_S = 0.12; // Gate öffnet rückwirkend, damit der Wortanfang („W“urf) nicht fehlt
+const CHUNK = 480; // 30 ms bei 16 kHz – kleine Blöcke, damit Teilergebnisse (Triggerwort) sofort kommen
+const LOOKAHEAD_S = 0.15; // Vorlauf: beim Öffnen des Gates wird das zuvor Gehörte nachgereicht („W“urf)
 const HOLD_S = 0.4;
 const LEVEL_EVERY_S = 0.05;
 
@@ -18,6 +18,7 @@ class OcheProcessor extends AudioWorkletProcessor {
     this.gain = 0; // 0..1, weiche Rampe
     this.delay = new Float32Array(Math.ceil(sampleRate * LOOKAHEAD_S));
     this.delayPos = 0;
+    this.wasOpen = false;
     this.ratio = sampleRate / TARGET_RATE;
     this.acc = 0;
     this.sum = 0;
@@ -67,36 +68,23 @@ class OcheProcessor extends AudioWorkletProcessor {
     this.levelCount += ch.length;
 
     const step = 1 / (0.01 * sampleRate); // 10-ms-Rampe
+    if (open && !this.wasOpen) {
+      // Gate geht auf: Vorlauf sofort nachreichen (mit kurzer Einblendung) – ohne feste Verzögerung im Normalbetrieb
+      const n = this.delay.length;
+      const fade = Math.round(0.01 * sampleRate);
+      for (let j = 0; j < n; j++) {
+        const x = this.delay[(this.delayPos + j) % n];
+        this.emit(j < fade ? (x * j) / fade : x);
+      }
+      this.gain = 1;
+    }
+    this.wasOpen = open;
     for (let i = 0; i < ch.length; i++) {
-      // Verzögerungsleitung
-      const delayed = this.delay[this.delayPos];
       this.delay[this.delayPos] = ch[i];
       this.delayPos = (this.delayPos + 1) % this.delay.length;
-
       const target = open ? 1 : 0;
       this.gain += Math.max(-step, Math.min(step, target - this.gain));
-      const y = delayed * this.gain;
-
-      if (this.dsp2) {
-        this.resampleFir(y);
-        continue;
-      }
-      // Boxcar-Dezimierung auf 16 kHz
-      this.sum += y;
-      this.count++;
-      this.acc += 1;
-      if (this.acc >= this.ratio) {
-        this.acc -= this.ratio;
-        this.out[this.outPos++] = this.sum / this.count;
-        this.sum = 0;
-        this.count = 0;
-        if (this.outPos === CHUNK) {
-          const chunk = this.out;
-          this.port.postMessage({ type: 'pcm', data: chunk }, [chunk.buffer]);
-          this.out = new Float32Array(CHUNK);
-          this.outPos = 0;
-        }
-      }
+      this.emit(ch[i] * this.gain);
     }
 
     if (t >= this.nextLevelAt) {
@@ -115,6 +103,32 @@ class OcheProcessor extends AudioWorkletProcessor {
     return true;
   }
 }
+
+/** Ein Eingangssample → 16 kHz → Blöcke an den Hauptthread. */
+OcheProcessor.prototype.emit = function (y) {
+  if (this.dsp2) {
+    this.resampleFir(y);
+    return;
+  }
+  // Boxcar-Dezimierung auf 16 kHz
+  this.sum += y;
+  this.count++;
+  this.acc += 1;
+  if (this.acc >= this.ratio) {
+    this.acc -= this.ratio;
+    this.out[this.outPos++] = this.sum / this.count;
+    this.sum = 0;
+    this.count = 0;
+    if (this.outPos === CHUNK) this.flushChunk();
+  }
+};
+
+OcheProcessor.prototype.flushChunk = function () {
+  const chunk = this.out;
+  this.port.postMessage({ type: 'pcm', data: chunk }, [chunk.buffer]);
+  this.out = new Float32Array(CHUNK);
+  this.outPos = 0;
+};
 
 function makeLowpass(fc, n) {
   const h = new Float32Array(n);
@@ -141,12 +155,7 @@ OcheProcessor.prototype.resampleFir = function (y) {
     const frac = this.nextOut - (this.k - 1);
     this.out[this.outPos++] = this.prevF + (f - this.prevF) * frac;
     this.nextOut += this.ratio;
-    if (this.outPos === CHUNK) {
-      const chunk = this.out;
-      this.port.postMessage({ type: 'pcm', data: chunk }, [chunk.buffer]);
-      this.out = new Float32Array(CHUNK);
-      this.outPos = 0;
-    }
+    if (this.outPos === CHUNK) this.flushChunk();
   }
   this.prevF = f;
   this.k++;
