@@ -135,7 +135,54 @@ async function runFile(
   return out;
 }
 
-export const api = { init, runFile };
+/** Wann (in Audio-Zeit) meldet Vosk welches Teilergebnis? `raw`: Datei direkt, sonst durch die Mikro-Kette. */
+async function partialTrace(
+  b64: string,
+  cfg: EvalConfig,
+  raw: boolean,
+): Promise<{ ms: number; kind: string; text: string }[]> {
+  await init(cfg);
+  const buffer = await decode(b64, cfg.inputDb);
+  const rec: KaldiRecognizer = new client!.KaldiRecognizer(16000, JSON.stringify(grammar));
+  rec.setWords(true);
+  const pos: number[] = [];
+  let fed = 0;
+  let last = '';
+  const out: { ms: number; kind: string; text: string }[] = [];
+  let pending = 0;
+  const done = new Promise<void>((resolve) => {
+    const on = (kind: string, text: string) => {
+      const ms = Math.round((pos.shift() ?? 0) / 16);
+      if (text !== last || kind === 'final') out.push({ ms, kind, text });
+      last = kind === 'final' ? '' : text;
+      if (--pending === 0) resolve();
+    };
+    rec.on('result', (m) => m.event === 'result' && on('final', m.result.text));
+    rec.on('partialresult', (m) => m.event === 'partialresult' && on('part', m.result.partial));
+  });
+  const feed = (pcm: Float32Array) => {
+    fed += pcm.length;
+    pos.push(fed);
+    pending++;
+    rec.acceptWaveformFloat(pcm, 16000);
+  };
+  if (raw) {
+    const off = new OfflineAudioContext(1, Math.ceil(buffer.duration * 16000), 16000);
+    const src = off.createBufferSource();
+    src.buffer = buffer;
+    src.connect(off.destination);
+    src.start();
+    const d = (await off.startRendering()).getChannelData(0);
+    for (let i = 0; i < d.length; i += 480) feed(d.slice(i, i + 480));
+  } else {
+    await processBuffer(buffer, { gainDb: cfg.gainDb, gateDb: cfg.gateDb, dsp2: cfg.dsp2 }, { onChunk: feed });
+  }
+  await done;
+  rec.remove();
+  return out;
+}
+
+export const api = { init, runFile, partialTrace };
 
 declare global {
   interface Window {
