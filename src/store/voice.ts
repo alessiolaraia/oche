@@ -28,6 +28,8 @@ interface VoiceStore {
   modelProgress: string | null;
   /** Testmodus: Erkanntes nur anzeigen, nicht ausführen. */
   testMode: boolean;
+  /** Bis wann der Rand leuchtet: Triggerwort gehört, Befehl wird erwartet (ms-Zeitstempel). */
+  armedUntil: number;
   set: (patch: Partial<Omit<VoiceStore, 'set' | 'pushResult'>>) => void;
   pushResult: (r: RawResult) => void;
 }
@@ -45,6 +47,7 @@ export const useVoice = create<VoiceStore>()((set) => ({
   warnings: [],
   modelProgress: null,
   testMode: false,
+  armedUntil: 0,
   set: (patch) => set(patch),
   pushResult: (r) => set((s) => ({ results: [r, ...s.results].slice(0, 20) })),
 }));

@@ -123,11 +123,28 @@ async function startWebSpeech(): Promise<void> {
   voice().set({ engine: 'webspeech', warnings: [] });
 }
 
+const ARMED_MS = 4000;
+
+/** Rand leuchten lassen, sobald das Triggerwort (Direkt-Modus: irgendeine Sprache) zu hören ist. */
+function markArmed(text: string): void {
+  const v = useSettings.getState().voice;
+  const t = tokenize(text);
+  if (t.length === 0) return;
+  const heardTrigger = v.mode === 'direct' || t[0] === v.trigger.toLowerCase();
+  if (heardTrigger) voice().set({ armedUntil: Date.now() + ARMED_MS });
+}
+
+/** Nach einer Entscheidung den Rand kurz ausklingen lassen. */
+function disarm(): void {
+  voice().set({ armedUntil: Math.min(voice().armedUntil, Date.now() + 500) });
+}
+
 function wire(e: SpeechEngine) {
   e.onTranscript = handleTranscript;
   e.onPartial = (text) => {
     const s = voice();
     s.set({ partial: text, status: s.status === 'listening' && text ? 'hearing' : s.status });
+    if (text && !isEchoMuted()) markArmed(text);
   };
   e.onError = (message) => voice().set({ error: message });
 }
@@ -222,6 +239,7 @@ export function handleTranscript(t: Transcript): void {
     });
     return;
   }
+  markArmed(t.text);
   const v = useSettings.getState().voice;
   const opts = {
     mode: v.mode,
@@ -252,6 +270,7 @@ export function handleTranscript(t: Transcript): void {
     return;
   }
   if (!cmd) {
+    disarm();
     push(false, 'kein Befehl');
     if (soundedLikeCommand(t.text))
       emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
@@ -267,6 +286,7 @@ export function handleTranscript(t: Transcript): void {
     return;
   }
   push(true);
+  disarm();
   dispatch(cmd);
 }
 

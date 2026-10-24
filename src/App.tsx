@@ -4,6 +4,7 @@ import { installTraining } from './app/training';
 import { installCaller } from './caller';
 import { useSettings } from './store/settings';
 import { Flash } from './ui/components/Flash';
+import { TriggerRing } from './ui/components/TriggerRing';
 import { navigate, useRoute } from './ui/router';
 import { Debug } from './ui/screens/Debug';
 import { Game } from './ui/screens/Game';
@@ -36,6 +37,7 @@ export function App() {
         {route === 'training' && <Training />}
         {route === 'debug' && <Debug />}
       </main>
+      <TriggerRing />
       <Flash />
     </div>
   );

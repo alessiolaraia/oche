@@ -4,7 +4,7 @@
 
 PWA für Steeldarts: Mikro dauerhaft an, „Wurf sechzig“ → 60 abziehen, Rest laut ansagen. Gerät liegt 2–3 m entfernt.
 Gleiches Verhalten auf MacBook (Chrome/Safari) und Handy (iOS Home-Screen-App, Android Chrome).
-Spezifikation: `docs/MASTERPROMPT.md`. Antworten an den User: Deutsch, knapp.
+Spezifikation: `docs/MASTERPROMPT.md`, Sprachsystem: `docs/VOICE_MASTERPROMPT.md` (hat Vorrang für alles rund um Mikro/Erkennung). Antworten an den User: Deutsch, knapp.
 
 **Definition of Done:** komplettes Match 501 / Double-Out / First to 3 aus 2,5 m nur per Stimme, inkl. Korrektur und Bust.
 

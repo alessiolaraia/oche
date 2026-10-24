@@ -10,6 +10,8 @@ test('„Wurf sechzig“ zieht 60 ab', async ({ page }) => {
   const errors = collectConsoleErrors(page);
   await warmUp(page);
   await quickStartWithVoice(page);
+  // Beim Triggerwort leuchtet der Bildschirmrand
+  await expect(page.locator('.trigger-ring[data-on="true"]')).toBeAttached({ timeout: 45_000 });
   await expect(page.getByTestId('rest-0')).toHaveText('441', { timeout: 45_000 });
   expect(errors).toEqual([]);
 });

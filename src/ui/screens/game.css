@@ -37,7 +37,7 @@
 }
 
 .game-meta {
-  font-size: var(--sg-fs-sm);
+  font-size: var(--sg-fs-body);
   font-weight: 500;
   color: var(--sg-ink-2);
   font-variant-numeric: tabular-nums;
@@ -49,7 +49,7 @@
 }
 
 .game-player {
-  font-size: clamp(var(--sg-fs-head), 4.2vmin, 2.25rem);
+  font-size: clamp(1.5rem, 5vmin, 2.75rem);
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -62,18 +62,51 @@
   min-height: 0;
 }
 
-.game-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* Drei große Werte unter der Restzahl – aus Wurfdistanz lesbar */
+.game-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  min-height: 32px;
+  width: min(100%, 560px);
 }
 
-.chip-route {
-  color: var(--sg-ink);
+.game-stat {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 10px 6px 8px;
+  border-radius: var(--sg-r-md);
+  background: var(--sg-glass-strong);
+  -webkit-backdrop-filter: var(--sg-blur);
+  backdrop-filter: var(--sg-blur);
+  border: 1px solid var(--sg-glass-border);
+  box-shadow: var(--sg-hi), var(--sg-shadow-1);
+}
+
+.game-stat-value {
+  font-size: clamp(1.75rem, 5.2vmin, 3rem);
   font-weight: 600;
-  font-size: var(--sg-fs-body);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.game-stat-label {
+  font-size: var(--sg-fs-sm);
+  color: var(--sg-ink-3);
+}
+
+/* Checkout-Weg: was jetzt zu werfen ist – als schwarze Pille, groß */
+.game-route {
+  margin-top: 6px;
+  padding: 10px 22px;
+  border-radius: var(--sg-r-pill);
+  color: var(--sg-on-dark);
+  background: linear-gradient(180deg, var(--sg-dark-top), var(--sg-dark-bottom));
+  box-shadow: var(--sg-hi-dark), var(--sg-shadow-dark);
+  font-size: clamp(1.25rem, 4vmin, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -114,7 +147,8 @@
   grid-template-areas: 'name rest' 'stats rest';
   align-items: center;
   column-gap: 12px;
-  padding: 8px 10px;
+  row-gap: 2px;
+  padding: 12px 14px;
   border-radius: var(--sg-r-md);
 }
 
@@ -129,7 +163,9 @@
 
 .board-name {
   grid-area: name;
+  font-size: clamp(1.125rem, 2.6vmin, 1.5rem);
   font-weight: 600;
+  letter-spacing: -0.015em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -149,26 +185,84 @@
 .board-stats {
   grid-area: stats;
   display: flex;
-  gap: 12px;
-  font-size: var(--sg-fs-sm);
-  color: var(--sg-ink-3);
+  gap: 14px;
+  font-size: clamp(0.9375rem, 2vmin, 1.125rem);
+  color: var(--sg-ink-2);
   font-variant-numeric: tabular-nums;
 }
 
 .board-rest {
   grid-area: rest;
-  font-size: var(--sg-fs-title);
+  font-size: clamp(2rem, 6vmin, 3.5rem);
+  line-height: 1;
   font-weight: 600;
   letter-spacing: var(--sg-track-tight);
   font-variant-numeric: tabular-nums;
 }
 
 .board-last {
-  padding: 6px 10px 4px;
-  font-size: var(--sg-fs-sm);
+  padding: 8px 14px 6px;
+  font-size: var(--sg-fs-body);
   color: var(--sg-ink-3);
   border-top: 1px solid var(--sg-hairline);
   margin-top: 6px;
+}
+
+/* ---- Verlauf des Legs (nur in der breiten Ansicht) ---- */
+
+.game-history {
+  grid-area: history;
+  display: none;
+  margin: 0;
+  padding: 14px 16px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.game-history-title {
+  font-size: var(--sg-fs-sm);
+  font-weight: 600;
+  color: var(--sg-ink-3);
+  margin-bottom: 6px;
+}
+
+.history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.history-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.5em 4.5em;
+  gap: 8px;
+  padding: 7px 0;
+  font-size: clamp(1rem, 1.8vmin, 1.25rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.history-row + .history-row {
+  border-top: 1px solid var(--sg-hairline);
+}
+
+.history-row:first-child {
+  font-weight: 600;
+}
+
+.history-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sg-ink-2);
+}
+
+.history-score,
+.history-rest {
+  text-align: right;
+}
+
+.history-rest {
+  color: var(--sg-ink-3);
 }
 
 /* ---- Pad und Leiste ---- */
@@ -210,7 +304,7 @@
 }
 
 /* Pad offen: Fokus kompakter */
-.game-with-pad .game-chips {
+.game-with-pad .game-stats {
   display: none;
 }
 
@@ -235,14 +329,23 @@
 
 @media (min-width: 900px), (orientation: landscape) and (min-aspect-ratio: 5/4) {
   .game {
-    grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
     grid-template-areas:
       'top top'
       'focus board'
+      'focus history'
       'focus pad'
       'focus bar';
     column-gap: 28px;
+  }
+  .game-history {
+    display: block;
+    align-self: start;
+    max-height: 100%;
+  }
+  .game-with-pad .game-history {
+    display: none;
   }
   .game-board {
     align-self: start;
@@ -250,8 +353,8 @@
   .game-pad {
     align-self: end;
   }
-  .game-with-pad .game-chips {
-    display: flex;
+  .game-with-pad .game-stats {
+    display: grid;
   }
 }
 
@@ -272,6 +375,19 @@
     padding: 4px 8px;
   }
   .board-rest {
+    font-size: var(--sg-fs-title);
+  }
+  .game-history {
+    display: none !important;
+  }
+  .game-stat {
+    padding: 6px 4px;
+  }
+  .game-stat-value {
+    font-size: var(--sg-fs-title);
+  }
+  .game-route {
+    padding: 6px 16px;
     font-size: var(--sg-fs-head);
   }
   .board-last {

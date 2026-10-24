@@ -98,6 +98,9 @@ export function Game() {
   const needsBullOut = config.startOrder === 'bullOut' && events.length === 0;
   const last = state.lastVisit;
   const trainingDone = training.results.filter((r) => r.success).length;
+  const myVisits = state.currentLeg.filter((v) => v.player === cur);
+  const legDarts = myVisits.reduce((sum, v) => sum + v.darts, 0);
+  const myLast = myVisits.at(-1);
   const legsTarget =
     config.legs.mode === 'firstTo' ? `First to ${config.legs.count}` : `Best of ${config.legs.count}`;
 
@@ -133,16 +136,25 @@ export function Game() {
         <div className="game-number">
           <BigNumber value={me.remaining} label={`Rest ${me.remaining}`} />
         </div>
-        <div className="game-chips">
-          <span className="chip" title="3-Dart-Average in diesem Spiel">
-            Ø {fmtAvg(myStats.average)}
-          </span>
-          {showRoute && route && (
-            <span className="chip chip-route" data-testid="checkout-route">
-              {formatRoute(route)}
-            </span>
-          )}
+        <div className="game-stats">
+          <div className="game-stat" title="3-Dart-Average in diesem Spiel">
+            <span className="game-stat-value">{fmtAvg(myStats.average)}</span>
+            <span className="game-stat-label">Average</span>
+          </div>
+          <div className="game-stat">
+            <span className="game-stat-value">{legDarts}</span>
+            <span className="game-stat-label">Darts im Leg</span>
+          </div>
+          <div className="game-stat">
+            <span className="game-stat-value">{myLast ? (myLast.bust ? 'Bust' : myLast.scored) : '–'}</span>
+            <span className="game-stat-label">Zuletzt</span>
+          </div>
         </div>
+        {showRoute && route && (
+          <p className="game-route" data-testid="checkout-route">
+            {formatRoute(route)}
+          </p>
+        )}
         {voiceEnabled && micStatus === 'off' && pad === 'none' && (
           <button
             className="btn btn-primary game-start-mic"
@@ -187,6 +199,26 @@ export function Game() {
             ? `Zuletzt: ${config.players[last.player]!.name} – ${last.bust ? 'Bust' : last.scored}`
             : `Sag „${capitalize(trigger)} sechzig“ – oder tippe.`}
         </p>
+      </section>
+
+      <section className="game-history card" aria-label="Verlauf dieses Legs">
+        <h2 className="game-history-title">Dieses Leg</h2>
+        {state.currentLeg.length === 0 ? (
+          <p className="hint">Noch keine Aufnahme.</p>
+        ) : (
+          <ol className="history">
+            {[...state.currentLeg]
+              .reverse()
+              .slice(0, 8)
+              .map((v) => (
+                <li key={v.eventId} className="history-row">
+                  <span className="history-name">{config.players[v.player]!.name}</span>
+                  <span className="history-score">{v.bust ? 'Bust' : v.scored}</span>
+                  <span className="history-rest">{v.remainingAfter}</span>
+                </li>
+              ))}
+          </ol>
+        )}
       </section>
 
       {pad !== 'none' && (
