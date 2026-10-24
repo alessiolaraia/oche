@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import { installFlashFeedback } from './app/feedbackUi';
 import { installTraining } from './app/training';
 import { installCaller } from './caller';
+import { useSession } from './store/session';
 import { useSettings } from './store/settings';
 import { Flash } from './ui/components/Flash';
+import { MatchIntro } from './ui/components/MatchIntro';
 import { TriggerRing } from './ui/components/TriggerRing';
 import { navigate, useRoute } from './ui/router';
 import { Debug } from './ui/screens/Debug';
@@ -19,6 +21,7 @@ import './ui/styles.css';
 export function App() {
   const route = useRoute();
   const onboarded = useSettings((s) => s.onboarded);
+  const intro = useSession((s) => s.intro);
 
   useEffect(() => installFlashFeedback(), []);
   useEffect(() => installCaller(), []);
@@ -39,6 +42,7 @@ export function App() {
         {route === 'debug' && <Debug />}
         {route === 'eval' && <Eval />}
       </main>
+      {intro && route === 'game' && <MatchIntro />}
       <TriggerRing />
       <Flash />
     </div>

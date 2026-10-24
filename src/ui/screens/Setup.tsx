@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { startMatch } from '../../app/controller';
 import type { InMode, MatchConfig, OutMode, Player } from '../../engine/types';
-import { newId, useMatch } from '../../store/match';
+import { newId } from '../../store/match';
 import { useSettings } from '../../store/settings';
 import { startVoice } from '../../voice/control';
 import { Choice } from '../components/controls';
@@ -22,7 +22,6 @@ export function Setup() {
   const [names, setNames] = useState<string[]>(settings.players.recent.slice(0, 8));
   const [bots, setBots] = useState<Record<number, number>>({});
   const [more, setMore] = useState(false);
-  const canResume = useMatch((m) => m.state !== null && m.state.winner === null);
 
   const go = (config: MatchConfig) => {
     settings.update('players', { recent: config.players.filter((p) => !p.bot).map((p) => p.name) });
@@ -89,12 +88,6 @@ export function Setup() {
         <br />
         nur mit der Stimme.
       </h1>
-
-      {canResume && (
-        <button className="btn btn-block setup-resume" onClick={() => navigate('game')}>
-          Laufendes Spiel fortsetzen
-        </button>
-      )}
 
       <section className="card setup-quick" aria-label="Schnellstart">
         <div className="sg-aura setup-aura" aria-hidden="true" />

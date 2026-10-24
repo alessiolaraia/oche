@@ -62,7 +62,8 @@ export function Game() {
 
   // Bot-Gegner wirft nach kurzer Pause selbst
   const botAvg = state && state.winner === null ? config?.players[state.current]?.bot?.average : undefined;
-  const botBlocked = question !== null || (config?.startOrder === 'bullOut' && events.length === 0);
+  const intro = useSession((s) => s.intro);
+  const botBlocked = intro || question !== null || (config?.startOrder === 'bullOut' && events.length === 0);
   useEffect(() => {
     if (botAvg === undefined || botBlocked || !state) return;
     const t = setTimeout(() => {

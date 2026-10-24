@@ -26,8 +26,18 @@ function afterInput(source: InputSource) {
 
 export function startMatch(config: MatchConfig): void {
   const state = useMatch.getState().start(config);
-  useSession.getState().setQuestion(null);
-  emitFeedback({ type: 'matchStarted', state });
+  const session = useSession.getState();
+  session.setQuestion(null);
+  const reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Mit Intro kommt die Ansage („A gegen B …“) erst, wenn die Namen eingeblendet werden
+  if (useSettings.getState().display.intro && !reduced) session.setIntro(true);
+  else emitFeedback({ type: 'matchStarted', state });
+}
+
+/** Vom Intro aufgerufen, sobald die Namen erscheinen (oder beim Überspringen). */
+export function announceMatchStart(): void {
+  const { state } = useMatch.getState();
+  if (state) emitFeedback({ type: 'matchStarted', state });
 }
 
 export function submitVisit(

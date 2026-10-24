@@ -5,7 +5,8 @@ import type { MatchState } from '../engine/types';
 import type { Settings } from '../settings/types';
 import { cuesToText, phrasebook, type Cue, type Phrasebook } from './phrases';
 
-export type Sfx = 'accept' | 'notUnderstood' | 'bust' | 'maximum' | 'ton' | 'highFinish' | 'leg' | 'match';
+export type Sfx =
+  'accept' | 'notUnderstood' | 'bust' | 'maximum' | 'ton' | 'highFinish' | 'leg' | 'match' | 'thud';
 
 export interface Announcement {
   /** Bausteine in Reihenfolge – Clip aus dem Klang-Paket oder Systemstimme. */
@@ -109,8 +110,16 @@ export function announce(
     }
     case 'matchStarted': {
       const st = e.state;
-      return out(pb.gameOn(st.config.players[st.current]!.name), null, true);
+      const names = st.config.players.map((p) => p.name);
+      return out(
+        [...(names.length > 1 ? pb.versus(names) : []), ...pb.gameOn(st.config.players[st.current]!.name)],
+        null,
+        true,
+      );
     }
+    case 'introDart':
+      // Intro: drei Einschläge, beim dritten „Hundertachtzig!“
+      return e.n === 3 ? out(pb.maximum, 'maximum') : out([], 'thud');
     case 'legRestarted':
       return out(pb.newLeg, null, true);
     case 'control':

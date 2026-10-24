@@ -175,7 +175,11 @@ async function partialTrace(
     const d = (await off.startRendering()).getChannelData(0);
     for (let i = 0; i < d.length; i += 480) feed(d.slice(i, i + 480));
   } else {
-    await processBuffer(buffer, { gainDb: cfg.gainDb, gateDb: cfg.gateDb, dsp2: cfg.dsp2 }, { onChunk: feed });
+    await processBuffer(
+      buffer,
+      { gainDb: cfg.gainDb, gateDb: cfg.gateDb, dsp2: cfg.dsp2 },
+      { onChunk: feed },
+    );
   }
   await done;
   rec.remove();

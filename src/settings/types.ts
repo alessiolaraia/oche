@@ -72,6 +72,8 @@ export interface Settings {
     showCheckoutRoute: boolean;
     keepAwake: boolean;
     boardPad: boolean;
+    /** Kurzes Intro (180 + „Name vs Name“) vor jedem Spiel. */
+    intro: boolean;
   };
   onboarded: boolean;
 }
@@ -122,6 +124,6 @@ export const DEFAULT_SETTINGS: Settings = {
     specialCalls: true,
     sfx: true,
   },
-  display: { showCheckoutRoute: true, keepAwake: true, boardPad: false },
+  display: { showCheckoutRoute: true, keepAwake: true, boardPad: false, intro: true },
   onboarded: false,
 };

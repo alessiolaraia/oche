@@ -83,6 +83,21 @@ function render(c: AudioContext, s: Sfx): number {
       [0, 4, 7, 12].forEach((s2, i) => tone(c, note(s2), i * 0.11, 0.3, 'triangle', 0.22));
       tone(c, note(19), 0.5, 0.5, 'sine', 0.18);
       return 1;
+    case 'thud': {
+      // Einschlag im Board: tiefer Schlag + kurzer Klick
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(150, c.currentTime);
+      o.frequency.exponentialRampToValueAtTime(55, c.currentTime + 0.12);
+      g.gain.setValueAtTime(0.55, c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.16);
+      o.connect(g).connect(c.destination);
+      o.start();
+      o.stop(c.currentTime + 0.18);
+      noiseBurst(c, 0, 0.04, 0.2);
+      return 0.12;
+    }
     case 'match':
       noiseBurst(c, 0, 1.2, 0.1);
       [0, 4, 7, 12, 7, 12, 16, 19, 24].forEach((s2, i) => tone(c, note(s2), i * 0.1, 0.4, 'triangle', 0.2));

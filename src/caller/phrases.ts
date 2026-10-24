@@ -37,6 +37,7 @@ export interface Phrasebook {
   askDartsAtDouble: Cues;
   answered: (n: number) => Cues;
   gameOn: (name: string) => Cues;
+  versus: (names: string[]) => Cues;
   newLeg: Cues;
   pause: Cues;
   resume: Cues;
@@ -97,6 +98,7 @@ export const PLAIN: Phrasebook = {
   askDartsAtDouble: [cue('Darts auf Doppel?', K.askDouble)],
   answered: (n) => [cue(`${capital(deNum(n))}.`, scoreKey(n))],
   gameOn: (name) => [named(`${name} beginnt.`), cue('Spiel an!', K.gameOn)],
+  versus: (names) => [named(`${names.slice(0, -1).join(', ')} gegen ${names.at(-1)}.`)],
   newLeg: [cue('Neues Leg.', K.newLeg)],
   pause: [cue('Pause.', K.pause)],
   resume: [cue('Weiter.', K.resume)],
@@ -146,6 +148,7 @@ export const ARENA: Phrasebook = {
   askDartsAtDouble: [cue('Darts at the double?', K.askDouble)],
   answered: (n) => [cue(`${capital(numberToEnglish(n))}.`, n >= 1 ? scoreKey(n) : undefined)],
   gameOn: (name) => [named(`${name} to throw first.`), cue('Game on!', K.gameOn)],
+  versus: (names) => [named(`${names.slice(0, -1).join(', ')} versus ${names.at(-1)}.`)],
   newLeg: [cue('New leg.', K.newLeg)],
   pause: [cue('Pause.', K.pause)],
   resume: [cue('Play on.', K.resume)],

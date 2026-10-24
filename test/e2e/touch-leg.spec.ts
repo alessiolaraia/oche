@@ -45,9 +45,10 @@ test('komplettes 501-Leg per Touch inkl. Bust, Korrektur per Zurück und Checkou
   // Reload: Spiel wird aus IndexedDB fortgesetzt
   await page.reload();
   await expect(page.getByText('Legs 1 : 0')).toBeVisible();
-  await page.goto('./#/');
-  await page.getByRole('button', { name: 'Laufendes Spiel fortsetzen' }).click();
   await expect(page.getByTestId('active-player')).toHaveText('Spieler 2');
+  // Startbildschirm bietet kein „Fortsetzen“ mehr an
+  await page.goto('./#/');
+  await expect(page.getByText('fortsetzen')).toHaveCount(0);
 
   expect(errors).toEqual([]);
 });

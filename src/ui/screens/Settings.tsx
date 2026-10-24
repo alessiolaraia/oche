@@ -87,6 +87,12 @@ export function Settings() {
           onChange={(v) => s.update('game', { askCheckoutDarts: v })}
         />
         <Toggle
+          label="Intro vor dem Spiel"
+          hint="Drei Pfeile, 180, dann „Name gegen Name“."
+          checked={display.intro}
+          onChange={(v) => s.update('display', { intro: v })}
+        />
+        <Toggle
           label="Bildschirm anlassen"
           checked={display.keepAwake}
           onChange={(v) => s.update('display', { keepAwake: v })}

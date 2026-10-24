@@ -14,6 +14,7 @@ export type FeedbackEvent =
   | { type: 'question'; question: Question }
   | { type: 'answered'; question: Question; value: number }
   | { type: 'matchStarted'; state: MatchState }
+  | { type: 'introDart'; n: number }
   | { type: 'legRestarted'; state: MatchState }
   | { type: 'control'; action: 'pause' | 'resume' | 'micOff' | 'stop' }
   | { type: 'trainingTarget'; mode: 'atc' | 'checkout' | '121'; target: number; label: string }

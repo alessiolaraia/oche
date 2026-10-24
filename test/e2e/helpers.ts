@@ -8,7 +8,12 @@ export async function freshApp(page: Page, settings: Record<string, unknown> = {
     localStorage.setItem(
       'oche-settings',
       JSON.stringify({
-        state: { onboarded: true, caller: { enabled: false, sfx: false }, ...extra },
+        state: {
+          onboarded: true,
+          caller: { enabled: false, sfx: false },
+          display: { intro: false },
+          ...extra,
+        },
         version: 1,
       }),
     );

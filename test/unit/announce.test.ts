@@ -34,6 +34,23 @@ const plain = { ...DEFAULT_SETTINGS.caller, announceTurn: false };
 const ctx = { state: null, askingAny: false };
 
 describe('Ansagen', () => {
+  it('Spielstart: „Max gegen Lea. Max beginnt. Spiel an!“', () => {
+    const state = reduce(cfg, []);
+    expect(announce({ type: 'matchStarted', state }, plain, ctx)?.text).toBe(
+      'Max gegen Lea. Max beginnt. Spiel an!',
+    );
+    const arena = announce({ type: 'matchStarted', state }, { ...plain, style: 'arena' }, ctx)?.text;
+    expect(arena).toBe('Max versus Lea. Max to throw first. Game on!');
+  });
+
+  it('Intro: Einschläge als Effekt, beim dritten „Hundertachtzig!“', () => {
+    expect(announce({ type: 'introDart', n: 1 }, plain, ctx)).toMatchObject({ text: '', sfx: 'thud' });
+    expect(announce({ type: 'introDart', n: 3 }, plain, ctx)).toMatchObject({
+      text: 'Hundertachtzig!',
+      sfx: 'maximum',
+    });
+  });
+
   it('Nüchtern: „Sechzig. Rest vierhunderteinundvierzig.“', () => {
     expect(announce(visitEvent([v(60)]), plain, ctx)?.text).toBe('Sechzig. Rest vierhunderteinundvierzig.');
   });
