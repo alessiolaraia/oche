@@ -6,7 +6,7 @@ import { requestPersistentStorage } from '../platform/storage';
 import { useSettings } from '../store/settings';
 import { useVoice } from '../store/voice';
 import { AudioPipeline, type Level } from './audio/pipeline';
-import { buildGrammar, type Command } from './commands';
+import { buildGrammar, TRIGGER_MIN_CONFIDENCE, type Command } from './commands';
 import { decide } from './decide/decide';
 import { isEchoMuted, onEchoMute } from './echo';
 import type { SpeechEngine, Transcript } from './engine';
@@ -137,6 +137,8 @@ async function startWebSpeech(gen: number): Promise<void> {
 }
 
 const ARMED_MS = 4000;
+/** Zeitpunkt des letzten sicher erkannten Triggerworts allein (für „Aufnahme … sechzig“). */
+let armedAt = 0;
 
 /** Rand leuchten lassen, sobald das Triggerwort (Direkt-Modus: irgendeine Sprache) zu hören ist. */
 function markArmed(text: string): void {
@@ -150,6 +152,7 @@ function markArmed(text: string): void {
 
 /** Nach einer Entscheidung den Rand kurz ausklingen lassen. */
 function disarm(): void {
+  armedAt = 0;
   voice().set({ armedUntil: Math.min(voice().armedUntil, Date.now() + 500) });
 }
 
@@ -244,15 +247,16 @@ export function handleTranscript(t: Transcript): void {
   const s = voice();
   voice().set({ partial: '', status: s.status === 'hearing' ? 'listening' : s.status });
   const echoMuted = isEchoMuted();
-  const armed = voice().armedUntil > Date.now();
-  if (!echoMuted) markArmed(t.text);
+  // Zweistufig („Aufnahme … sechzig“) nur nach einem *sicher* erkannten Triggerwort im Endergebnis –
+  // nicht nach dem Leuchten, das schon auf unsichere Teilergebnisse reagiert.
+  const armed = Date.now() - armedAt < ARMED_MS;
   const v = useSettings.getState().voice;
   const d = decide(t, {
     mode: v.mode,
     trigger: v.trigger,
     aliases: v.aliases,
     minConfidence: v.minConfidence,
-    triggerMinConfidence: v.triggerMinConfidence,
+    triggerMinConfidence: Math.max(v.triggerMinConfidence, TRIGGER_MIN_CONFIDENCE),
     paused,
     echoMuted,
     armed,
@@ -272,6 +276,8 @@ export function handleTranscript(t: Transcript): void {
   }
   switch (d.kind) {
     case 'arm':
+      armedAt = Date.now();
+      if (!echoMuted) markArmed(t.text);
       push(false, 'Triggerwort – warte auf Zahl');
       return;
     case 'ignore':
@@ -280,6 +286,7 @@ export function handleTranscript(t: Transcript): void {
       if (d.signal) emitFeedback({ type: 'rejected', reason: 'notUnderstood', heard: t.text });
       return;
     case 'reject':
+      disarm();
       push(
         false,
         d.reason === 'echo'

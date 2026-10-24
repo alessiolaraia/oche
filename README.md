@@ -11,7 +11,7 @@ Bewusst nur zwei – so löst Gerede am Tisch nichts aus:
 | --------------------------------------------------------- | --------------------------------------------------------------------- |
 | „Wurf sechzig“, „Wurf hundert einundvierzig“, „Wurf null“ | Punkte der Aufnahme (zu viel geworfen = Bust, erkennt die App selbst) |
 | „Wurf … (kurze Pause) … sechzig“                          | geht auch getrennt                                                    |
-| „Zurück“                                                  | letzte Aufnahme rückgängig                                            |
+| „Wurf zurück“ (Triggerwort + zurück)                      | letzte Aufnahme rückgängig                                            |
 
 Das Triggerwort („Wurf“) kannst du in den Einstellungen unter „Sprache“ frei wählen – die App prüft, ob das
 Sprachmodell das Wort kennt.

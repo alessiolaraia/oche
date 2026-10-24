@@ -100,7 +100,7 @@ export const DEFAULT_SETTINGS: Settings = {
     mode: 'trigger',
     trigger: 'wurf',
     minConfidence: 0.55,
-    triggerMinConfidence: 0.6,
+    triggerMinConfidence: 0.72,
     aliases: {},
     flags: { dsp2: true, vad: 'off' },
     distanceM: 2.5,

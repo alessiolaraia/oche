@@ -44,7 +44,11 @@ const SECTIONS: { title: string; intro: string; pick: (c: Clip) => boolean }[] =
     intro: 'Calm, matter-of-fact.',
     pick: (c) => !/^(score|require|target|leg)_/.test(c.key) && c.level === 'calm',
   },
-  { title: 'Checkout requirements', intro: 'Calm, informative: “You require …”.', pick: (c) => c.key.startsWith('require_') },
+  {
+    title: 'Checkout requirements',
+    intro: 'Calm, informative: “You require …”.',
+    pick: (c) => c.key.startsWith('require_'),
+  },
   { title: 'Practice targets', intro: 'Calm.', pick: (c) => c.key.startsWith('target_') },
   {
     title: 'Scores 0–99',
@@ -145,7 +149,9 @@ async function main() {
   writeFileSync(
     `${OUT}/Oche-Recording-Script.csv`,
     'no,line,takes,delivery,section\n' +
-      lines.map((l) => [l.no, `"${l.text}"`, l.takes, `"${noteFor(l)}"`, `"${l.section}"`].join(',')).join('\n') +
+      lines
+        .map((l) => [l.no, `"${l.text}"`, l.takes, `"${noteFor(l)}"`, `"${l.section}"`].join(','))
+        .join('\n') +
       '\n',
   );
   const page = html(lines);
@@ -153,7 +159,11 @@ async function main() {
   const browser = await chromium.launch();
   const p = await browser.newPage();
   await p.setContent(page);
-  await p.pdf({ path: `${OUT}/Oche-Recording-Script.pdf`, format: 'A4', margin: { top: '14mm', bottom: '14mm', left: '12mm', right: '12mm' } });
+  await p.pdf({
+    path: `${OUT}/Oche-Recording-Script.pdf`,
+    format: 'A4',
+    margin: { top: '14mm', bottom: '14mm', left: '12mm', right: '12mm' },
+  });
   await browser.close();
   const takes = lines.reduce((s, l) => s + l.takes, 0);
   console.log(`${lines.length} Zeilen (${takes} Takes) → ${OUT}/`);

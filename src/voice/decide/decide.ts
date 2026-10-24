@@ -43,8 +43,13 @@ export function decide(t: Transcript, ctx: DecideContext): Decision {
   if (ctx.echoMuted) return { kind: 'reject', reason: 'echo', command: null, text: t.text, signal: false };
   const tokens = tokenize(t.text);
   const trig = ctx.trigger.toLowerCase();
-  if (ctx.mode === 'trigger' && tokens.length === 1 && tokens[0] === trig)
+  if (ctx.mode === 'trigger' && tokens.length === 1 && tokens[0] === trig) {
+    // Triggerwort allein: nur mit sicherem Triggerwort auf die Zahl warten
+    const w = t.words?.[0];
+    if (w && w.word === trig && w.conf < ctx.triggerMinConfidence)
+      return { kind: 'ignore', reason: 'noCommand', text: t.text, signal: false };
     return { kind: 'arm', text: t.text };
+  }
   // zweistufig: nach „Wurf“ allein zählt die folgende Zahl auch ohne Triggerwort
   if (ctx.armed && tokens[0] !== trig) {
     const withTrigger = decide(

@@ -119,6 +119,14 @@ describe('Entscheidung (S5–S6)', () => {
 });
 
 describe('Triggerwort mit Pause (S7)', () => {
+  it('unsicheres Triggerwort allein schaltet nicht scharf', () => {
+    expect(decide(t('wurf', [['wurf', 0.45]]), ctx)).toMatchObject({ kind: 'ignore', signal: false });
+  });
+
+  it('nicht scharf: „sechzig“ allein zählt nie', () => {
+    expect(decide(t('sechzig', [['sechzig', 0.99]]), ctx).kind).toBe('ignore');
+  });
+
   it('„Wurf“ allein wartet, danach zählt „sechzig“ ohne Trigger', () => {
     expect(decide(t('wurf', [['wurf', 0.9]]), ctx).kind).toBe('arm');
     expect(decide(t('sechzig', [['sechzig', 0.9]]), { ...ctx, armed: true })).toMatchObject({

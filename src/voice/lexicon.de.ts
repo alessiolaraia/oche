@@ -12,7 +12,7 @@ export const FILLERS: readonly string[] = ['äh', 'ähm', 'also'];
 /** Wörter für 0 Punkte (nach dem Triggerwort). */
 export const ZERO_WORDS: readonly string[] = ['null', 'nichts', 'nix', 'vorbei', 'daneben'];
 
-/** „Zurück“: letzte Aufnahme rückgängig. */
+/** „[Triggerwort] zurück“: letzte Aufnahme rückgängig. */
 export const UNDO_WORDS: readonly string[] = ['zurück'];
 
 /** Tokens normalisieren: Füllwörter raus, Aliase (eingebaut + gelernt) ersetzen. */
@@ -43,6 +43,6 @@ export function helpEntries(trigger: string): HelpEntry[] {
     },
     { say: `${T} zwo`, does: '2 – „zwo“ ist deutlicher als „zwei“' },
     { say: `${T} … (kurze Pause) … sechzig`, does: 'Triggerwort und Zahl dürfen getrennt kommen' },
-    { say: 'Zurück', does: 'Letzte Aufnahme rückgängig' },
+    { say: `${T} zurück`, does: 'Letzte Aufnahme rückgängig' },
   ];
 }

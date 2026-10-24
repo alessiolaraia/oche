@@ -1,6 +1,12 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { buildGrammar, missingWords, parseCommand, type ParseOptions } from '../../src/voice/commands';
+import {
+  buildGrammar,
+  missingWords,
+  parseCommand,
+  soundAlikes,
+  type ParseOptions,
+} from '../../src/voice/commands';
 import { FILLERS } from '../../src/voice/lexicon.de';
 import { TRIGGER_SUGGESTIONS } from '../../src/voice/triggers';
 
@@ -19,7 +25,6 @@ describe('Befehle: nur „Trigger + Zahl“ und „Zurück“', () => {
     ['wurf daneben', { type: 'score', value: 0 }],
     ['wurf zwo', { type: 'score', value: 2 }],
     ['wurf äh sechzig', { type: 'score', value: 60 }],
-    ['zurück', { type: 'undo' }],
     ['wurf zurück', { type: 'undo' }],
   ])('„%s“', (text, cmd) => expect(parseCommand(text, trigger)).toEqual(cmd));
 
@@ -41,6 +46,20 @@ describe('Befehle: nur „Trigger + Zahl“ und „Zurück“', () => {
     'rückgängig',
   ])('frühere Befehle lösen nichts mehr aus: „%s“', (text) => {
     expect(parseCommand(text, trigger)).toBeNull();
+  });
+
+  it('„Zurück“ nur mit Triggerwort (Trigger-Modus) – Gerede wie „zurück“ löst nichts aus', () => {
+    expect(parseCommand('zurück', trigger)).toBeNull();
+    expect(parseCommand('zurück', direct)).toEqual({ type: 'undo' });
+  });
+
+  it('Ähnlich klingende Wörter landen als Ausweich-Phrase in der Grammatik, Beugungen des Triggers nicht', () => {
+    const big = new Set([...vocab, 'abnahme', 'ausnahme', 'aufnahmen', 'aufnahme']);
+    const s = soundAlikes('aufnahme', big);
+    expect(s).toContain('abnahme');
+    expect(s).toContain('ausnahme');
+    expect(s).not.toContain('aufnahmen');
+    expect(buildGrammar({ trigger: 'aufnahme', vocab: big })).toContain('abnahme');
   });
 
   it('Zahl ohne Triggerwort zählt nicht (Trigger-Modus), im Direkt-Modus schon', () => {

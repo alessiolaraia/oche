@@ -5,6 +5,9 @@ import { numberPhrases, parseNumberAt, tokenize } from './numbers.de';
 
 export type Command = { type: 'score'; value: number } | { type: 'undo' };
 
+/** Untergrenze für die Sicherheit des Triggerworts – auch wenn ältere Einstellungen weniger erlauben. */
+export const TRIGGER_MIN_CONFIDENCE = 0.72;
+
 export interface ParseOptions {
   mode: 'trigger' | 'direct';
   trigger: string;
@@ -26,10 +29,9 @@ export function parseCommand(text: string, opts: ParseOptions): Command | null {
   const t = hasTrigger ? all.slice(1) : all;
   if (t.length === 0) return null;
 
-  // „Zurück“ – mit oder ohne Triggerwort
-  if (t.length === 1 && UNDO_WORDS.includes(t[0]!)) return { type: 'undo' };
-
+  // Ohne Triggerwort passiert nichts (im Trigger-Modus) – auch kein „Zurück“
   if (!hasTrigger && opts.mode !== 'direct') return null;
+  if (t.length === 1 && UNDO_WORDS.includes(t[0]!)) return { type: 'undo' };
   if (t.length === 1 && ZERO_WORDS.includes(t[0]!)) return { type: 'score', value: 0 };
   const v = wholeNumber(t);
   return v !== null ? { type: 'score', value: v } : null;
@@ -40,6 +42,40 @@ export interface GrammarOptions {
   vocab: ReadonlySet<string> | null;
   /** Gelernte Aliase – ihre Wörter kommen als eigene Phrasen in die Grammatik. */
   aliases?: Readonly<Record<string, string>>;
+}
+
+function editDistance(a: string, b: string): number {
+  const d = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    let prev = d[0]!;
+    d[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const tmp = d[j]!;
+      d[j] = Math.min(d[j]! + 1, d[j - 1]! + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return d[b.length]!;
+}
+
+/** Wörter aus dem Vokabular, die dem Triggerwort ähneln (höchstens 12, die ähnlichsten zuerst). */
+export function soundAlikes(trigger: string, vocab: ReadonlySet<string> | null, max = 12): string[] {
+  if (!vocab) return [];
+  const t = trigger.toLowerCase();
+  const limit = t.length >= 6 ? 2 : 1;
+  const numbers = new Set(numberPhrases(0, 180, null).flatMap((p) => p.split(' ')));
+  const found: [string, number][] = [];
+  for (const w of vocab) {
+    if (w === t || numbers.has(w) || Math.abs(w.length - t.length) > limit) continue;
+    // Beugungen des Triggerworts selbst („Aufnahmen“, „Wurfs“) klingen gleich – die nicht wegnehmen
+    if (w.startsWith(t) || t.startsWith(w)) continue;
+    const d = editDistance(w, t);
+    if (d <= limit) found.push([w, d]);
+  }
+  return found
+    .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+    .slice(0, max)
+    .map(([w]) => w);
 }
 
 /** Vosk-Grammatik: alle erlaubten Phrasen, nur aus Wörtern im Modellvokabular. */
@@ -57,7 +93,12 @@ export function buildGrammar(opts: GrammarOptions): string[] {
     phrases.add(alias);
     phrases.add(`${trigger} ${alias}`);
   }
-  for (const u of UNDO_WORDS) phrases.add(u);
+  for (const u of UNDO_WORDS) {
+    phrases.add(`${trigger} ${u}`);
+    phrases.add(u); // allein: fängt Gerede ab, löst aber nichts aus
+  }
+  // Ähnlich klingende Wörter als Ausweich-Phrasen: „Abnahme“ wird dann nicht zu „Aufnahme“ gepresst
+  for (const w of soundAlikes(trigger, opts.vocab)) phrases.add(w);
   for (const f of FILLERS) phrases.add(f);
   for (const learned of opts.aliases ? Object.keys(opts.aliases) : []) phrases.add(learned);
   // Triggerwort allein: „Wurf … (Pause) … sechzig“

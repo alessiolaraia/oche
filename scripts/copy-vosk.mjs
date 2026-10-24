@@ -21,7 +21,8 @@ for (const file of ['vosk.worker.js', 'vosk.wasm']) {
 const worker = join(dest, 'vosk.worker.js');
 const PARTIAL_WORDS = 'recognizer.recognizer.SetPartialWords(value);';
 const code = readFileSync(worker, 'utf8');
-if (!code.includes(PARTIAL_WORDS)) throw new Error('[copy-vosk] SetPartialWords nicht gefunden – Worker-Patch anpassen');
+if (!code.includes(PARTIAL_WORDS))
+  throw new Error('[copy-vosk] SetPartialWords nicht gefunden – Worker-Patch anpassen');
 writeFileSync(worker, code.replace(PARTIAL_WORDS, 'recognizer.recognizer.SetPartialWords(false);'));
 console.log('[copy-vosk] vosk.worker.js + vosk.wasm → public/vosk/ (Teilergebnisse ohne Wort-Details)');
 
