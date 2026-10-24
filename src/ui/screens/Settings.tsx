@@ -1,5 +1,5 @@
 import { useSettings } from '../../store/settings';
-import type { CallerStyle, EnginePreference, VoiceMode } from '../../settings/types';
+import type { ArenaStyle, CallerStyle, EnginePreference, VoiceMode } from '../../settings/types';
 import { Calibration } from '../components/Calibration';
 import { capitalize, Choice, Range, Toggle } from '../components/controls';
 import { Icon } from '../components/Icon';
@@ -85,6 +85,18 @@ export function Settings() {
           hint="„Mit wie vielen Darts?“ – für genaue Statistik."
           checked={game.askCheckoutDarts}
           onChange={(v) => s.update('game', { askCheckoutDarts: v })}
+        />
+        <Choice<ArenaStyle>
+          full
+          label="Arena"
+          hint={
+            display.arena === 'stage'
+              ? 'Bühne: dunkel, Zahlen in Chrom, Tafel wie im TV.'
+              : 'Neon: Bar-Wand mit Leuchtröhren in Pink und Cyan.'
+          }
+          value={display.arena}
+          options={{ stage: 'Bühne', neon: 'Neon' }}
+          onChange={(v) => s.update('display', { arena: v })}
         />
         <Toggle
           label="Intro vor dem Spiel"

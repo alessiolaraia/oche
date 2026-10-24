@@ -31,6 +31,7 @@ import { startVoice, stopVoice } from '../../voice/control';
 import { navigate } from '../router';
 import './game.css';
 import './arena.css';
+import './arena-neon.css';
 
 function fmtAvg(n: number | null): string {
   return n === null ? '–' : n.toFixed(1).replace('.', ',');
@@ -52,6 +53,7 @@ export function Game() {
   const showRoute = useSettings((s) => s.display.showCheckoutRoute);
   const boardPadDefault = useSettings((s) => s.display.boardPad);
   const keepAwake = useSettings((s) => s.display.keepAwake);
+  const arenaStyle = useSettings((s) => s.display.arena);
   const voiceEnabled = useSettings((s) => s.voice.enabled);
   const trigger = useSettings((s) => s.voice.trigger);
   const micStatus = useVoice((s) => s.status);
@@ -107,7 +109,7 @@ export function Game() {
     config.legs.mode === 'firstTo' ? `First to ${config.legs.count}` : `Best of ${config.legs.count}`;
 
   return (
-    <div className={`game arena${pad !== 'none' ? ' game-with-pad' : ''}`}>
+    <div className={`game arena${pad !== 'none' ? ' game-with-pad' : ''}`} data-arena={arenaStyle}>
       <header className="game-top">
         <button className="icon-btn" aria-label="Menü" aria-expanded={menu} onClick={() => setMenu(!menu)}>
           <Icon name="menu" />
@@ -363,9 +365,10 @@ export function Game() {
 
 function MatchOver({ state }: { state: MatchState }) {
   const { config } = state;
+  const arenaStyle = useSettings((s) => s.display.arena);
   const winner = config.players[state.winner!]!;
   return (
-    <div className="screen match-over arena">
+    <div className="screen match-over arena" data-arena={arenaStyle}>
       <div className="sg-aura match-over-aura" aria-hidden="true" />
       <p className="game-meta">{scoreLine(state)}</p>
       <h1 className="match-over-title">{winner.name} gewinnt</h1>

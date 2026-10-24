@@ -19,6 +19,13 @@ import { WebSpeechEngine, webSpeechSupported } from './webSpeechEngine';
 let engine: SpeechEngine | null = null;
 let pipeline: AudioPipeline | null = null;
 let starting = false;
+/** Zählt Start/Stopp: ein Start, der während des Ladens gestoppt wurde, darf das Mikro nicht mehr öffnen. */
+let generation = 0;
+
+class Cancelled extends Error {}
+const check = (gen: number) => {
+  if (gen !== generation) throw new Cancelled();
+};
 let paused = false;
 const levelListeners = new Set<(l: Level) => void>();
 
@@ -95,22 +102,36 @@ function currentGrammar(vocab: ReadonlySet<string>): string[] {
   return grammar;
 }
 
-async function startVosk(): Promise<void> {
-  pipeline = await startPipeline();
+async function startVosk(gen: number): Promise<void> {
+  const p = await startPipeline();
+  if (gen !== generation) {
+    p.stop();
+    throw new Cancelled();
+  }
+  pipeline = p;
   voice().set({ modelProgress: 'Sprachmodell wird geladen (45 MB, nur beim ersten Mal) …' });
   const vocab = await loadVocab();
+  check(gen);
   const e = new VoskEngine(currentGrammar(vocab));
   wire(e);
   await e.start();
+  if (gen !== generation) {
+    e.stop();
+    throw new Cancelled();
+  }
   engine = e;
   pipeline.onChunk = (pcm) => e.feed(pcm);
   voice().set({ modelProgress: null, engine: 'vosk' });
 }
 
-async function startWebSpeech(): Promise<void> {
+async function startWebSpeech(gen: number): Promise<void> {
   const e = new WebSpeechEngine();
   wire(e);
   await e.start();
+  if (gen !== generation) {
+    e.stop();
+    throw new Cancelled();
+  }
   engine = e;
   voice().set({ engine: 'webspeech', warnings: [] });
 }
@@ -146,6 +167,7 @@ function wire(e: SpeechEngine) {
 export async function startVoice(): Promise<void> {
   if (engine || starting) return;
   starting = true;
+  const gen = ++generation;
   paused = false;
   voice().set({ status: 'loading', error: null, partial: '' });
   configureAudioSession();
@@ -154,24 +176,28 @@ export async function startVoice(): Promise<void> {
   try {
     if (pref !== 'webspeech' && voskSupported()) {
       try {
-        await startVosk();
+        await startVosk(gen);
       } catch (err) {
+        if (err instanceof Cancelled) throw err;
         cleanup();
         if (pref === 'vosk' || !webSpeechSupported()) throw err;
         voice().set({
           warnings: [`Vosk nicht verfügbar (${message(err)}) – nutze die Spracherkennung des Browsers.`],
         });
-        await startWebSpeech();
+        await startWebSpeech(gen);
       }
     } else {
-      await startWebSpeech();
+      await startWebSpeech(gen);
     }
+    check(gen);
     voice().set({ status: 'listening', modelProgress: null });
   } catch (err) {
+    // während des Startens gestoppt: stopVoice hat schon aufgeräumt
+    if (err instanceof Cancelled) return;
     cleanup();
     voice().set({ status: 'off', engine: 'none', error: friendlyError(err), modelProgress: null });
   } finally {
-    starting = false;
+    if (gen === generation) starting = false;
   }
 }
 
@@ -195,9 +221,11 @@ function cleanup() {
 }
 
 export function stopVoice(): void {
+  generation++;
+  starting = false;
   cleanup();
   paused = false;
-  voice().set({ status: 'off', engine: 'none', level: 0, partial: '', gateOpen: false });
+  voice().set({ status: 'off', engine: 'none', level: 0, partial: '', gateOpen: false, modelProgress: null });
 }
 
 export function setPaused(p: boolean): void {

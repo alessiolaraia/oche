@@ -1,0 +1,260 @@
+/* Arena „Neon“: Bar-Wand bei Nacht, Leuchtröhren in Pink und Cyan. Baut auf .arena auf und ersetzt nur Farben,
+   Glühen und Oberflächen; Triple/Doppel bleiben rot/grün (als Neon). */
+
+.arena[data-arena='neon'] {
+  --neon-pink: #ff2bd6;
+  --neon-cyan: #22e6ff;
+  --neon-red: #ff3b6b;
+  --neon-green: #39ff88;
+  --board-red: var(--neon-pink);
+  --board-green: var(--neon-cyan);
+
+  --sg-ink: #fdf7ff;
+  --sg-ink-2: rgba(253, 247, 255, 0.72);
+  --sg-ink-3: rgba(214, 200, 255, 0.5);
+  --sg-glass: linear-gradient(180deg, rgba(22, 14, 40, 0.72), rgba(10, 6, 22, 0.72));
+  --sg-glass-strong: linear-gradient(180deg, rgba(30, 18, 54, 0.85), rgba(14, 8, 30, 0.85));
+  --sg-glass-border: rgba(34, 230, 255, 0.22);
+  --sg-hairline: rgba(150, 120, 255, 0.14);
+  --sg-on-dark: #ffffff;
+  --sg-dark-top: #ff4fdc;
+  --sg-dark-bottom: #b1159a;
+  --sg-hi-dark: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --sg-shadow-dark: 0 0 24px rgba(255, 43, 214, 0.55);
+}
+
+/* Wand: dunkle Ziegel, farbiges Licht von den Röhren */
+.app:has(.arena[data-arena='neon']) {
+  background:
+    radial-gradient(60% 50% at 0% 0%, rgba(255, 43, 214, 0.22), transparent 70%),
+    radial-gradient(60% 50% at 100% 100%, rgba(34, 230, 255, 0.18), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0 2px, transparent 2px 34px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0 2px, transparent 2px 72px),
+    linear-gradient(180deg, #120b20, #07040e);
+}
+
+@keyframes neon-on {
+  0%,
+  12%,
+  20%,
+  30% {
+    opacity: 0.25;
+  }
+  10%,
+  16%,
+  26%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Leuchtring-Board statt Segmenten */
+.arena[data-arena='neon'] .game-focus::before {
+  background:
+    radial-gradient(closest-side, transparent 60%, rgba(255, 43, 214, 0.9) 60.6% 61.6%, transparent 62.4%),
+    radial-gradient(closest-side, transparent 94%, rgba(34, 230, 255, 0.85) 94.6% 95.6%, transparent 96.4%),
+    radial-gradient(closest-side, transparent 8%, rgba(34, 230, 255, 0.8) 8.6% 9.8%, transparent 10.4%);
+  -webkit-mask: none;
+  mask: none;
+  opacity: 0.45;
+  filter: drop-shadow(0 0 10px rgba(255, 43, 214, 0.8)) drop-shadow(0 0 22px rgba(34, 230, 255, 0.5));
+  animation: neon-on 1.4s steps(1) both;
+}
+
+.arena[data-arena='neon'] .game-meta {
+  background: rgba(10, 6, 22, 0.6);
+  border-color: var(--neon-cyan);
+  box-shadow:
+    0 0 12px rgba(34, 230, 255, 0.5),
+    inset 0 0 10px rgba(34, 230, 255, 0.25);
+  text-shadow: 0 0 8px rgba(34, 230, 255, 0.9);
+}
+
+.arena[data-arena='neon'] .game-player {
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 12px var(--neon-cyan),
+    0 0 30px var(--neon-cyan);
+}
+
+.arena[data-arena='neon'] .game-player::before {
+  background: var(--neon-pink);
+  filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+/* Restzahl als Leuchtreklame */
+.arena[data-arena='neon'] .big-number-digits {
+  background: none;
+  color: #fff6fd;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  filter: none;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 10px var(--neon-pink),
+    0 0 24px var(--neon-pink),
+    0 0 52px var(--neon-pink),
+    0 0 90px rgba(255, 43, 214, 0.6);
+  animation: neon-on 1.2s steps(1) both;
+}
+
+/* Kacheln mit Neonrahmen */
+.arena[data-arena='neon'] .game-stat {
+  background: rgba(10, 6, 22, 0.55);
+  border: 1.5px solid var(--neon-cyan);
+  box-shadow:
+    0 0 14px rgba(34, 230, 255, 0.45),
+    inset 0 0 14px rgba(34, 230, 255, 0.2);
+}
+
+.arena[data-arena='neon'] .game-stat:first-child {
+  border-color: var(--neon-pink);
+  box-shadow:
+    0 0 14px rgba(255, 43, 214, 0.5),
+    inset 0 0 14px rgba(255, 43, 214, 0.2);
+}
+
+.arena[data-arena='neon'] .game-stat::before {
+  display: none;
+}
+
+.arena[data-arena='neon'] .game-stat-value {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
+}
+
+/* Checkout: Triple pink-rot, Doppel neongrün – als Röhren */
+.arena[data-arena='neon'] .route-dart {
+  background: rgba(10, 6, 22, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.arena[data-arena='neon'] .route-dart[data-m='3'],
+.arena[data-arena='neon'] .route-dart[data-m='bull'] {
+  background: rgba(40, 4, 20, 0.6);
+  border-color: var(--neon-red);
+  box-shadow:
+    0 0 16px var(--neon-red),
+    inset 0 0 12px rgba(255, 59, 107, 0.45);
+  text-shadow: 0 0 10px var(--neon-red);
+}
+
+.arena[data-arena='neon'] .route-dart[data-m='2'] {
+  background: rgba(4, 30, 16, 0.6);
+  border-color: var(--neon-green);
+  box-shadow:
+    0 0 16px var(--neon-green),
+    inset 0 0 12px rgba(57, 255, 136, 0.4);
+  text-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Tafel mit Leuchtrahmen */
+.arena[data-arena='neon'] .game-board,
+.arena[data-arena='neon'] .game-history {
+  background: rgba(10, 6, 22, 0.72);
+  border: 1.5px solid var(--neon-cyan);
+  box-shadow:
+    0 0 18px rgba(34, 230, 255, 0.4),
+    inset 0 0 22px rgba(34, 230, 255, 0.12);
+}
+
+.arena[data-arena='neon'] .board-head {
+  color: rgba(34, 230, 255, 0.85);
+  text-shadow: 0 0 8px rgba(34, 230, 255, 0.6);
+}
+
+.arena[data-arena='neon'] .board-row[aria-current='true'] {
+  background: linear-gradient(90deg, rgba(255, 43, 214, 0.22), rgba(255, 43, 214, 0) 75%);
+}
+
+.arena[data-arena='neon'] .board-row[aria-current='true']::before {
+  box-shadow:
+    0 0 10px var(--neon-pink),
+    0 0 24px var(--neon-pink);
+}
+
+.arena[data-arena='neon'] .board-num {
+  color: #eaffff;
+  background: rgba(4, 24, 30, 0.6);
+  border: 1.5px solid var(--neon-cyan);
+  box-shadow:
+    0 0 10px rgba(34, 230, 255, 0.6),
+    inset 0 0 8px rgba(34, 230, 255, 0.35);
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.arena[data-arena='neon'] .board-row[aria-current='true'] .board-rest {
+  background: none;
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 14px var(--neon-pink),
+    0 0 32px var(--neon-pink);
+}
+
+.arena[data-arena='neon'] .board-last {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.arena[data-arena='neon'] .history-row:first-child .history-score {
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.arena[data-arena='neon'] .game-bar {
+  background: rgba(10, 6, 22, 0.75);
+  border: 1.5px solid rgba(255, 43, 214, 0.55);
+  box-shadow: 0 0 18px rgba(255, 43, 214, 0.3);
+}
+
+.arena[data-arena='neon'] .mic-chip[data-status='listening'] .mic-dot,
+.arena[data-arena='neon'] .mic-chip[data-status='hearing'] .mic-dot {
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Bestätigungs-Blitz in Neon */
+.app:has(.arena[data-arena='neon']) .flash[data-kind='accept'] .flash-text {
+  background: none;
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 16px var(--neon-green, #39ff88),
+    0 0 40px #39ff88;
+  filter: none;
+}
+
+.app:has(.arena[data-arena='neon']) .flash[data-kind='accept'],
+.app:has(.arena[data-arena='neon']) .flash[data-kind='info'] {
+  background: radial-gradient(70% 60% at 50% 50%, rgba(57, 255, 136, 0.18), rgba(7, 4, 14, 0.9) 70%);
+}
+
+.app:has(.arena[data-arena='neon']) .flash[data-kind='reject'] {
+  background: radial-gradient(70% 60% at 50% 50%, rgba(255, 59, 107, 0.32), rgba(10, 4, 10, 0.94) 70%);
+}
+
+/* Matchende in Neon */
+.match-over.arena[data-arena='neon'] .match-over-title {
+  background: none;
+  color: #fff;
+  filter: none;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 16px var(--neon-pink),
+    0 0 40px var(--neon-pink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena[data-arena='neon'] .big-number-digits,
+  .arena[data-arena='neon'] .game-focus::before {
+    animation: none;
+  }
+}
+
+/* Leuchten des Namens nicht am Rand abschneiden (Name hat overflow: hidden für „…“) */
+.arena[data-arena='neon'] .game-player {
+  padding: 0.15em 0.5em;
+  margin-block: -0.15em;
+}

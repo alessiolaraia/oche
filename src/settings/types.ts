@@ -6,6 +6,8 @@ export type EnginePreference = 'auto' | 'vosk' | 'webspeech';
 export type CallerStyle = 'plain' | 'arena';
 export type VoiceSource = 'pack' | 'system';
 
+export type ArenaStyle = 'stage' | 'neon';
+
 export interface Settings {
   game: {
     startScore: number;
@@ -74,6 +76,8 @@ export interface Settings {
     boardPad: boolean;
     /** Kurzes Intro (180 + „Name vs Name“) vor jedem Spiel. */
     intro: boolean;
+    /** Look des Spielbildschirms. */
+    arena: ArenaStyle;
   };
   onboarded: boolean;
 }
@@ -124,6 +128,6 @@ export const DEFAULT_SETTINGS: Settings = {
     specialCalls: true,
     sfx: true,
   },
-  display: { showCheckoutRoute: true, keepAwake: true, boardPad: false, intro: true },
+  display: { showCheckoutRoute: true, keepAwake: true, boardPad: false, intro: true, arena: 'stage' },
   onboarded: false,
 };

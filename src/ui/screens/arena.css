@@ -113,6 +113,9 @@
   background-clip: text;
   color: transparent;
   filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.5)) drop-shadow(0 0 28px rgba(255, 255, 255, 0.12));
+  /* Kursiv ragt über die Zellen hinaus – der Chrom-Verlauf malt nur innerhalb der Box, daher Luft */
+  padding: 0.06em 0.16em 0.04em 0.06em;
+  font-size: min(96cqh, calc(100cqw / (var(--digits) * 0.64 + 0.3)));
 }
 
 /* Werte unter der Zahl: TV-Kacheln mit farbiger Oberkante */
@@ -303,6 +306,7 @@
 
 .arena .board-rest {
   min-width: 3.1ch;
+  padding-right: 0.08em;
   text-align: right;
   font-weight: 800;
   font-style: italic;
@@ -424,4 +428,32 @@
 
 .app:has(.arena) .flash[data-kind='reject'] .flash-text {
   color: #fff;
+}
+
+/* Handy hoch: Restzahl bleibt groß, auch mit Checkout-Weg – Tafel, Kacheln und Weg werden dafür kompakter */
+@media (max-width: 600px) and (orientation: portrait) {
+  .arena .board-head,
+  .arena .board-last {
+    display: none;
+  }
+  .arena .board-row {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .arena .board-rest {
+    font-size: 2.25rem;
+  }
+  .arena .game-stat {
+    padding: 8px 4px 7px;
+  }
+  .arena .game-stat-value {
+    font-size: 1.75rem;
+  }
+  .arena .game-stat-label {
+    font-size: 10px;
+  }
+  .arena .game-route {
+    margin-top: 2px;
+    font-size: 1.25rem;
+  }
 }

@@ -33,17 +33,16 @@ export function App() {
     if (!onboarded && route === 'setup') navigate('onboarding');
   }, [onboarded, route]);
 
-  // Mikro nur im Spiel (inkl. „Around the Clock“, das im Trainings-Bildschirm läuft): beim Verlassen aus,
+  // Mikro nur im laufenden Spiel (inkl. „Around the Clock“ im Trainings-Bildschirm): beim Verlassen aus,
   // beim Zurückkehren wieder an. Einstellungen/Einrichtung starten ihren Mikro-Test selbst nach dem Wechsel.
+  // Spiel vorbei (Sieger steht fest) oder beendet: Mikro aus, ohne Ausnahme.
   const atc = useTraining((t) => t.mode === 'atc');
-  const inGame = route === 'game' || (route === 'training' && atc);
+  // Trainingsrunden enden mit „Sieger“ und gehen direkt weiter – dort bleibt das Mikro an
+  const matchRunning = useMatch((m) => m.state !== null && (m.state.winner === null || m.kind !== 'x01'));
+  const inGame = (route === 'game' && matchRunning) || (route === 'training' && atc);
   useEffect(() => {
-    if (!inGame) {
-      stopVoice();
-      return;
-    }
-    const running = route !== 'game' || useMatch.getState().state?.winner === null;
-    if (running && useSettings.getState().voice.enabled) void startVoice();
+    if (!inGame) stopVoice();
+    else if (useSettings.getState().voice.enabled) void startVoice();
   }, [inGame, route]);
 
   // Statusleiste passend zur dunklen Arena im Spiel
